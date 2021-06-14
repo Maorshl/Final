@@ -2,7 +2,7 @@ const express = require("express");
 const user = express.Router();
 const createUser = require("../services/CreateUser");
 
-user.get("/create", (req, res) => {
+user.post("/create", (req, res) => {
   try {
     createUser(req.body);
     res.send("User created successfully");
