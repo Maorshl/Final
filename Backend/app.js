@@ -13,7 +13,7 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  const created = createUser(req.body.user);
+  const created = createUser(req.body);
   res.send(created);
 });
 
