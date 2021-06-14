@@ -3,7 +3,7 @@ import "../Style/App.css";
 import AppBar from "./AppBar";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   const [user, setUser] = useState(null);
   return (
