@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../Style/App.css";
 import AppBar from "./AppBar";
-import SignIn from "./SignIn";
+import SignIn from "./SignIn2";
 import SignUp from "./SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
