@@ -1,6 +1,7 @@
 const express = require("express");
 const user = express.Router();
 const getNewToken = require("../services/RefreshToken");
+const Logout = require("../services/Logout");
 const createUser = require("../services/CreateUser");
 const login = require("../services/Login");
 
@@ -22,6 +23,14 @@ user.get("/refreshToken", (req, res) => {
     getNewToken(req, res);
   } catch (error) {
     res.send(error.message);
+  }
+});
+
+user.post("/logout", async (req, res) => {
+  try {
+    await Logout(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
   }
 });
 
