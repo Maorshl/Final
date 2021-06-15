@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { compare } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { validateToken } = require("../Middlewares");
+
 const { REFRESH_TOKEN_SECRET, ACCESS_TOKEN_SECRET } = process.env;
 const user = require("../models/User");
 const refreshToken = require("../models/RefreshToken");
