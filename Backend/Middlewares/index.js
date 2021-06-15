@@ -7,7 +7,6 @@ function validateToken(req, res, next) {
   if (!token) {
     return res.status(401).send("Access Token Required");
   }
-
   jwt.verify(token, ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
       console.log(err);

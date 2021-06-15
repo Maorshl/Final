@@ -1,9 +1,10 @@
 const express = require("express");
 const post = express.Router();
+const { validateToken } = require("../Middlewares");
 const createPost = require("../services/CreatePost");
 const getAllPosts = require("../services/GetAllPosts");
 
-post.post("/create", (req, res) => {
+post.post("/create", validateToken, (req, res) => {
   try {
     createPost(req.body);
     res.send("post created successfully");
@@ -12,7 +13,7 @@ post.post("/create", (req, res) => {
   }
 });
 
-post.get("/", async (req, res) => {
+post.get("/", validateToken, async (req, res) => {
   const posts = await getAllPosts();
   res.json(posts);
 });
