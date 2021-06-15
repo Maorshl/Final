@@ -12,6 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function Copyright() {
   return (
@@ -64,10 +66,15 @@ export default function SignInSide({ setUser }) {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    console.log("Welcome");
-    setUser({ userName, password });
+    const { data } = await axios.post("http://localhost:8080/user/login", {
+      userName,
+      password,
+    });
+    Cookies.set("token", data.accessToken);
+    Cookies.set("refreshToken", data.newRefreshToken);
+    setUser({ userName });
   };
 
   return (
