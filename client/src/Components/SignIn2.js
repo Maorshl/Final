@@ -19,8 +19,20 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link
+        target="_blank"
+        color="inherit"
+        href="https://www.linkedin.com/in/maor-shlomo-27a8931bb/"
+      >
+        Maor Shlomo
+      </Link>{" "}
+      {"& "}
+      <Link
+        target="_blank"
+        color="inherit"
+        href="https://www.linkedin.com/in/gil-naaman-518738203/"
+      >
+        Gil Naaman
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -55,9 +67,14 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    color: "white",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  right: {
+    backgroundColor: "#333",
+    color: "white",
   },
 }));
 
@@ -65,23 +82,38 @@ export default function SignInSide({ setUser }) {
   const classes = useStyles();
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
+  const [wrongPassword, setWrongPassword] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post("http://localhost:8080/user/login", {
+    const response = await axios.post("http://localhost:8080/user/login", {
       userName,
       password,
     });
-    Cookies.set("token", data.accessToken);
-    Cookies.set("refreshToken", data.newRefreshToken);
-    setUser({ userName });
+    if (response.status === 200) {
+      const { data } = response;
+      Cookies.set("token", data.accessToken);
+      Cookies.set("refreshToken", data.newRefreshToken);
+      setUser({ userName });
+    } else {
+      setWrongPassword(true);
+    }
   };
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+        className={classes.right}
+      >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -122,6 +154,11 @@ export default function SignInSide({ setUser }) {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {wrongPassword && (
+              <Typography variant="subtitle2" color="secondary">
+                Wrong username or password please try again!
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
@@ -135,7 +172,7 @@ export default function SignInSide({ setUser }) {
             <Grid container>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
