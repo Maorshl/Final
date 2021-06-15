@@ -12,7 +12,7 @@ app.use("/user", user);
 app.use("/post", post);
 
 app.listen(PORT, () => {
-  console.log(`listening on post ${PORT}`);
+  console.log(`listening on port ${PORT}`);
 });
 
 module.exports = app;

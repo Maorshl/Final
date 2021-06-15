@@ -1,7 +1,6 @@
 require("dotenv").config();
 const { compare } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const { REFRESH_TOKEN_SECRET, ACCESS_TOKEN_SECRET } = process.env;
 const user = require("../models/User");
 const refreshToken = require("../models/RefreshToken");
@@ -21,7 +20,7 @@ async function login(req, res) {
     return res.status(403).send("User or password incorrect");
   }
   const accessToken = jwt.sign(loginUser.toJSON(), ACCESS_TOKEN_SECRET, {
-    expiresIn: "10m",
+    expiresIn: "10s",
   });
   const newRefreshToken = jwt.sign(loginUser.toJSON(), REFRESH_TOKEN_SECRET);
   new refreshToken({ token: newRefreshToken }).save();

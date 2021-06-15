@@ -14,7 +14,7 @@ user.post("/create", (req, res) => {
   }
 });
 
-user.get("/login", async (req, res) => {
+user.post("/login", async (req, res) => {
   await login(req, res);
 });
 
