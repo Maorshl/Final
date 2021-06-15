@@ -5,9 +5,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Drewer from "./Drewer";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,11 +24,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+export default function MenuAppBar({ setUser }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const logout = async (e) => {
+    await axios.post("http://localhost:8080/user/logout", {
+      refreshToken: Cookies.get("refreshToken"),
+    });
+    Cookies.remove("token");
+    Cookies.remove("refreshToken");
+    setUser(null);
+  };
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -76,6 +88,15 @@ export default function MenuAppBar() {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={logout}
+                color="inherit"
+              >
+                <ExitToAppIcon />
+              </IconButton>
             </div>
           )}
         </Toolbar>
