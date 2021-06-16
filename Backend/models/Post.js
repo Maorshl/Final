@@ -4,12 +4,13 @@ require("dotenv").config();
 
 const PostSchema = new Schema({
   title: String,
+  url: String,
   content: String,
   private: Boolean,
-  likes: Number,
   createdAt: Date,
-  Author: String,
+  author: String,
   tags: Array,
+  rating: Number,
 });
 
 module.exports = mongoose.model("Post", PostSchema);
