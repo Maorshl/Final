@@ -1,18 +1,19 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  MenuItem,
+  Menu,
+} from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
-
-//* This component is for the app bar at the top, and we using "material ui" as a bootstarp
+import Welcome from "./Welcome";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar({ setUser }) {
+export default function MenuAppBar({ setUser, user }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -103,6 +104,7 @@ export default function MenuAppBar({ setUser }) {
           )}
         </Toolbar>
       </AppBar>
+      <Welcome user={user} />
     </div>
   );
 }
