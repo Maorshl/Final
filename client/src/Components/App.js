@@ -7,6 +7,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
+//* In out app we are using "material ui" as a bootstarp, there for some of our defenition its part of "material ui".
+
+//* The axios interceptors attach for each http request the access token.
+//* If the user need new access token, it handle it.
+
 axios.interceptors.response.use(
   response => {
     return response;
@@ -46,10 +51,11 @@ async function getNewToken(refToken) {
 
 function App() {
   const [user, setUser] = useState(null);
-  const [loading, setloading] = useState(false);
-  if (loading) {
-    return <div class="loader">loading</div>;
-  }
+  // todo spinner
+  // const [loading, setloading] = useState(false);
+  // if (loading) {
+  //   return <div class="loader">loading</div>;
+  // }
 
   return (
     <div className="App">

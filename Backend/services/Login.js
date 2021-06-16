@@ -7,16 +7,13 @@ const refreshToken = require("../models/RefreshToken");
 
 async function login(req, res) {
   const { userName, password } = req.body;
-
   const loginUser = await user.findOne({ userName });
 
   if (!loginUser) {
-    console.log("No such user");
     return res.status(403).send("User or password incorrect");
   }
   const checkPass = await compare(password, loginUser.password);
   if (!checkPass) {
-    console.log("Wrong password");
     return res.status(403).send("User or password incorrect");
   }
   const accessToken = jwt.sign(loginUser.toJSON(), ACCESS_TOKEN_SECRET, {

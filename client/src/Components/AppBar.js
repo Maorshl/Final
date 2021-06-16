@@ -12,6 +12,8 @@ import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
 
+//* This component is for the app bar at the top, and we using "material ui" as a bootstarp
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,

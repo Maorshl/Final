@@ -1,10 +1,9 @@
 require("dotenv").config();
-const { compare } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { validateToken } = require("../Middlewares");
 const { REFRESH_TOKEN_SECRET, ACCESS_TOKEN_SECRET } = process.env;
-const user = require("../models/User");
 const refreshToken = require("../models/RefreshToken");
+
+//* This function checks the refresh token of the user and if he is vaild she return new access token.
 
 async function getNewToken(req, res) {
   const { refToken } = req.body;
@@ -20,7 +19,7 @@ async function getNewToken(req, res) {
       return res.status(403).send("Invalid Refresh Token");
     }
     const accessToken = jwt.sign(decoded, ACCESS_TOKEN_SECRET, {
-      expiresIn: "10m",
+      expiresIn: "15m",
     });
     res.json({ accessToken });
   });
