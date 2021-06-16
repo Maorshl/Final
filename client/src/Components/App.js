@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "../Style/App.css";
 import AppBar from "./AppBar";
-import SignIn from "./SignIn2";
+import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
 axios.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
   async function (error) {
@@ -30,7 +30,7 @@ axios.interceptors.response.use(
 );
 axios.interceptors.request.use(async function (config) {
   const token = await Cookies.get("token");
-  config.headers.Authorization = "bearer " + token;
+  config.headers.Authorization = "Bearer " + token;
   return config;
 });
 async function getNewToken(refToken) {
@@ -46,6 +46,11 @@ async function getNewToken(refToken) {
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setloading] = useState(false);
+  if (loading) {
+    return <div class="loader">loading</div>;
+  }
+
   return (
     <div className="App">
       <Router>

@@ -12,7 +12,7 @@ import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
@@ -30,7 +30,7 @@ export default function MenuAppBar({ setUser }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const logout = async (e) => {
+  const logout = async e => {
     await axios.post("http://localhost:8080/user/logout", {
       refreshToken: Cookies.get("refreshToken"),
     });
@@ -39,11 +39,11 @@ export default function MenuAppBar({ setUser }) {
     setUser(null);
   };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setAuth(event.target.checked);
   };
 
-  const handleMenu = (event) => {
+  const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
 
