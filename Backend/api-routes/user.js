@@ -5,13 +5,8 @@ const Logout = require("../services/Logout");
 const createUser = require("../services/CreateUser");
 const login = require("../services/Login");
 
-user.post("/create", (req, res) => {
-  try {
-    createUser(req.body);
-    res.send("User created successfully");
-  } catch (error) {
-    res.send(error.message);
-  }
+user.post("/create", async (req, res) => {
+  await createUser(req, res);
 });
 
 user.post("/login", async (req, res) => {

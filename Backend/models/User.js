@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 require("dotenv").config();
 
 const userSchema = new Schema({
-  userName: String,
+  userName: { type: String, unique: true, required: true, dropDups: true },
+  email: { type: String, unique: true, required: true },
   password: String,
   privatePosts: Array,
   savedPosts: Array,

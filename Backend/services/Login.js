@@ -20,7 +20,7 @@ async function login(req, res) {
     return res.status(403).send("User or password incorrect");
   }
   const accessToken = jwt.sign(loginUser.toJSON(), ACCESS_TOKEN_SECRET, {
-    expiresIn: "10s",
+    expiresIn: "15m",
   });
   const newRefreshToken = jwt.sign(loginUser.toJSON(), REFRESH_TOKEN_SECRET);
   new refreshToken({ token: newRefreshToken }).save();
