@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,13 +12,27 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link
+        target="_blank"
+        color="inherit"
+        href="https://www.linkedin.com/in/maor-shlomo-27a8931bb/"
+      >
+        Maor Shlomo
+      </Link>{" "}
+      {"& "}
+      <Link
+        target="_blank"
+        color="inherit"
+        href="https://www.linkedin.com/in/gil-naaman-518738203/"
+      >
+        Gil Naaman
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -48,7 +62,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [userName, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
+  const [redirect, setRedirect] = useState(false);
+  const [tryAgain, setTryAgain] = useState(false);
 
+  const createUser = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8080/user/create", {
+        user: { userName, password, email },
+      });
+      if (response.status === 201) {
+        setRedirect(true);
+      } else {
+        setTryAgain(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (redirect) {
+    return <Redirect to="/" />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -61,31 +98,26 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+                autoComplete="Uname"
+                name="username"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="username"
+                label="Username"
                 autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 variant="outlined"
                 required
                 fullWidth
@@ -97,6 +129,9 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
                 variant="outlined"
                 required
                 fullWidth
@@ -107,6 +142,13 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
+            {tryAgain && (
+              <Grid item xs={12}>
+                <Typography variant="subtitle2" color="secondary">
+                  Wrong username or password please try again!
+                </Typography>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -115,6 +157,7 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
+            onClick={createUser}
             type="submit"
             fullWidth
             variant="contained"
