@@ -10,6 +10,7 @@ import { Input } from "@material-ui/core";
 import { FormControl } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import Tags from "./Tags";
 
 const useStyles = makeStyles(theme => ({
@@ -25,8 +26,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
   },
-  input: {
-    width: "400px",
+  descriptionContainer: {
+    width: "1000px",
   },
 }));
 
@@ -71,14 +72,26 @@ function AddPost() {
   const [postDescription, setDescription] = useState(undefined);
   const [postTags, setPostTags] = useState([]);
   const [tag, setTag] = useState("");
-  const [postRating, setRating] = useState(0);
   const [postPrivate, setPrivate] = useState(false);
   const postAuthor = Cookies.get("userName");
   const postDate = new Date();
   const classes = useStyles();
 
-  const addPost = async () => {
-    axios.post("/post/create", {});
+  const addPost = () => {
+    axios
+      .post("http://localhost:8080/post/create", {
+        title: postTitle,
+        url: postUrl,
+        description: postDescription,
+        private: postPrivate,
+        createdAt: postDate,
+        author: postAuthor,
+        tags: postTags,
+        rating: 0,
+      })
+      .then(result => {
+        console.log(result);
+      });
   };
   const setPostUrl = event => {
     setUrl(event.target.value);
@@ -94,8 +107,13 @@ function AddPost() {
     setTag(event.target.value);
   };
   const setTags = () => {
-    //* This function takes each last tag of the input and add it to the tags array.
+    //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates in post tags
     if (tagInput.current.value === "") return;
+    if (postTags.find(element => element === tagInput.current.value)) {
+      tagInput.current.value = "";
+      tagInput.current.focus();
+      return;
+    }
     setPostTags([...postTags, tag]);
     tagInput.current.value = "";
     tagInput.current.focus();
@@ -137,24 +155,27 @@ function AddPost() {
             </Typography>
           </FormGroup>
         </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl>
-            <InputLabel htmlFor="my-input">Post Description</InputLabel>
-            <Input
-              aria-describedby="my-helper-text"
-              onChange={setPostDescription}
-              className={classes.input}
-            />
-          </FormControl>
+        <Grid item xs={12} className={classes.descriptionContainer}>
+          <FormGroup>
+            <FormControl>
+              <TextField
+                id="outlined-multiline-static"
+                label="Post description"
+                multiline
+                rows={4}
+                variant="outlined"
+                onChange={setPostDescription}
+              />
+            </FormControl>
+          </FormGroup>
         </Grid>
         <Grid item xs={12} className={classes.inputContainer}>
           <FormControl>
-            {/* <InputLabel htmlFor="my-input">Post Tags</InputLabel> */}
+            <InputLabel htmlFor="my-input">Post Tags</InputLabel>
             <Input
               aria-describedby="my-helper-text"
               onChange={getTags}
               className={classes.input}
-              placeholder="Post Tags"
               inputRef={tagInput}
             />
           </FormControl>
@@ -163,7 +184,12 @@ function AddPost() {
           </Button>
         </Grid>
       </Grid>
+
       <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
+
+      <Button onClick={addPost} variant="contained" color="primary">
+        Add Post
+      </Button>
     </div>
   );
 }

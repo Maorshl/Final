@@ -11,12 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-#add-post-button {
-  position: absolute;
-  left: 100px;
-  top: 600px;
-}
-.input {
-  width: 400px;
-  margin-top: 7.5%;
-}

@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Tags({ tags, setPostTags, tagInput }) {
+function Tags({ tags, setPostTags }) {
   const classes = useStyles();
 
   const handleDelete = tagToDelete => () => {
