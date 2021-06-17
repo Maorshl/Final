@@ -40,7 +40,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: "100vh",
   },
@@ -84,7 +84,7 @@ export default function SignInSide({ setUser }) {
   const [password, setPassword] = useState(null);
   const [wrongPassword, setWrongPassword] = useState(false);
 
-  const login = async (e) => {
+  const login = async e => {
     e.preventDefault();
     const response = await axios.post("http://localhost:8080/user/login", {
       userName,
@@ -94,6 +94,7 @@ export default function SignInSide({ setUser }) {
       const { data } = response;
       Cookies.set("token", data.accessToken);
       Cookies.set("refreshToken", data.newRefreshToken);
+      Cookies.set("userName", userName);
       setUser({ userName });
     } else {
       setWrongPassword(true);
@@ -123,7 +124,7 @@ export default function SignInSide({ setUser }) {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
-              onChange={(e) => {
+              onChange={e => {
                 setUserName(e.target.value);
               }}
               variant="outlined"
@@ -137,7 +138,7 @@ export default function SignInSide({ setUser }) {
               autoFocus
             />
             <TextField
-              onChange={(e) => {
+              onChange={e => {
                 setPassword(e.target.value);
               }}
               variant="outlined"

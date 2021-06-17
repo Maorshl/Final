@@ -16,3 +16,23 @@ code {
   left: 100px;
   top: 600px;
 }
+.input {
+  width: 400px;
+  margin-top: 7.5%;
+}
+
+/* .post-title-private {
+  margin-top: 7.5%;
+  display: flexbox;
+}
+#post-private {
+  display: inline-block;
+  /* position: absolute; */
+/* top: 25%;
+  right: 10%; */
+/* } */
+/* #post-title { */
+/* width: 300px; */
+/* border: solid 10px black; */
+/* display: inline-block; */
+/* } */

@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar({ setUser, user }) {
+export default function MenuAppBar({ setUser }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -104,7 +104,7 @@ export default function MenuAppBar({ setUser, user }) {
           )}
         </Toolbar>
       </AppBar>
-      <Welcome user={user} />
+      <Welcome />
     </div>
   );
 }
