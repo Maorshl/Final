@@ -101,7 +101,6 @@ export default function MenuAppBar({ setUser }) {
           )}
         </Toolbar>
       </AppBar>
-      <Welcome />
     </div>
   );
 }

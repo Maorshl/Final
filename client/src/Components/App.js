@@ -79,7 +79,6 @@ function App() {
             <AddPost />
           </Route>
           <Route path="/">
-
             {user && <Welcome setUser={setUser} />}
             {!user && <SignIn setUser={setUser} />}
           </Route>
