@@ -12,31 +12,28 @@ import { InputLabel } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Tags from "./Tags";
+import AppBar from "./AppBar";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
+    width: "fit-content",
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    // marginTop: "5rem",
-    // marginLeft: "10%",
+    marginTop: "5rem",
     margin: "auto",
   },
   inputContainer: {
+    padding: "1rem",
     display: "flex",
     flexDirection: "row",
-  },
-  inputUrl: {
-    display: "flex",
-    flexDirection: "row",
-    width: "400px",
   },
   descriptionContainer: {
     width: "600px",
   },
 }));
 
-const AntSwitch = withStyles(theme => ({
+const AntSwitch = withStyles((theme) => ({
   root: {
     width: 28,
     height: 16,
@@ -70,7 +67,7 @@ const AntSwitch = withStyles(theme => ({
   checked: {},
 }))(Switch);
 
-function AddPost() {
+function AddPost({ setUser }) {
   const tagInput = useRef();
   const [postUrl, setUrl] = useState(undefined);
   const [postTitle, setTitle] = useState(undefined);
@@ -96,23 +93,23 @@ function AddPost() {
       })
       .then((window.location = "/"));
   };
-  const setPostUrl = event => {
+  const setPostUrl = (event) => {
     setUrl(event.target.value);
   };
-  const setPostTitle = event => {
+  const setPostTitle = (event) => {
     setTitle(event.target.value);
   };
-  const setPostDescription = event => {
+  const setPostDescription = (event) => {
     setDescription(event.target.value);
   };
-  const getTags = event => {
+  const getTags = (event) => {
     //* This function get the value of the input, set it as varibale of tag with useState.
     setTag(event.target.value);
   };
   const setTags = () => {
     //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates in post tags
     if (tagInput.current.value === "") return;
-    if (postTags.find(element => element === tagInput.current.value)) {
+    if (postTags.find((element) => element === tagInput.current.value)) {
       tagInput.current.value = "";
       tagInput.current.focus();
       return;
@@ -126,23 +123,64 @@ function AddPost() {
   };
 
   return (
-    <div className={classes.container}>
-      <Grid item xs={12} className={classes.inputUrl}>
-        <FormControl>
-          <InputLabel htmlFor="my-input">Post URL</InputLabel>
-          <Input
-            aria-describedby="my-helper-text"
-            onChange={setPostUrl}
-            className={classes.input}
-          />
-        </FormControl>
-      </Grid>
-      <Grid item xs={12} className={classes.inputContainer}>
-        <FormControl>
-          <InputLabel htmlFor="my-input">Post Title</InputLabel>
-          <Input aria-describedby="my-helper-text" onChange={setPostTitle} />
-        </FormControl>
-        <FormGroup>
+    <>
+      <AppBar setUser={setUser} />
+      <div className={classes.container}>
+        <Typography variant="h4" color="primary">
+          Add Post
+        </Typography>
+        <Grid item xs={12} className={classes.inputContainer}>
+          <FormControl>
+            <InputLabel htmlFor="my-input">Post URL</InputLabel>
+            <Input
+              aria-describedby="my-helper-text"
+              onChange={setPostUrl}
+              className={classes.input}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} className={classes.inputContainer}>
+          <FormControl>
+            <InputLabel htmlFor="my-input">Post Title</InputLabel>
+            <Input aria-describedby="my-helper-text" onChange={setPostTitle} />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} className={classes.inputContainer}>
+          <FormGroup>
+            <FormControl>
+              <TextField
+                id="outlined-multiline-static"
+                label="Post description"
+                multiline
+                rows={4}
+                variant="outlined"
+                onChange={setPostDescription}
+              />
+            </FormControl>
+          </FormGroup>
+        </Grid>
+        <Grid item xs={12} className={classes.inputContainer}>
+          <FormControl style={{ width: "70%" }}>
+            <InputLabel htmlFor="my-input">Post Tags</InputLabel>
+            <Input
+              aria-describedby="my-helper-text"
+              onChange={getTags}
+              className={classes.input}
+              inputRef={tagInput}
+            />
+          </FormControl>
+          <Button
+            style={{ width: "30%", fontSize: "10px", marginLeft: 0 }}
+            onClick={setTags}
+            variant="contained"
+            color="primary"
+          >
+            Add Tag
+          </Button>
+        </Grid>
+        <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
+
+        <FormGroup style={{ marginBottom: "1rem", marginLeft: "1rem" }}>
           <Typography component="div">
             <Grid component="label" container alignItems="center" spacing={1}>
               <Grid item>
@@ -156,42 +194,16 @@ function AddPost() {
             </Grid>
           </Typography>
         </FormGroup>
-      </Grid>
-      <Grid item xs={12} className={classes.descriptionContainer}>
-        <FormGroup>
-          <FormControl>
-            <TextField
-              id="outlined-multiline-static"
-              label="Post description"
-              multiline
-              rows={4}
-              variant="outlined"
-              onChange={setPostDescription}
-            />
-          </FormControl>
-        </FormGroup>
-      </Grid>
-      <Grid item xs={12} className={classes.inputContainer}>
-        <FormControl>
-          <InputLabel htmlFor="my-input">Post Tags</InputLabel>
-          <Input
-            aria-describedby="my-helper-text"
-            onChange={getTags}
-            className={classes.input}
-            inputRef={tagInput}
-          />
-        </FormControl>
-        <Button onClick={setTags} variant="contained" color="primary">
-          Add Tag
+        <Button
+          style={{ marginRight: "1rem", fontSize: "20px", marginLeft: "1rem" }}
+          onClick={addPost}
+          variant="contained"
+          color="primary"
+        >
+          Add Post
         </Button>
-      </Grid>
-
-      <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
-
-      <Button onClick={addPost} variant="contained" color="primary">
-        Add Post
-      </Button>
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -13,7 +13,6 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
-import Welcome from "./Welcome";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,13 +33,17 @@ export default function MenuAppBar({ setUser }) {
   const open = Boolean(anchorEl);
 
   const logout = async (e) => {
-    await axios.post("http://localhost:8080/user/logout", {
-      refreshToken: Cookies.get("refreshToken"),
-    });
-    Cookies.remove("token");
-    Cookies.remove("refreshToken");
-    Cookies.remove("userName");
-    setUser(null);
+    await axios
+      .post("http://localhost:8080/user/logout", {
+        refreshToken: Cookies.get("refreshToken"),
+      })
+      .then(() => {
+        Cookies.remove("token");
+        Cookies.remove("refreshToken");
+        Cookies.remove("userName");
+        setUser(null);
+        window.location = "/";
+      });
   };
 
   const handleMenu = (event) => {

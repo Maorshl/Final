@@ -76,7 +76,7 @@ function App() {
             <SignUp />
           </Route>
           <Route exact path="/addPost">
-            <AddPost />
+            <AddPost setUser={setUser} />
           </Route>
           <Route path="/">
             {user && <Welcome setUser={setUser} />}
