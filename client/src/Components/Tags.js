@@ -14,6 +14,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+//* This component renders the post tags, and handle if one is deleted
+
 function Tags({ tags, setPostTags }) {
   const classes = useStyles();
 

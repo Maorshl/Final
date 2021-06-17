@@ -18,16 +18,21 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    marginTop: "5rem",
-    marginLeft: "45%",
+    // marginTop: "5rem",
+    // marginLeft: "10%",
     margin: "auto",
   },
   inputContainer: {
     display: "flex",
     flexDirection: "row",
   },
+  inputUrl: {
+    display: "flex",
+    flexDirection: "row",
+    width: "400px",
+  },
   descriptionContainer: {
-    width: "1000px",
+    width: "600px",
   },
 }));
 
@@ -89,9 +94,7 @@ function AddPost() {
         tags: postTags,
         rating: 0,
       })
-      .then(result => {
-        console.log(result);
-      });
+      .then((window.location = "/"));
   };
   const setPostUrl = event => {
     setUrl(event.target.value);
@@ -124,65 +127,63 @@ function AddPost() {
 
   return (
     <div className={classes.container}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl>
-            <InputLabel htmlFor="my-input">Post URL</InputLabel>
-            <Input
-              aria-describedby="my-helper-text"
-              onChange={setPostUrl}
-              className={classes.input}
-            />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl>
-            <InputLabel htmlFor="my-input">Post Title</InputLabel>
-            <Input aria-describedby="my-helper-text" onChange={setPostTitle} />
-          </FormControl>
-          <FormGroup>
-            <Typography component="div">
-              <Grid component="label" container alignItems="center" spacing={1}>
-                <Grid item>
-                  <AntSwitch
-                    checked={postPrivate}
-                    onChange={changePostPrivate}
-                    name="checkedC"
-                  />
-                </Grid>
-                <Grid item>Private</Grid>
+      <Grid item xs={12} className={classes.inputUrl}>
+        <FormControl>
+          <InputLabel htmlFor="my-input">Post URL</InputLabel>
+          <Input
+            aria-describedby="my-helper-text"
+            onChange={setPostUrl}
+            className={classes.input}
+          />
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} className={classes.inputContainer}>
+        <FormControl>
+          <InputLabel htmlFor="my-input">Post Title</InputLabel>
+          <Input aria-describedby="my-helper-text" onChange={setPostTitle} />
+        </FormControl>
+        <FormGroup>
+          <Typography component="div">
+            <Grid component="label" container alignItems="center" spacing={1}>
+              <Grid item>
+                <AntSwitch
+                  checked={postPrivate}
+                  onChange={changePostPrivate}
+                  name="checkedC"
+                />
               </Grid>
-            </Typography>
-          </FormGroup>
-        </Grid>
-        <Grid item xs={12} className={classes.descriptionContainer}>
-          <FormGroup>
-            <FormControl>
-              <TextField
-                id="outlined-multiline-static"
-                label="Post description"
-                multiline
-                rows={4}
-                variant="outlined"
-                onChange={setPostDescription}
-              />
-            </FormControl>
-          </FormGroup>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
+              <Grid item>Private</Grid>
+            </Grid>
+          </Typography>
+        </FormGroup>
+      </Grid>
+      <Grid item xs={12} className={classes.descriptionContainer}>
+        <FormGroup>
           <FormControl>
-            <InputLabel htmlFor="my-input">Post Tags</InputLabel>
-            <Input
-              aria-describedby="my-helper-text"
-              onChange={getTags}
-              className={classes.input}
-              inputRef={tagInput}
+            <TextField
+              id="outlined-multiline-static"
+              label="Post description"
+              multiline
+              rows={4}
+              variant="outlined"
+              onChange={setPostDescription}
             />
           </FormControl>
-          <Button onClick={setTags} variant="contained" color="primary">
-            Add Tag
-          </Button>
-        </Grid>
+        </FormGroup>
+      </Grid>
+      <Grid item xs={12} className={classes.inputContainer}>
+        <FormControl>
+          <InputLabel htmlFor="my-input">Post Tags</InputLabel>
+          <Input
+            aria-describedby="my-helper-text"
+            onChange={getTags}
+            className={classes.input}
+            inputRef={tagInput}
+          />
+        </FormControl>
+        <Button onClick={setTags} variant="contained" color="primary">
+          Add Tag
+        </Button>
       </Grid>
 
       <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
