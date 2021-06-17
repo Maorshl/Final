@@ -1,14 +1,39 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Chip, Paper } from "@material-ui/core";
 
-function Tags(tags) {
-  console.log(tags);
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    listStyle: "none",
+    margin: 0,
+  },
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+}));
+
+function Tags({ tags, setPostTags, tagInput }) {
+  const classes = useStyles();
+
+  const handleDelete = tagToDelete => () => {
+    setPostTags(tags => tags.filter(tag => tag !== tagToDelete));
+  };
   return (
-    <div>
-      {tags &&
-        tags.map(tag => {
-          return <span>{tag}</span>;
-        })}
-    </div>
+    <Paper component="ul" className={classes.root}>
+      {tags.map((tag, i) => {
+        return (
+          <li key={i}>
+            <Chip
+              label={tag}
+              onDelete={handleDelete(tag)}
+              className={classes.chip}
+            />
+          </li>
+        );
+      })}
+    </Paper>
   );
 }
 

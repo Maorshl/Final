@@ -101,7 +101,6 @@ function AddPost() {
     tagInput.current.focus();
   };
   const changePostPrivate = () => {
-    console.log("object");
     setPrivate(!postPrivate);
   };
 
@@ -150,11 +149,12 @@ function AddPost() {
         </Grid>
         <Grid item xs={12} className={classes.inputContainer}>
           <FormControl>
-            <InputLabel htmlFor="my-input">Post Tags</InputLabel>
+            {/* <InputLabel htmlFor="my-input">Post Tags</InputLabel> */}
             <Input
               aria-describedby="my-helper-text"
               onChange={getTags}
               className={classes.input}
+              placeholder="Post Tags"
               inputRef={tagInput}
             />
           </FormControl>
@@ -163,11 +163,7 @@ function AddPost() {
           </Button>
         </Grid>
       </Grid>
-      {postTags && <Tags tags={postTags} />}
-      {/* {postTags &&
-        postTags.map(tag => {
-          return <span>{tag} </span>;
-        })} */}
+      <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
     </div>
   );
 }
