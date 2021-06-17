@@ -10,7 +10,7 @@ import { Input } from "@material-ui/core";
 import { FormControl } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Link } from "@material-ui/core";
 import Tags from "./Tags";
 import AppBar from "./AppBar";
 
@@ -195,7 +195,12 @@ function AddPost({ setUser }) {
           </Typography>
         </FormGroup>
         <Button
-          style={{ marginRight: "1rem", fontSize: "20px", marginLeft: "1rem" }}
+          style={{
+            marginRight: "1rem",
+            fontSize: "20px",
+            marginLeft: "1rem",
+            marginBottom: "1rem",
+          }}
           onClick={addPost}
           variant="contained"
           color="primary"
@@ -203,7 +208,33 @@ function AddPost({ setUser }) {
           Add Post
         </Button>
       </div>
+      <Copyright />
     </>
+  );
+}
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="initial" align="center">
+      {"Copyright © "}
+      <Link
+        target="_blank"
+        color="inherit"
+        href="https://www.linkedin.com/in/maor-shlomo-27a8931bb/"
+      >
+        Maor Shlomo
+      </Link>{" "}
+      {"& "}
+      <Link
+        target="_blank"
+        color="inherit"
+        href="https://www.linkedin.com/in/gil-naaman-518738203/"
+      >
+        Gil Naaman
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
   );
 }
 
