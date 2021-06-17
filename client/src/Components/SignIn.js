@@ -94,6 +94,7 @@ export default function SignInSide({ setUser }) {
       const { data } = response;
       Cookies.set("token", data.accessToken);
       Cookies.set("refreshToken", data.newRefreshToken);
+      Cookies.set("userName", data.userName);
       setUser({ userName });
     } else {
       setWrongPassword(true);

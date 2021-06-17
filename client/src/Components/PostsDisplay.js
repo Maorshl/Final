@@ -35,15 +35,16 @@ function PostsDisplay(props) {
   });
   return (
     <>
-      <div className={classes.root}>
+      <Typography>DisplayPosts</Typography>
+      {/* <div className={classes.root}>
         <Typography>Saved Posts</Typography>
         <div className="post-display">
           {savedPosts.map((post, i) => {
             return <PostCard post={post} key={i} />;
           })}
-        </div>
+        </div> */}
 
-        {/* <Typography>High Rated Posts</Typography>
+      {/* <Typography>High Rated Posts</Typography>
         <div className="post-display">
           {highRatedPosts.map((post, i) => {
             return <PostCard post={post} key={i} />;
@@ -56,7 +57,7 @@ function PostsDisplay(props) {
             return <PostCard post={post} key={i} />;
           })}
         </div> */}
-      </div>
+      {/* </div> */}
     </>
   );
 }

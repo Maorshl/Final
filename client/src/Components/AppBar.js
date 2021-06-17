@@ -38,6 +38,7 @@ export default function MenuAppBar({ setUser }) {
     });
     Cookies.remove("token");
     Cookies.remove("refreshToken");
+    Cookies.remove("userName");
     setUser(null);
   };
 

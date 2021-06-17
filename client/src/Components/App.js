@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Style/App.css";
 import Welcome from "./Welcome";
 import SignIn from "./SignIn";
@@ -57,6 +57,16 @@ function App() {
   //   return <div class="loader">loading</div>;
   // }
 
+  // useEffect to stay logged in
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const refreshToken = Cookies.get("refreshToken");
+    const userName = Cookies.get("userName");
+    if (token && refreshToken && userName) {
+      setUser({ userName });
+    }
+  }, []);
   return (
     <div className="App">
       <Router>
