@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Style/App.css";
-import AppBar from "./AppBar";
+import Welcome from "./Welcome";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -11,10 +11,10 @@ import AddPost from "./AddPost";
 //* In out app we are using "material ui" as a bootstarp, there for some of our defenition its part of "material ui".
 
 //* The axios interceptors attach for each http request the access token.
-//* If the user need new access token, it handle it.
+//* If the user need new access token, it handles it.
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
   async function (error) {
@@ -58,6 +58,16 @@ function App() {
   //   return <div class="loader">loading</div>;
   // }
 
+  // useEffect to stay logged in
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const refreshToken = Cookies.get("refreshToken");
+    const userName = Cookies.get("userName");
+    if (token && refreshToken && userName) {
+      setUser({ userName });
+    }
+  }, []);
   return (
     <div className="App">
       <Router>
@@ -69,7 +79,8 @@ function App() {
             <AddPost />
           </Route>
           <Route path="/">
-            {user && <AppBar setUser={setUser} user={user} />}
+
+            {user && <Welcome setUser={setUser} />}
             {!user && <SignIn setUser={setUser} />}
           </Route>
         </Switch>

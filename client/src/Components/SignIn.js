@@ -17,7 +17,7 @@ import Cookies from "js-cookie";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textPrimary" align="center">
       {"Copyright © "}
       <Link
         target="_blank"
@@ -80,6 +80,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignInSide({ setUser }) {
   const classes = useStyles();
+  const [rememberMe, setRememberMe] = useState(false);
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [wrongPassword, setWrongPassword] = useState(false);
@@ -91,10 +92,15 @@ export default function SignInSide({ setUser }) {
       password,
     });
     if (response.status === 200) {
+      let expires = null;
+      if (rememberMe) {
+        expires = 5;
+      }
       const { data } = response;
-      Cookies.set("token", data.accessToken);
-      Cookies.set("refreshToken", data.newRefreshToken);
-      Cookies.set("userName", userName);
+
+      Cookies.set("token", data.accessToken, { expires });
+      Cookies.set("refreshToken", data.newRefreshToken, { expires });
+      Cookies.set("userName", data.userName, { expires });
       setUser({ userName });
     } else {
       setWrongPassword(true);
@@ -152,7 +158,19 @@ export default function SignInSide({ setUser }) {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  onClick={() => {
+                    if (!rememberMe) {
+                      setRememberMe(true);
+                    } else {
+                      setRememberMe(false);
+                    }
+                  }}
+                />
+              }
               label="Remember me"
             />
             {wrongPassword && (
