@@ -6,6 +6,7 @@ import SignUp from "./SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
+import AddPost from "./AddPost";
 
 //* In out app we are using "material ui" as a bootstarp, there for some of our defenition its part of "material ui".
 
@@ -74,7 +75,11 @@ function App() {
           <Route path="/signUp">
             <SignUp />
           </Route>
+          <Route exact path="/addPost">
+            <AddPost />
+          </Route>
           <Route path="/">
+
             {user && <Welcome setUser={setUser} />}
             {!user && <SignIn setUser={setUser} />}
           </Route>
