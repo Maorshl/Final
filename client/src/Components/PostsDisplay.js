@@ -9,12 +9,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
   },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing(2),
+  flex: {
+    display: "flex",
+    margin: 0,
   },
 }));
 
@@ -25,39 +22,39 @@ function PostsDisplay(props) {
   const [privatePosts, setPrivatePosts] = useState([]);
   useEffect(() => {
     (async function getPosts() {
-      const { data } = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
+      const { data } = await axios.get("http://localhost:8080/post/");
       setSavedPosts(data);
       setHighRatedPosts(data);
       setPrivatePosts(data);
     })();
-  });
+  }, []);
   return (
     <>
-      <Typography>DisplayPosts</Typography>
-      {/* <div className={classes.root}>
+      <div className={classes.root}>
         <Typography>Saved Posts</Typography>
-        <div className="post-display">
-          {savedPosts.map((post, i) => {
-            return <PostCard post={post} key={i} />;
-          })}
-        </div> */}
+        <div className="post-scroll">
+          {savedPosts &&
+            savedPosts.map((post, i) => {
+              return <PostCard post={post} key={i} />;
+            })}
+        </div>
 
-      {/* <Typography>High Rated Posts</Typography>
-        <div className="post-display">
-          {highRatedPosts.map((post, i) => {
-            return <PostCard post={post} key={i} />;
-          })}
+        <Typography>High Rated Posts</Typography>
+        <div className="post-scroll">
+          {highRatedPosts &&
+            highRatedPosts.map((post, i) => {
+              return <PostCard post={post} key={i} />;
+            })}
         </div>
 
         <Typography>Private Posts</Typography>
-        <div className="post-display">
-          {privatePosts.map((post, i) => {
-            return <PostCard post={post} key={i} />;
-          })}
-        </div> */}
-      {/* </div> */}
+        <div className="post-scroll">
+          {privatePosts &&
+            privatePosts.map((post, i) => {
+              return <PostCard post={post} key={i} />;
+            })}
+        </div>
+      </div>
     </>
   );
 }

@@ -14,21 +14,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
+    Width: "100%",
   },
   avatar: {
     backgroundColor: red[500],
@@ -44,7 +30,7 @@ export default function PostCard({ post }) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            {post.userId}
+            {post.author}
           </Avatar>
         }
         action={
@@ -53,11 +39,11 @@ export default function PostCard({ post }) {
           </IconButton>
         }
         title={post.title}
-        subheader="Subtitle"
+        subheader={new Date(post.createdAt).toLocaleDateString()}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {post.body}
+          {post.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

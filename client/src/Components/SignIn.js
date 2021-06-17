@@ -17,7 +17,7 @@ import Cookies from "js-cookie";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textPrimary" align="center">
+    <Typography variant="body2" color="initial" align="center">
       {"Copyright © "}
       <Link
         target="_blank"
