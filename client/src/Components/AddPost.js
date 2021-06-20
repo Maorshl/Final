@@ -1,20 +1,23 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
 import Cookies from "js-cookie";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import FormGroup from "@material-ui/core/FormGroup";
-import Switch from "@material-ui/core/Switch";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { Input } from "@material-ui/core";
-import { FormControl } from "@material-ui/core";
-import { InputLabel } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { TextField, Link } from "@material-ui/core";
 import Tags from "./Tags";
 import AppBar from "./AppBar";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import {
+  Grid,
+  Input,
+  FormControl,
+  InputLabel,
+  Link,
+  TextField,
+  Button,
+  Typography,
+  Switch,
+  FormGroup,
+} from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     width: "fit-content",
     display: "flex",
@@ -33,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AntSwitch = withStyles((theme) => ({
+const AntSwitch = withStyles(theme => ({
   root: {
     width: 28,
     height: 16,
@@ -93,23 +96,23 @@ function AddPost({ setUser }) {
       })
       .then((window.location = "/"));
   };
-  const setPostUrl = (event) => {
+  const setPostUrl = event => {
     setUrl(event.target.value);
   };
-  const setPostTitle = (event) => {
+  const setPostTitle = event => {
     setTitle(event.target.value);
   };
-  const setPostDescription = (event) => {
+  const setPostDescription = event => {
     setDescription(event.target.value);
   };
-  const getTags = (event) => {
+  const getTags = event => {
     //* This function get the value of the input, set it as varibale of tag with useState.
     setTag(event.target.value);
   };
   const setTags = () => {
     //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates in post tags
     if (tagInput.current.value === "") return;
-    if (postTags.find((element) => element === tagInput.current.value)) {
+    if (postTags.find(element => element === tagInput.current.value)) {
       tagInput.current.value = "";
       tagInput.current.focus();
       return;
