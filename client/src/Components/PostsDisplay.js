@@ -3,8 +3,9 @@ import PostCard from "./PostCard";
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import Cookies from "js-cookie";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -26,10 +27,16 @@ function PostsDisplay(props) {
   const [highRatedPosts, setHighRatedPosts] = useState([]);
   const [privatePosts, setPrivatePosts] = useState([]);
   useEffect(() => {
-    (async function getPosts() {
+    (async function getSavedPosts() {
       const { data } = await axios.get("http://localhost:8080/post/");
       setSavedPosts(data);
       setHighRatedPosts(data);
+    })();
+    (async function getPrivatePosts() {
+      const username = Cookies.get("userName");
+      const { data } = await axios.get(
+        `http://localhost:8080/post/${username}/private`
+      );
       setPrivatePosts(data);
     })();
   }, []);
