@@ -36,15 +36,7 @@ function PostsDisplay(props) {
   const [posts, setPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   (async function getPosts() {
-  //     const { data } = await axios.get("http://localhost:8080/post/");
-  //     setSavedPosts(data);
-  //     setHighRatedPosts(data);
-  //     setPrivatePosts(data);
-  //   })();
-  // }, []);
-
+  const [morePosts, setMorePosts] = useState(true);
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -53,6 +45,7 @@ function PostsDisplay(props) {
       );
       if (data === "No more posts") {
         setLoading(false);
+        setMorePosts(false);
         return;
       }
       if (pageNum === 1) {
@@ -91,9 +84,13 @@ function PostsDisplay(props) {
           })}
         {loading && (
           <div className={classes.spinner}>
-            <CircularProgress />
             <CircularProgress color="secondary" />
           </div>
+        )}
+        {!morePosts && (
+          <Typography variant="h6" color="primary">
+            No more posts to show! come back later :)
+          </Typography>
         )}
       </div>
     </>
