@@ -1,15 +1,16 @@
 const User = require("../models/User");
 const { hashSync } = require("bcrypt");
 
-function createUser(user) {
+async function createUser(req, res) {
+  const { user } = req.body;
+  const hashedPassword = hashSync(user.password, 10);
+  user.password = hashedPassword;
+  const newUser = new User(user);
   try {
-    const hashedPassword = hashSync(user.password, 10);
-    user.password = hashedPassword;
-    const newUser = new User(user);
-    newUser.save();
-    return "User created successfully";
+    await newUser.save();
+    return res.status(201).send("User created successfully");
   } catch (error) {
-    return error;
+    return res.status(403).send("User name or email is alrady in use!");
   }
 }
 
