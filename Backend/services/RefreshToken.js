@@ -18,9 +18,19 @@ async function getNewToken(req, res) {
     if (err) {
       return res.status(403).send("Invalid Refresh Token");
     }
-    const accessToken = jwt.sign(decoded, ACCESS_TOKEN_SECRET, {
-      expiresIn: "15m",
-    });
+    const { name, password } = decoded;
+    const accessToken = jwt.sign(
+      {
+        result: {
+          name,
+          password,
+        },
+      },
+      ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: "10m",
+      }
+    );
     res.json({ accessToken });
   });
 }

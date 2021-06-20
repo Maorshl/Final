@@ -14,7 +14,7 @@ import AddPost from "./AddPost";
 //* If the user need new access token, it handles it.
 
 axios.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
   async function (error) {
