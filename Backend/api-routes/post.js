@@ -14,10 +14,10 @@ post.post("/create", validateToken, (req, res) => {
   }
 });
 
-// post.get("/", validateToken, async (req, res) => {
-//   const posts = await getAllPosts();
-//   res.json(posts);
-// });
+post.get("/", validateToken, async (req, res) => {
+  const posts = await getAllPosts();
+  res.json(posts);
+});
 
 post.get("/getFew", async (req, res) => {
   let { pageNum } = req.query;

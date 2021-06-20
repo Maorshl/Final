@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
 
     backgroundColor: "#333",
-    height: "91vh",
+    height: "100vh",
   },
   flex: {
     display: "flex",
@@ -25,21 +25,54 @@ function PostsDisplay(props) {
   const [savedPosts, setSavedPosts] = useState([]);
   const [highRatedPosts, setHighRatedPosts] = useState([]);
   const [privatePosts, setPrivatePosts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+
+  // useEffect(() => {
+  //   (async function getPosts() {
+  //     const { data } = await axios.get("http://localhost:8080/post/");
+  //     setSavedPosts(data);
+  //     setHighRatedPosts(data);
+  //     setPrivatePosts(data);
+  //   })();
+  // }, []);
+
   useEffect(() => {
-    (async function getPosts() {
-      const { data } = await axios.get("http://localhost:8080/post/");
-      setSavedPosts(data);
-      setHighRatedPosts(data);
-      setPrivatePosts(data);
-    })();
-  }, []);
+    const getData = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8080/post/getFew?pageNum=${pageNum}`
+      );
+      setPosts(data);
+    };
+    getData();
+  }, [pageNum]);
+
+  function scrollToEnd() {
+    setPageNum(pageNum + 1);
+  }
+
+  window.onscroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      scrollToEnd();
+    }
+  };
+
   return (
     <>
       <div className={classes.root}>
         <Typography variant="h2" color="primary">
           Feed
         </Typography>
-        <div className={classes.flex}>
+
+        {posts &&
+          posts.map((post, i) => {
+            return <PostCard post={post} key={i} />;
+          })}
+
+        {/* <div className={classes.flex}>
           <div className="post-scroll">
             <Typography>Saved Posts</Typography>
             {savedPosts &&
@@ -63,7 +96,7 @@ function PostsDisplay(props) {
                 return <PostCard post={post} key={i} />;
               })}
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
