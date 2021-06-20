@@ -19,7 +19,7 @@ post.get("/", validateToken, async (req, res) => {
   res.json(posts);
 });
 
-post.get("/getFew", async (req, res) => {
+post.get("/getFew", validateToken, async (req, res) => {
   let { pageNum } = req.query;
   const data = await getPosts(pageNum);
 
