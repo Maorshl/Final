@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    marginTop: "5rem",
+    marginTop: "2rem",
     margin: "auto",
   },
   inputContainer: {

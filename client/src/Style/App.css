@@ -7,13 +7,30 @@
   pointer-events: none;
 }
 .post-scroll {
-  max-width: fit-content;
   height: 30rem;
+  width: 30rem;
   overflow-x: hidden;
   overflow-y: auto;
-  margin: auto;
+  margin: 0;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
 
+::-webkit-scrollbar-track {
+  border: 1px solid yellowgreen;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: yellowgreen;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #88ba1c;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

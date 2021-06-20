@@ -7,10 +7,15 @@ import { Typography, Grid } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
+
+    backgroundColor: "#333",
+    height: "91vh",
   },
   flex: {
     display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
     margin: 0,
   },
 }));
@@ -31,28 +36,33 @@ function PostsDisplay(props) {
   return (
     <>
       <div className={classes.root}>
-        <Typography>Saved Posts</Typography>
-        <div className="post-scroll">
-          {savedPosts &&
-            savedPosts.map((post, i) => {
-              return <PostCard post={post} key={i} />;
-            })}
-        </div>
+        <Typography variant="h2" color="primary">
+          Feed
+        </Typography>
+        <div className={classes.flex}>
+          <div className="post-scroll">
+            <Typography>Saved Posts</Typography>
+            {savedPosts &&
+              savedPosts.map((post, i) => {
+                return <PostCard post={post} key={i} />;
+              })}
+          </div>
 
-        <Typography>High Rated Posts</Typography>
-        <div className="post-scroll">
-          {highRatedPosts &&
-            highRatedPosts.map((post, i) => {
-              return <PostCard post={post} key={i} />;
-            })}
-        </div>
+          <div className="post-scroll">
+            <Typography>High Rated Posts</Typography>
+            {highRatedPosts &&
+              highRatedPosts.map((post, i) => {
+                return <PostCard post={post} key={i} />;
+              })}
+          </div>
 
-        <Typography>Private Posts</Typography>
-        <div className="post-scroll">
-          {privatePosts &&
-            privatePosts.map((post, i) => {
-              return <PostCard post={post} key={i} />;
-            })}
+          <div className="post-scroll">
+            <Typography>Private Posts</Typography>
+            {privatePosts &&
+              privatePosts.map((post, i) => {
+                return <PostCard post={post} key={i} />;
+              })}
+          </div>
         </div>
       </div>
     </>

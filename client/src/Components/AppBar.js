@@ -60,7 +60,7 @@ export default function MenuAppBar({ setUser }) {
         <Toolbar>
           <Drewer />
           <Typography variant="h6" className={classes.title}>
-            Remember
+            Smart library
           </Typography>
           {auth && (
             <div>

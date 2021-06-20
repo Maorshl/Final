@@ -9,16 +9,13 @@ function Welcome({ setUser }) {
   return (
     <div>
       <AppBar setUser={setUser} />
-      <Typography variant="h2" color="primary">
-        Welcome
-      </Typography>
+
       <div className="left-down-corner">
         <FloatingButton />
         <PostsDisplay />
       </div>
     </div>
   );
-
 }
 
 export default Welcome;

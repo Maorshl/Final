@@ -13,7 +13,7 @@ user.post("/login", async (req, res) => {
   await login(req, res);
 });
 
-user.get("/refreshToken", (req, res) => {
+user.post("/refreshToken", (req, res) => {
   try {
     getNewToken(req, res);
   } catch (error) {
