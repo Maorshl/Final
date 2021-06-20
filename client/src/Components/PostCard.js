@@ -13,8 +13,9 @@ import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
+import LinkIcon from "@material-ui/icons/Link";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     Width: "100%",
   },
@@ -45,16 +46,22 @@ export default function PostCard({ post }) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {post.content}
+          {post.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        {post.url && (
+          <IconButton
+            aria-label="share"
+            href={`https://${post.url}`}
+            target="_blank"
+          >
+            <LinkIcon />
+          </IconButton>
+        )}
       </CardActions>
     </Card>
   );
