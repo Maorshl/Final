@@ -3,6 +3,7 @@ import PostCard from "./PostCard";
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,6 +19,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-around",
     margin: 0,
   },
+  spinner: {
+    display: "flex",
+    justifyContent: "center",
+    "& > * + *": {
+      marginLeft: theme.spacing(2),
+    },
+  },
 }));
 
 function PostsDisplay(props) {
@@ -27,7 +35,7 @@ function PostsDisplay(props) {
   const [privatePosts, setPrivatePosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
-
+  const [loading, setLoading] = useState(false);
   // useEffect(() => {
   //   (async function getPosts() {
   //     const { data } = await axios.get("http://localhost:8080/post/");
@@ -39,10 +47,20 @@ function PostsDisplay(props) {
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       const { data } = await axios.get(
         `http://localhost:8080/post/getFew?pageNum=${pageNum}`
       );
-      setPosts(data);
+      if (data === "No more posts") {
+        setLoading(false);
+        return;
+      }
+      if (pageNum === 1) {
+        setLoading(false);
+        return setPosts(data);
+      }
+      setPosts([...posts, ...data]);
+      setLoading(false);
     };
     getData();
   }, [pageNum]);
@@ -71,32 +89,12 @@ function PostsDisplay(props) {
           posts.map((post, i) => {
             return <PostCard post={post} key={i} />;
           })}
-
-        {/* <div className={classes.flex}>
-          <div className="post-scroll">
-            <Typography>Saved Posts</Typography>
-            {savedPosts &&
-              savedPosts.map((post, i) => {
-                return <PostCard post={post} key={i} />;
-              })}
+        {loading && (
+          <div className={classes.spinner}>
+            <CircularProgress />
+            <CircularProgress color="secondary" />
           </div>
-
-          <div className="post-scroll">
-            <Typography>High Rated Posts</Typography>
-            {highRatedPosts &&
-              highRatedPosts.map((post, i) => {
-                return <PostCard post={post} key={i} />;
-              })}
-          </div>
-
-          <div className="post-scroll">
-            <Typography>Private Posts</Typography>
-            {privatePosts &&
-              privatePosts.map((post, i) => {
-                return <PostCard post={post} key={i} />;
-              })}
-          </div>
-        </div> */}
+        )}
       </div>
     </>
   );
