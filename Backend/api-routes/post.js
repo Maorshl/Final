@@ -21,7 +21,6 @@ post.post("/create", validateToken, (req, res) => {
 
 post.get("/getFew", async (req, res) => {
   let { pageNum } = req.query;
-  // pageNum = parseInt(pageNum);
   const data = await getPosts(pageNum);
 
   res.send(data);
