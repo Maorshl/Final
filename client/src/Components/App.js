@@ -53,12 +53,6 @@ async function getNewToken(refToken) {
 function App() {
   const [user, setUser] = useState(null);
   // todo spinner
-  // const [loading, setloading] = useState(false);
-  // if (loading) {
-  //   return <div class="loader">loading</div>;
-  // }
-
-  // useEffect to stay logged in
 
   useEffect(() => {
     const token = Cookies.get("token");
