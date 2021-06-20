@@ -12,7 +12,8 @@ import {
   IconButton,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import HomeIcon from "@material-ui/icons/Home";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles({
   list: {
@@ -57,20 +58,20 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button>
+        <ListItem button component="a" href="/">
           <ListItemIcon>
-            <InboxIcon />
+            <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Inbox" />
+          <ListItemText primary="Home" />
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button component="a" href="/addpost">
           <ListItemIcon>
-            <InboxIcon />
+            <AddIcon />
           </ListItemIcon>
-          <ListItemText primary="Inbox" />
+          <ListItemText primary="Add Post" />
         </ListItem>
       </List>
     </div>
