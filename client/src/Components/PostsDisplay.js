@@ -3,6 +3,7 @@ import PostCard from "./PostCard";
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,13 +11,20 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
 
     backgroundColor: "#333",
-    height: "91vh",
+    height: "100vh",
   },
   flex: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     margin: 0,
+  },
+  spinner: {
+    display: "flex",
+    justifyContent: "center",
+    "& > * + *": {
+      marginLeft: theme.spacing(2),
+    },
   },
 }));
 
@@ -25,45 +33,65 @@ function PostsDisplay(props) {
   const [savedPosts, setSavedPosts] = useState([]);
   const [highRatedPosts, setHighRatedPosts] = useState([]);
   const [privatePosts, setPrivatePosts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [morePosts, setMorePosts] = useState(true);
   useEffect(() => {
-    (async function getPosts() {
-      const { data } = await axios.get("http://localhost:8080/post/");
-      setSavedPosts(data);
-      setHighRatedPosts(data);
-      setPrivatePosts(data);
-    })();
-  }, []);
+    const getData = async () => {
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:8080/post/getFew?pageNum=${pageNum}`
+      );
+      if (data === "No more posts") {
+        setLoading(false);
+        setMorePosts(false);
+        return;
+      }
+      if (pageNum === 1) {
+        setLoading(false);
+        return setPosts(data);
+      }
+      setPosts([...posts, ...data]);
+      setLoading(false);
+    };
+    getData();
+  }, [pageNum]);
+
+  function scrollToEnd() {
+    setPageNum(pageNum + 1);
+  }
+
+  window.onscroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      scrollToEnd();
+    }
+  };
+
   return (
     <>
       <div className={classes.root}>
         <Typography variant="h2" color="primary">
           Feed
         </Typography>
-        <div className={classes.flex}>
-          <div className="post-scroll">
-            <Typography>Saved Posts</Typography>
-            {savedPosts &&
-              savedPosts.map((post, i) => {
-                return <PostCard post={post} key={i} />;
-              })}
-          </div>
 
-          <div className="post-scroll">
-            <Typography>High Rated Posts</Typography>
-            {highRatedPosts &&
-              highRatedPosts.map((post, i) => {
-                return <PostCard post={post} key={i} />;
-              })}
+        {posts &&
+          posts.map((post, i) => {
+            return <PostCard post={post} key={i} />;
+          })}
+        {loading && (
+          <div className={classes.spinner}>
+            <CircularProgress color="secondary" />
           </div>
-
-          <div className="post-scroll">
-            <Typography>Private Posts</Typography>
-            {privatePosts &&
-              privatePosts.map((post, i) => {
-                return <PostCard post={post} key={i} />;
-              })}
-          </div>
-        </div>
+        )}
+        {!morePosts && (
+          <Typography variant="h6" color="primary">
+            No more posts to show! come back later :)
+          </Typography>
+        )}
       </div>
     </>
   );
