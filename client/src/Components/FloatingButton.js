@@ -3,12 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Fab, Link } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: "1rem",
     marginLeft: "1rem",
     position: "fixed",
     bottom: 0,
+    zIndex: 9000,
   },
   extendedIcon: {
     marginRight: theme.spacing(1),

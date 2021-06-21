@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -18,6 +18,12 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row",
     justifyContent: "space-around",
     margin: 0,
+  },
+  posts: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "fit-content",
   },
   spinner: {
     display: "flex",
@@ -77,21 +83,22 @@ function PostsDisplay(props) {
         <Typography variant="h2" color="primary">
           Feed
         </Typography>
-
-        {posts &&
-          posts.map((post, i) => {
-            return <PostCard post={post} key={i} />;
-          })}
-        {loading && (
-          <div className={classes.spinner}>
-            <CircularProgress color="secondary" />
-          </div>
-        )}
-        {!morePosts && (
-          <Typography variant="h6" color="primary">
-            No more posts to show! come back later :)
-          </Typography>
-        )}
+        <div className={classes.posts}>
+          {posts &&
+            posts.map((post, i) => {
+              return <PostCard post={post} key={i} />;
+            })}
+          {loading && (
+            <div className={classes.spinner}>
+              <CircularProgress color="secondary" />
+            </div>
+          )}
+          {!morePosts && (
+            <Typography variant="h6" color="primary">
+              No more posts to show! come back later :)
+            </Typography>
+          )}
+        </div>
       </div>
     </>
   );

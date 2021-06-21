@@ -14,9 +14,11 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    Width: "100%",
+    width: "60%",
+    margin: "auto",
+    marginTop: "1rem",
   },
   avatar: {
     backgroundColor: red[500],
