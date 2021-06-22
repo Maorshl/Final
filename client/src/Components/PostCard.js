@@ -34,8 +34,11 @@ export default function PostCard({ post }) {
         subheader={new Date(post.createdAt).toLocaleDateString()}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {post.content}
+        <Typography variant="body2" component="p">
+          {post.head && post.head}
+        </Typography>
+        <Typography variant="body3" color="textSecondary" component="p">
+          {post.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
