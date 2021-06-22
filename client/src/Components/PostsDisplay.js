@@ -1,38 +1,9 @@
 import axios from "axios";
 import PostCard from "./PostCard";
 import React, { useEffect, useState, useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-
-    backgroundColor: "#333",
-    height: "100vh",
-  },
-  flex: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    margin: 0,
-  },
-  posts: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    height: "fit-content",
-  },
-  spinner: {
-    display: "flex",
-    justifyContent: "center",
-    "& > * + *": {
-      marginLeft: theme.spacing(2),
-    },
-  },
-}));
+import useStyles from "../Style/index";
 
 function PostsDisplay() {
   const postsDiv = useRef();
@@ -73,17 +44,17 @@ function PostsDisplay() {
 
   return (
     <>
-      <div className={classes.root}>
+      <div className={classes.rootPostDisplay}>
         <Typography variant="h2" color="primary">
           Feed
         </Typography>
-        <div className={classes.posts} ref={postsDiv}>
+        <div className={classes.postsPostDisplay} ref={postsDiv}>
           {posts &&
             posts.map((post, i) => {
               return <PostCard post={post} key={i} />;
             })}
           {loading && (
-            <div className={classes.spinner}>
+            <div className={classes.spinnerPostDisplay}>
               <CircularProgress color="secondary" />
             </div>
           )}
