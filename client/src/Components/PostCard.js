@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
   CardHeader,
@@ -9,31 +8,20 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "60%",
-    margin: "auto",
-    marginTop: "1rem",
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-}));
+import useStyles from "../Style";
 
 export default function PostCard({ post }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.rootPostCard}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="recipe" className={classes.avatarPostCard}>
             {post.author}
           </Avatar>
         }
