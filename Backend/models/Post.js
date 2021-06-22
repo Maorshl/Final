@@ -5,6 +5,7 @@ require("dotenv").config();
 const PostSchema = new Schema({
   title: String,
   url: String,
+  head: String,
   description: String,
   private: Boolean,
   createdAt: Date,
