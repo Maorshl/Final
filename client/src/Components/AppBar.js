@@ -8,23 +8,12 @@ import {
   MenuItem,
   Menu,
 } from "@material-ui/core";
+import useStyles from "../Style";
 import { AccountCircle } from "@material-ui/icons";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
 
 export default function MenuAppBar({ setUser }) {
   const classes = useStyles();
@@ -32,7 +21,7 @@ export default function MenuAppBar({ setUser }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const logout = async (e) => {
+  const logout = async e => {
     await axios
       .post("http://localhost:8080/user/logout", {
         refreshToken: Cookies.get("refreshToken"),
@@ -46,7 +35,7 @@ export default function MenuAppBar({ setUser }) {
       });
   };
 
-  const handleMenu = (event) => {
+  const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -55,11 +44,11 @@ export default function MenuAppBar({ setUser }) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.rootAppBar}>
       <AppBar position="static">
         <Toolbar>
           <Drewer />
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.titleAppBar}>
             Smart library
           </Typography>
           {auth && (
