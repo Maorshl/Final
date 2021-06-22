@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@material-ui/core/";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "../Style/index";
 
 function Copyright() {
   return (
@@ -41,44 +41,6 @@ function Copyright() {
     </Typography>
   );
 }
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-    color: "white",
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  right: {
-    backgroundColor: "#333",
-    color: "white",
-  },
-}));
 
 export default function SignInSide({ setUser }) {
   const classes = useStyles();
@@ -110,9 +72,9 @@ export default function SignInSide({ setUser }) {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component="main" className={classes.rootSignIn}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={false} sm={4} md={7} className={classes.imageSingIn} />
       <Grid
         item
         xs={12}
@@ -121,16 +83,16 @@ export default function SignInSide({ setUser }) {
         component={Paper}
         elevation={6}
         square
-        className={classes.right}
+        className={classes.rightSingIn}
       >
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+        <div className={classes.paperSingIn}>
+          <Avatar className={classes.avatarSingIn}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.formSingIn} noValidate>
             <TextField
               onChange={e => {
                 setUserName(e.target.value);
@@ -185,7 +147,7 @@ export default function SignInSide({ setUser }) {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className={classes.submitSingIn}
               onClick={login}
             >
               Sign In
