@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import useStyles from "../Style/index";
-// conflict resolved
+
 function PostsDisplay() {
   const postsDiv = useRef();
 
@@ -16,18 +16,20 @@ function PostsDisplay() {
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
   const [morePosts, setMorePosts] = useState(true);
-
+  const [latestPostTime, setLatestPostTime] = useState(undefined);
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:8080/post/getFew?pageNum=${pageNum}`
+        `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}`
       );
       if (data === "No more posts") {
         setLoading(false);
         setMorePosts(false);
         return;
       }
+      setLatestPostTime(data[data.length - 1]);
+      data.splice(data.length - 1, 1);
       if (pageNum === 1) {
         setLoading(false);
         return setPosts(data);
