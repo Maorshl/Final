@@ -10,11 +10,11 @@ import {
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
+import Rating from "./Rating";
 import LinkIcon from "@material-ui/icons/Link";
 import useStyles from "../Style";
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, id }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -43,6 +43,7 @@ export default function PostCard({ post }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+        <Rating id={id} />
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>

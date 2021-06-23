@@ -12,6 +12,7 @@ const PostSchema = new Schema({
   author: String,
   tags: Array,
   rating: Number,
+  raters: Array,
 });
 
 module.exports = mongoose.model("Post", PostSchema);
