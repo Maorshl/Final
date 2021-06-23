@@ -13,6 +13,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import useStyles from "../Style";
 
+
 export default function PostCard({ post }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -45,9 +46,15 @@ export default function PostCard({ post }) {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        {post.url && (
+          <IconButton
+            aria-label="share"
+            href={`https://${post.url}`}
+            target="_blank"
+          >
+            <LinkIcon />
+          </IconButton>
+        )}
       </CardActions>
     </Card>
   );

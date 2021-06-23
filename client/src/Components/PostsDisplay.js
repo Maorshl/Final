@@ -4,9 +4,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import useStyles from "../Style/index";
-
+// conflict resolved
 function PostsDisplay() {
   const postsDiv = useRef();
+
   const classes = useStyles();
   const [savedPosts, setSavedPosts] = useState([]);
   const [highRatedPosts, setHighRatedPosts] = useState([]);

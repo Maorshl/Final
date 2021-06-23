@@ -3,7 +3,11 @@ const post = express.Router();
 const { validateToken } = require("../Middlewares");
 const createPost = require("../services/CreatePost");
 const getAllPosts = require("../services/GetAllPosts");
+// resolved conflict
+const getPrivatePosts = require("../services/getPrivatePosts");
+
 const getPosts = require("../services/GetPosts");
+
 
 post.post("/create", validateToken, (req, res) => {
   try {
@@ -11,6 +15,14 @@ post.post("/create", validateToken, (req, res) => {
     res.send("post created successfully");
   } catch (error) {
     res.send(error.message);
+  }
+});
+
+post.get("/:user/private", validateToken, (req, res) => {
+  try {
+    getPrivatePosts(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
   }
 });
 
