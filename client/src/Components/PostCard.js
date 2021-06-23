@@ -11,8 +11,8 @@ import {
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
+import LinkIcon from "@material-ui/icons/Link";
 import useStyles from "../Style";
-
 
 export default function PostCard({ post }) {
   const classes = useStyles();
