@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
   CardHeader,
@@ -9,30 +8,21 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
-import LinkIcon from "@material-ui/icons/Link";
+import useStyles from "../Style";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    Width: "100%",
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-}));
 
 export default function PostCard({ post }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.rootPostCard}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="recipe" className={classes.avatarPostCard}>
             {post.author}
           </Avatar>
         }
@@ -45,7 +35,10 @@ export default function PostCard({ post }) {
         subheader={new Date(post.createdAt).toLocaleDateString()}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" component="p">
+          {post.head && post.head}
+        </Typography>
+        <Typography variant="body3" color="textSecondary" component="p">
           {post.description}
         </Typography>
       </CardContent>

@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Drawer,
   Button,
@@ -14,19 +13,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import AddIcon from "@material-ui/icons/Add";
-
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  menuButton: {
-    color: "white",
-    marginRight: "1rem",
-  },
-  fullList: {
-    width: "auto",
-  },
-});
+import useStyles from "../Style";
 
 export default function TemporaryDrawer() {
   const classes = useStyles();
@@ -50,8 +37,8 @@ export default function TemporaryDrawer() {
 
   const list = anchor => (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      className={clsx(classes.listDrewer, {
+        [classes.fullListDrewer]: anchor === "top" || anchor === "bottom",
       })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
@@ -84,7 +71,7 @@ export default function TemporaryDrawer() {
           <Button onClick={toggleDrawer(anchor, true)}>
             <IconButton
               edge="start"
-              className={classes.menuButton}
+              className={classes.menuButtonDrewer}
               color="inherit"
               aria-label="menu"
             >

@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
 import Cookies from "js-cookie";
+import validator from "validator";
 import Tags from "./Tags";
 import AppBar from "./AppBar";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import useStyles from "../Style";
+import AntSwitch from "../Style/AntSwitch";
 import {
   Grid,
   Input,
@@ -13,91 +15,48 @@ import {
   TextField,
   Button,
   Typography,
-  Switch,
   FormGroup,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    width: "fit-content",
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "center",
-    marginTop: "2rem",
-    margin: "auto",
-  },
-  inputContainer: {
-    padding: "1rem",
-    display: "flex",
-    flexDirection: "row",
-  },
-  descriptionContainer: {
-    width: "600px",
-  },
-}));
-
-const AntSwitch = withStyles(theme => ({
-  root: {
-    width: 28,
-    height: 16,
-    padding: 0,
-    display: "flex",
-  },
-  switchBase: {
-    padding: 2,
-    color: theme.palette.grey[500],
-    "&$checked": {
-      transform: "translateX(12px)",
-      color: theme.palette.common.white,
-      "& + $track": {
-        opacity: 1,
-        backgroundColor: theme.palette.primary.main,
-        borderColor: theme.palette.primary.main,
-      },
-    },
-  },
-  thumb: {
-    width: 12,
-    height: 12,
-    boxShadow: "none",
-  },
-  track: {
-    border: `1px solid ${theme.palette.grey[500]}`,
-    borderRadius: 16 / 2,
-    opacity: 1,
-    backgroundColor: theme.palette.common.white,
-  },
-  checked: {},
-}))(Switch);
-
 function AddPost({ setUser }) {
   const tagInput = useRef();
-  const [postUrl, setUrl] = useState(undefined);
-  const [postTitle, setTitle] = useState(undefined);
-  const [postDescription, setDescription] = useState(undefined);
+  const classes = useStyles();
+  const [postUrl, setUrl] = useState(null);
+  const [isValidUrl, setIsValidUrl] = useState(false);
+  const [postTitle, setTitle] = useState(null);
+  const [postDescription, setDescription] = useState(null);
   const [postTags, setPostTags] = useState([]);
   const [tag, setTag] = useState("");
   const [postPrivate, setPrivate] = useState(false);
+  const [buttonColor, setButtonColor] = useState("null");
   const postAuthor = Cookies.get("userName");
   const postDate = new Date();
-  const classes = useStyles();
 
   const addPost = () => {
-    axios
-      .post("http://localhost:8080/post/create", {
-        title: postTitle,
-        url: postUrl,
-        description: postDescription,
-        private: postPrivate,
-        createdAt: postDate,
-        author: postAuthor,
-        tags: postTags,
-        rating: 0,
-      })
-      .then((window.location = "/"));
+    if (isValidUrl) {
+      axios
+        .post("http://localhost:8080/post/create", {
+          title: postTitle,
+          url: postUrl,
+          description: postDescription,
+          private: postPrivate,
+          createdAt: postDate,
+          author: postAuthor,
+          tags: postTags,
+          rating: 0,
+        })
+        .then((window.location = "/"));
+    }
   };
   const setPostUrl = event => {
-    setUrl(event.target.value);
+    if (validator.isURL(event.target.value)) {
+      setButtonColor("primary");
+      setIsValidUrl(true);
+      setUrl(event.target.value);
+    } else {
+      setButtonColor("null");
+      setIsValidUrl(false);
+    }
   };
   const setPostTitle = event => {
     setTitle(event.target.value);
@@ -139,7 +98,15 @@ function AddPost({ setUser }) {
               aria-describedby="my-helper-text"
               onChange={setPostUrl}
               className={classes.input}
+              type="url"
+              required="true"
+              name="url"
             />
+            {!isValidUrl && (
+              <Typography variant="h6" color="primary">
+                Please enter valid URL
+              </Typography>
+            )}
           </FormControl>
         </Grid>
         <Grid item xs={12} className={classes.inputContainer}>
@@ -197,6 +164,7 @@ function AddPost({ setUser }) {
             </Grid>
           </Typography>
         </FormGroup>
+
         <Button
           style={{
             marginRight: "1rem",
@@ -206,7 +174,7 @@ function AddPost({ setUser }) {
           }}
           onClick={addPost}
           variant="contained"
-          color="primary"
+          color={buttonColor}
         >
           Add Post
         </Button>
