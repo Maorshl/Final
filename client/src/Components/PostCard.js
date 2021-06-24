@@ -47,11 +47,7 @@ export default function PostCard({ post }) {
           <FavoriteIcon />
         </IconButton>
         {post.url && (
-          <IconButton
-            aria-label="share"
-            href={`https://${post.url}`}
-            target="_blank"
-          >
+          <IconButton aria-label="share" href={post.url} target="_blank">
             <LinkIcon />
           </IconButton>
         )}
