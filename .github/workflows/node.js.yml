@@ -29,16 +29,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Server dependencies
         run: npm ci
-        working-directory: ./backend
+        working-directory: ./Backend
       - name: Install Server dependencies
         run: npm i
-        working-directory: ./backend
+        working-directory: ./Backend
       - name: Install Client dependencies
         run: npm i
         working-directory: ./client
       - name: Run server
         run: npm run dev
-        working-directory: ./backend
+        working-directory: ./Backend
       - name: Run Client
         run: npm start & npx wait-on http://localhost:3000
         working-directory: ./client
