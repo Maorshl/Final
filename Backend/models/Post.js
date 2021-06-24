@@ -13,6 +13,7 @@ const PostSchema = new Schema({
   tags: Array,
   rating: Number,
   raters: Array,
+  rateAVG: Number,
 });
 
 module.exports = mongoose.model("Post", PostSchema);
