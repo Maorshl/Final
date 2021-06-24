@@ -32,7 +32,7 @@ jobs:
           MONGO_URI: "mongodb+srv://GilMaor:T4Cb0LFfDAxWTLSG@final.og3j5.mongodb.net/Final?retryWrites=true&w=majority"
           REFRESH_TOKEN_SECRET: "tcdsvu"
           ACCESS_TOKEN_SECRET: "uzjyh"
-        working-directory: ./backend
+        working-directory: .
       - name: Install Server dependencies
         run: npm i
         working-directory: ./client
