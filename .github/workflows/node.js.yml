@@ -10,10 +10,10 @@ on:
     branches: [main]
 
 env:
-  MONGO_URI: ${{secrets.MONGO_URI}}
-  PORT: ${{secrets.PORT}}
-  REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
-  ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+  MONGO_URI: ${{secrets.ENV_FILE.MONGO_URI}}
+  PORT: ${{secrets.ENV_FILE.PORT}}
+  REFRESH_TOKEN_SECRET: ${{secrets.ENV_FILE.REFRESH_TOKEN_SECRET}}
+  ACCESS_TOKEN_SECRET: ${{secrets.ENV_FILE.ACCESS_TOKEN_SECRET}}
 
 jobs:
   build:
