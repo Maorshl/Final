@@ -27,10 +27,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Runs env
-        run: env
-      - name: Add server .env file
-        run: echo "$ENV_FILE" > .env
+        env: # Or as an environment variable
+          PORT: 8080
+          MONGO_URI: "mongodb+srv://GilMaor:T4Cb0LFfDAxWTLSG@final.og3j5.mongodb.net/Final?retryWrites=true&w=majority"
+          REFRESH_TOKEN_SECRET: "tcdsvu"
+          ACCESS_TOKEN_SECRET: "uzjyh"
         working-directory: ./backend
       - name: Install Server dependencies
         run: npm i
