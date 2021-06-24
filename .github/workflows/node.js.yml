@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Add server .env file
-        run: echo "$ENV_FILE" > ./backend/.env
+        run: echo "$ENV_FILE" > .env
         working-directory: ./backend
       - name: Install Server dependencies
         run: npm i
