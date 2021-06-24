@@ -27,19 +27,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        working-directory: .
       - name: Install Server dependencies
         run: npm i
-        working-directory: .
+        working-directory: ./backend
       - name: Install Client dependencies
         run: npm i
-        working-directory: .
+        working-directory: ./client
       - name: Run server
         run: npm run dev
-        working-directory: .
+        working-directory: ./backend
       - name: Run Client
         run: npm start & npx wait-on http://localhost:3000
-        working-directory: .
+        working-directory: ./client
       - name: Running tests
         run: npm run test
         working-directory: .
