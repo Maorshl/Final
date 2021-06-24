@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [12.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        env: # Or as an environment variable
+        env:
           PORT: 8080
           MONGO_URI: "mongodb+srv://GilMaor:T4Cb0LFfDAxWTLSG@final.og3j5.mongodb.net/Final?retryWrites=true&w=majority"
           REFRESH_TOKEN_SECRET: "tcdsvu"
