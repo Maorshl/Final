@@ -29,7 +29,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Server dependencies
         run: npm ci
-        working-directory: .
+        working-directory: ./backend
       - name: Install Server dependencies
         run: npm i
         working-directory: ./backend
