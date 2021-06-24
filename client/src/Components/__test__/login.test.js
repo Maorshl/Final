@@ -29,4 +29,13 @@ describe("Frontend test", async () => {
     );
     expect(heading1).toBe("Add Post");
   });
+  test("Should logout", async () => {
+    await page.click("#logoutButton");
+    await page.waitForSelector("h1.MuiTypography-h5");
+    const heading1 = await page.$eval(
+      "h1.MuiTypography-h5",
+      (el) => el.textContent
+    );
+    expect(heading1).toBe("Sign in");
+  });
 });
