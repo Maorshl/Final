@@ -1,23 +1,23 @@
 const Post = require("../models/Post");
-//* This variable is the value of the time of the last post that send to the client, so we can know from which time we should do the query from the DB.
-let lastPostTime;
+//* This function send to each client list of post, with the date of the last post,
+//* and every client send back the latest post time that he recived and now he can get older posts.
 
-async function getPosts(query) {
+async function getPosts(pageNum, latestPost) {
   let posts;
   try {
-    if (query === "1") {
+    if (pageNum === "1") {
       posts = await Post.find({}).sort({ createdAt: "desc" }).limit(5);
     } else {
       posts = await Post.find({
-        createdAt: { $lt: new Date(lastPostTime) },
+        createdAt: { $lt: new Date(latestPost) },
       })
         .sort({ createdAt: "desc" })
         .limit(5);
     }
     if (posts.length === 0) return "No more posts";
-
-    lastPostTime = new Date(posts[posts.length - 1].createdAt);
+    const lastPostTime = new Date(posts[posts.length - 1].createdAt);
     post = shuffleArray(posts);
+    posts.push(lastPostTime);
     return posts;
   } catch (error) {
     console.log(error);
