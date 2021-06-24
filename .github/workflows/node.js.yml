@@ -1,0 +1,45 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ Test-Building ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests (Node.js ${{ matrix.node-version }})
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Add server .env file
+        run: echo "$ENV_FILE" > .env
+        working-directory: ./backend
+      - name: Install Server dependencies
+        run: npm i
+        working-directory: ./client
+      - name: Install Client dependencies
+        run: npm i
+        working-directory: ./backend
+      - name: Run server
+        run: npm run dev
+        working-directory: ./client
+      - name: Run Client
+        run: npm start & npx wait-on http://localhost:3000
+        working-directory: ./client
+      - name: Running tests
+        run: npm run test
+        working-directory: .
