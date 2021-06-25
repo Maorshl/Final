@@ -40,3 +40,4 @@ describe("Frontend test", () => {
     expect(heading1).toBe("Sign in");
   });
 });
+browser.close();
