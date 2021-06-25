@@ -1,22 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Avatar,
   IconButton,
   Typography,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import Rating from "./Rating";
-import LinkIcon from "@material-ui/icons/Link";
+import CardAct from "./CardAct";
 import useStyles from "../Style";
 
 export default function PostCard({ post, id }) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
   return (
     <Card className={classes.rootPostCard}>
@@ -42,21 +38,7 @@ export default function PostCard({ post, id }) {
           {post.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <Rating id={id} />
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        {post.url && (
-          <IconButton
-            aria-label="share"
-            href={`https://${post.url}`}
-            target="_blank"
-          >
-            <LinkIcon />
-          </IconButton>
-        )}
-      </CardActions>
+      <CardAct id={id} post={post} />
     </Card>
   );
 }

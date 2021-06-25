@@ -43,6 +43,7 @@ function AddPost({ setUser }) {
         author: postAuthor,
         tags: postTags,
         rating: 0,
+        rateAVG: 0,
         raters: [],
       })
       .then(result => {
