@@ -5,7 +5,6 @@ let page;
 describe("Frontend test", () => {
   test("Should login", async () => {
     browser = await puppeteer.launch();
-    console.log("Puppeteer launched successfully!!!!!");
     page = await browser.newPage();
     await page.goto("http://localhost:3000");
     await page.click("#username");
@@ -37,7 +36,8 @@ describe("Frontend test", () => {
       "h1.MuiTypography-h5",
       (el) => el.textContent
     );
+
     expect(heading1).toBe("Sign in");
+    browser.close();
   });
 });
-browser.close();
