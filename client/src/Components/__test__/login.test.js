@@ -2,7 +2,7 @@ import puppeteer from "puppeteer";
 jest.setTimeout(10000);
 let browser;
 let page;
-describe("Frontend test", async () => {
+describe("Frontend test", () => {
   test("Should login", async () => {
     browser = await puppeteer.launch({ headless: false, slowMo: 50 });
     page = await browser.newPage();
