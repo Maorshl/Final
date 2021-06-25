@@ -30,23 +30,26 @@ function AddPost({ setUser }) {
   const [postPrivate, setPrivate] = useState(false);
   const [buttonColor, setButtonColor] = useState("null");
   const postAuthor = Cookies.get("userName");
-  const postDate = new Date();
 
   const addPost = () => {
-    if (isValidUrl) {
-      axios
-        .post("http://localhost:8080/post/create", {
-          title: postTitle,
-          url: postUrl,
-          description: postDescription,
-          private: postPrivate,
-          createdAt: postDate,
-          author: postAuthor,
-          tags: postTags,
-          rating: 0,
-        })
-        .then((window.location = "/"));
-    }
+    if (!isValidUrl) return;
+    axios
+      .post("http://localhost:8080/post/create", {
+        title: postTitle,
+        url: postUrl,
+        description: postDescription,
+        private: postPrivate,
+        createdAt: new Date(),
+        author: postAuthor,
+        tags: postTags,
+        rating: 0,
+        rateAVG: 0,
+        raters: [],
+      })
+      .then(result => {
+        //* When the server done with the post request the client move back to the home page.
+        if (result.status === 200) window.location = "/";
+      });
   };
   const setPostUrl = event => {
     if (validator.isURL(event.target.value)) {
