@@ -36,7 +36,7 @@ function CardAct({ id, post }) {
     getAVGRateData();
   }, []);
 
-  const setPostRate = async (rate) => {
+  const setPostRate = async rate => {
     const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
       postId: id,
       userName,
