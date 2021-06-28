@@ -42,7 +42,7 @@ function PostsDisplay() {
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
-      setPageNum(prevPageNum => prevPageNum + 1);
+      setPageNum((prevPageNum) => prevPageNum + 1);
   };
 
   return (

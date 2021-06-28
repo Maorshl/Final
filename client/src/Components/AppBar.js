@@ -21,7 +21,7 @@ export default function MenuAppBar({ setUser }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const logout = async e => {
+  const logout = async (e) => {
     await axios
       .post("http://localhost:8080/user/logout", {
         refreshToken: Cookies.get("refreshToken"),
@@ -35,7 +35,7 @@ export default function MenuAppBar({ setUser }) {
       });
   };
 
-  const handleMenu = event => {
+  const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -81,6 +81,7 @@ export default function MenuAppBar({ setUser }) {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
               <IconButton
+                id="logoutButton"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
