@@ -54,7 +54,7 @@ function PostsDisplay() {
         <div className={classes.postsPostDisplay} ref={postsDiv}>
           {posts &&
             posts.map((post, i) => {
-              return <PostCard post={post} key={i} />;
+              return <PostCard post={post} key={i} id={post._id} />;
             })}
           {loading && (
             <div className={classes.spinnerPostDisplay}>

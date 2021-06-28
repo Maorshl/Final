@@ -2,7 +2,6 @@ const express = require("express");
 const post = express.Router();
 const { validateToken } = require("../Middlewares");
 const createPost = require("../services/CreatePost");
-const getAllPosts = require("../services/GetAllPosts");
 const getPrivatePosts = require("../services/getPrivatePosts");
 
 const getPosts = require("../services/GetPosts");

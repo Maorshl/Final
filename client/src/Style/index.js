@@ -143,6 +143,9 @@ const useStyles = makeStyles(theme => ({
   chipTags: {
     margin: theme.spacing(0.5),
   },
+  cardActions: {
+    justifyContent: "space-around",
+  },
 }));
 
 export default useStyles;
