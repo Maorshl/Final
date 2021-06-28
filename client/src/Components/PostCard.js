@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CardTags from "./CardTags";
 import {
   Card,
   CardHeader,
@@ -38,6 +39,7 @@ export default function PostCard({ post }) {
           {post.description}
         </Typography>
       </CardContent>
+      <CardTags tags={post.tags} />
       <CardAct post={post} />
     </Card>
   );
