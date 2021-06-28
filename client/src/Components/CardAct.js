@@ -12,23 +12,24 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import LinkIcon from "@material-ui/icons/Link";
 const userName = Cookies.get("userName");
 
-function CardAct({ id, post }) {
+function CardAct({ post }) {
   const classes = useStyles();
   const [isRated, setIsRated] = useState(false);
   const [rateValue, setRateValue] = useState(0);
 
+  console.log(post._id);
   useEffect(() => {
     //* To know if user rated this post
     const getRaters = async () => {
       const { data } = await axios.get(
-        `http://localhost:8080/rating/isRated?id=${id}&userName=${userName}`
+        `http://localhost:8080/rating/isRated?id=${post._id}&userName=${userName}`
       );
       setIsRated(data);
     };
     //* Set each post his AVG rate
     const getAVGRateData = async () => {
       const { data } = await axios.get(
-        `http://localhost:8080/rating/getRate?id=${id}`
+        `http://localhost:8080/rating/getRate?id=${post._id}`
       );
       setRateValue(data.AVG);
     };
@@ -36,9 +37,10 @@ function CardAct({ id, post }) {
     getAVGRateData();
   }, []);
 
-  const setPostRate = async rate => {
+  const setPostRate = async (rate, postId) => {
+    console.log("function", postId);
     const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
-      postId: id,
+      postId,
       userName,
       rate,
     });
@@ -57,8 +59,13 @@ function CardAct({ id, post }) {
             <Typography component="legend">Rate this post!</Typography>
             <Rating
               onChange={(event, newValue) => {
-                setPostRate(newValue);
+                console.log(newValue);
+                console.log(post._id);
               }}
+              // onClick={(event, newValue) => {
+              //   console.log("onchange", post._id);
+              //   setPostRate(newValue, post._id);
+              // }}
               name="customized-empty"
               defaultValue={0}
               precision={0.5}
@@ -66,6 +73,7 @@ function CardAct({ id, post }) {
             />
           </Box>
         )}
+        {post._id}
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>

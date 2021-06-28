@@ -11,7 +11,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CardAct from "./CardAct";
 import useStyles from "../Style";
 
-export default function PostCard({ post, id }) {
+export default function PostCard({ post }) {
   const classes = useStyles();
 
   return (
@@ -38,7 +38,7 @@ export default function PostCard({ post, id }) {
           {post.description}
         </Typography>
       </CardContent>
-      <CardAct id={id} post={post} />
+      <CardAct post={post} />
     </Card>
   );
 }

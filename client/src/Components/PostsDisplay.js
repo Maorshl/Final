@@ -7,11 +7,10 @@ import useStyles from "../Style/index";
 
 function PostsDisplay() {
   const postsDiv = useRef();
-
   const classes = useStyles();
-  const [savedPosts, setSavedPosts] = useState([]);
-  const [highRatedPosts, setHighRatedPosts] = useState([]);
-  const [privatePosts, setPrivatePosts] = useState([]);
+  // const [savedPosts, setSavedPosts] = useState([]);
+  // const [highRatedPosts, setHighRatedPosts] = useState([]);
+  // const [privatePosts, setPrivatePosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -42,7 +41,7 @@ function PostsDisplay() {
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
-      setPageNum((prevPageNum) => prevPageNum + 1);
+      setPageNum(prevPageNum => prevPageNum + 1);
   };
 
   return (
@@ -54,7 +53,7 @@ function PostsDisplay() {
         <div className={classes.postsPostDisplay} ref={postsDiv}>
           {posts &&
             posts.map((post, i) => {
-              return <PostCard post={post} key={i} id={post._id} />;
+              return <PostCard post={post} key={i} />;
             })}
           {loading && (
             <div className={classes.spinnerPostDisplay}>

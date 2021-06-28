@@ -21,7 +21,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"cd .. && cd Backend && node app.js\"",
+    "server": "concurrently \"react-scripts start\" \"cd .. && cd Backend && node app.js\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

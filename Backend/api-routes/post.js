@@ -27,7 +27,6 @@ post.get("/getPosts", validateToken, async (req, res) => {
   //* With the query the server will know which data send to each client
   const { pageNum, latestPost } = req.query;
   const data = await getPosts(pageNum, latestPost);
-
   res.send(data);
 });
 module.exports = post;

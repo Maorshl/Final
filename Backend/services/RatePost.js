@@ -1,6 +1,7 @@
 const Post = require("../models/Post");
 
 async function ratePost(postId, userName, rate) {
+  console.log("id", postId);
   if (userName == undefined) return;
   const post = await Post.findById(postId);
   rate = Number(rate);
