@@ -38,7 +38,7 @@ export default function PostCard({ post }) {
           {post.description}
         </Typography>
       </CardContent>
-      <CardAct post={post} />
+      <CardAct post={post} key={post._id} />
     </Card>
   );
 }

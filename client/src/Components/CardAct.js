@@ -17,7 +17,6 @@ function CardAct({ post }) {
   const [isRated, setIsRated] = useState(false);
   const [rateValue, setRateValue] = useState(0);
 
-  console.log(post._id);
   useEffect(() => {
     //* To know if user rated this post
     const getRaters = async () => {
@@ -37,17 +36,16 @@ function CardAct({ post }) {
     getAVGRateData();
   }, []);
 
-  const setPostRate = async (rate, postId) => {
-    console.log("function", postId);
+  const setPostRate = async rate => {
     const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
-      postId,
+      postId: post._id,
       userName,
       rate,
     });
     setIsRated(true);
     setRateValue(data.AVG);
   };
-
+  console.log(post._id);
   return (
     <div>
       {/*  If rated- marked as rated, if not, he can vote. */}
@@ -59,21 +57,15 @@ function CardAct({ post }) {
             <Typography component="legend">Rate this post!</Typography>
             <Rating
               onChange={(event, newValue) => {
-                console.log(newValue);
-                console.log(post._id);
+                setPostRate(newValue);
               }}
-              // onClick={(event, newValue) => {
-              //   console.log("onchange", post._id);
-              //   setPostRate(newValue, post._id);
-              // }}
-              name="customized-empty"
+              name={post._id}
               defaultValue={0}
               precision={0.5}
               emptyIcon={<StarBorderIcon fontSize="inherit" />}
             />
           </Box>
         )}
-        {post._id}
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
