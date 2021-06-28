@@ -3,7 +3,7 @@ const { validateToken } = require("../Middlewares");
 const rating = express.Router();
 const getRaters = require("../services/GetRaters");
 const ratePost = require("../services/RatePost");
-const getAvgRate = require("../services/getAvgRate");
+const getAvgRate = require("../services/GetAvgRate");
 
 rating.get("/isRated", validateToken, async (req, res) => {
   const { id, userName } = req.query;
