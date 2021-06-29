@@ -3,14 +3,12 @@ import PostCard from "./PostCard";
 import React, { useEffect, useState, useRef } from "react";
 import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Search from "./Search";
 import useStyles from "../Style/index";
 
 function PostsDisplay() {
   const postsDiv = useRef();
   const classes = useStyles();
-  // const [savedPosts, setSavedPosts] = useState([]);
-  // const [highRatedPosts, setHighRatedPosts] = useState([]);
-  // const [privatePosts, setPrivatePosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -46,6 +44,8 @@ function PostsDisplay() {
 
   return (
     <>
+      <Search />
+
       <div className={classes.rootPostDisplay}>
         <Typography variant="h2" color="primary">
           Feed
