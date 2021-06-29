@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import AddPost from "./AddPost";
 import MyPosts from "./MyPosts";
+import NeedToLogin from "./NeedToLogin";
 
 //* In out app we are using "material ui" as a bootstarp, there for some of our defenition its part of "material ui".
 
@@ -71,10 +72,10 @@ function App() {
             <SignUp />
           </Route>
           <Route exact path="/addPost">
-            <AddPost setUser={setUser} />
+            {user ? <AddPost setUser={setUser} /> : <NeedToLogin />}
           </Route>
           <Route exact path="/myPosts">
-            <MyPosts setUser={setUser} />
+            {user ? <MyPosts setUser={setUser} /> : <NeedToLogin />}
           </Route>
           <Route path="/">
             {user && <Welcome setUser={setUser} />}
