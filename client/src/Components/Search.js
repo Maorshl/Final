@@ -7,6 +7,7 @@ import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
+import { FormControl, TextField } from "@material-ui/core";
 
 function Search() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,7 +21,7 @@ function Search() {
     setAnchorEl(null);
   };
   return (
-    <div>
+    <div className="search">
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -74,6 +75,17 @@ function Search() {
           />
         </StyledMenuItem>
       </StyledMenu>
+      <div className="search-input">
+        <FormControl>
+          <TextField
+            id="outlined-multiline-static"
+            label="Search post"
+            multiline
+            rows={1}
+            variant="outlined"
+          />
+        </FormControl>
+      </div>
     </div>
   );
 }
