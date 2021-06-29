@@ -6,7 +6,7 @@ async function getPosts(pageNum, latestPost) {
   let posts;
   try {
     if (pageNum === "1") {
-      posts = await Post.find({}).sort({ createdAt: "desc" }).limit(5);
+      posts = await Post.find({ private: false });
     } else {
       posts = await Post.find({
         createdAt: { $lt: new Date(latestPost) },

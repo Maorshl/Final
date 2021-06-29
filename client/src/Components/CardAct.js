@@ -45,7 +45,7 @@ function CardAct({ post }) {
     setIsRated(true);
     setRateValue(data.AVG);
   };
-  console.log(post._id);
+
   return (
     <div>
       {/*  If rated- marked as rated, if not, he can vote. */}
