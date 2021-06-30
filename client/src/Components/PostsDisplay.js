@@ -14,6 +14,7 @@ function PostsDisplay() {
   const [loading, setLoading] = useState(false);
   const [morePosts, setMorePosts] = useState(true);
   const [latestPostTime, setLatestPostTime] = useState(undefined);
+
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -37,6 +38,8 @@ function PostsDisplay() {
     getData();
   }, [pageNum]);
 
+  //* Every time the user scrolled until the bottom of the div, it trigers this function and he ask for more posts.
+
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
       setPageNum(prevPageNum => prevPageNum + 1);
@@ -44,7 +47,7 @@ function PostsDisplay() {
 
   return (
     <>
-      <Search />
+      <Search posts={posts} setPosts={setPosts} />
 
       <div className={classes.rootPostDisplay}>
         <Typography variant="h2" color="primary">

@@ -9,9 +9,10 @@ import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
 import { FormControl, TextField } from "@material-ui/core";
 
-function Search() {
+function Search({ posts, setPosts }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [searchFilter, setSearchfilter] = useState(undefined);
+  const [searchFilter, setSearchfilter] = useState("");
+  const [searchText, setSearchText] = useState(undefined);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -19,6 +20,21 @@ function Search() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const filterPosts = () => {
+    posts.forEach(post => {
+      console.log(post[searchFilter] && post[searchFilter].toLowerCase());
+    });
+
+    // const filterPostsList = posts.filter(post =>
+    //   post[searchFilter].toLowerCase().includes(searchText)
+    // );
+    // console.log(filterPostsList);
+  };
+  const setText = event => {
+    setSearchText(event.target.value.toLowerCase());
+    filterPosts();
   };
   return (
     <div className="search">
@@ -45,7 +61,7 @@ function Search() {
           <ListItemText
             primary="Title"
             onClick={() => {
-              setSearchfilter("Title");
+              setSearchfilter("title");
               handleClose();
             }}
           />
@@ -55,9 +71,9 @@ function Search() {
             <DraftsIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText
-            primary="Content"
+            primary="Description"
             onClick={() => {
-              setSearchfilter("Content");
+              setSearchfilter("description");
               handleClose();
             }}
           />
@@ -83,6 +99,7 @@ function Search() {
             multiline
             rows={1}
             variant="outlined"
+            onChange={setText}
           />
         </FormControl>
       </div>
