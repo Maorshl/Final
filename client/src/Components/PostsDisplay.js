@@ -10,6 +10,7 @@ function PostsDisplay() {
   const postsDiv = useRef();
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
+  const [viewPosts, setViewPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
   const [morePosts, setMorePosts] = useState(true);
@@ -30,8 +31,10 @@ function PostsDisplay() {
       data.splice(data.length - 1, 1);
       if (pageNum === 1) {
         setLoading(false);
+        setViewPosts(data);
         return setPosts(data);
       }
+      setViewPosts([...viewPosts, ...data]);
       setPosts([...posts, ...data]);
       setLoading(false);
     };
@@ -47,15 +50,15 @@ function PostsDisplay() {
 
   return (
     <>
-      <Search posts={posts} setPosts={setPosts} />
+      <Search posts={posts} setViewPosts={setViewPosts} />
 
       <div className={classes.rootPostDisplay}>
         <Typography variant="h2" color="primary">
           Feed
         </Typography>
         <div className={classes.postsPostDisplay} ref={postsDiv}>
-          {posts &&
-            posts.map((post, i) => {
+          {viewPosts &&
+            viewPosts.map((post, i) => {
               return <PostCard post={post} key={i} />;
             })}
           {loading && (
