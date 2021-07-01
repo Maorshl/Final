@@ -5,10 +5,13 @@ const Post = require("../models/Post");
 
 async function getPosts(pageNum, latestPost, searchFilter, searchText) {
   let posts;
+
   const text = new RegExp(searchText, "i");
-  if (!searchFilter) {
-    searchFilter = "title";
-  }
+
+  //* If search filter is undefined - set is default into title, only for mongoose that does the query.
+
+  searchFilter ? searchFilter : (searchFilter = "title");
+
   try {
     if (pageNum === "1") {
       posts = await Post.find({
