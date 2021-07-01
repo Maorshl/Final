@@ -27,13 +27,14 @@ function Search({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   useEffect(() => {
-    if (searchText) {
+    if (searchText && searchFilter) {
       setButtonColor("primary");
     } else {
       setButtonColor("null");
     }
-  }, [searchText]);
+  }, [searchText, searchFilter]);
 
   return (
     <div className="search">
