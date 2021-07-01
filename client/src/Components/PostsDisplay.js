@@ -41,6 +41,7 @@ function PostsDisplay() {
       `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     if (data === "No more posts") {
+      //* Preventing from posts disapear when search and scrolling down.
       if (searchText && !scrolled) {
         setPosts([]);
       }
