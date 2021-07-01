@@ -58,7 +58,8 @@ function PostsDisplay() {
     setLoading(false);
   };
 
-  //* Every time the user scrolled until the bottom of the div, it trigers this function and he ask for more posts.
+  //* Every time the user scrolled until the bottom of the div
+  //* it trigers this function and he ask for more posts.
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
