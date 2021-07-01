@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -8,11 +8,17 @@ import SendIcon from "@material-ui/icons/Send";
 import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
 import { FormControl, TextField } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
-function Search({ posts }) {
+function Search({
+  setSearchfilter,
+  setSearchText,
+  searchFilter,
+  serach,
+  searchText,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [searchFilter, setSearchfilter] = useState(null);
-  const [searchText, setSearchText] = useState(null);
+  const [buttonColor, setButtonColor] = useState("null");
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -21,12 +27,14 @@ function Search({ posts }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  useEffect(() => {
+    if (searchText) {
+      setButtonColor("primary");
+    } else {
+      setButtonColor("null");
+    }
+  }, [searchText]);
 
-  const filterPosts = () => {};
-  const setText = event => {
-    setSearchText(event.target.value.toLowerCase());
-    filterPosts();
-  };
   return (
     <div className="search">
       <Button
@@ -76,7 +84,7 @@ function Search({ posts }) {
           <ListItemText
             primary="Tags"
             onClick={() => {
-              setSearchfilter("Tags");
+              setSearchfilter("tags");
               handleClose();
             }}
           />
@@ -90,9 +98,21 @@ function Search({ posts }) {
             multiline
             rows={1}
             variant="outlined"
-            onChange={setText}
+            onChange={event => {
+              setSearchText(event.target.value);
+            }}
           />
         </FormControl>
+        <Button
+          className="serach-button"
+          aria-controls="customized-menu"
+          aria-haspopup="true"
+          variant="contained"
+          color={buttonColor}
+          onClick={() => serach()}
+        >
+          <SearchIcon />
+        </Button>
       </div>
     </div>
   );
