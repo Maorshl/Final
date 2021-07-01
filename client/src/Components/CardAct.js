@@ -56,7 +56,7 @@ function CardAct({ post }) {
           <Box component="fieldset" mb={3} borderColor="transparent">
             {!post.private && (
               <>
-                <Typography component="legend">Rate this post!</Typography>)(
+                <Typography component="legend">Rate this post!</Typography>
                 <Rating
                   onChange={(event, newValue) => {
                     setPostRate(newValue);
