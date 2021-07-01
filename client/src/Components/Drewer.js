@@ -14,6 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import AddIcon from "@material-ui/icons/Add";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import useStyles from "../Style";
 
 export default function TemporaryDrawer() {
@@ -57,6 +58,12 @@ export default function TemporaryDrawer() {
             <LockOpenIcon />
           </ListItemIcon>
           <ListItemText primary="My Posts" />
+        </ListItem>
+        <ListItem button component="a" href="/savedposts">
+          <ListItemIcon>
+            <FavoriteIcon />
+          </ListItemIcon>
+          <ListItemText primary="Saved Posts" />
         </ListItem>
       </List>
       <Divider />
