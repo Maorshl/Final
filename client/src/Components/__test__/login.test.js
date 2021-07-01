@@ -29,6 +29,21 @@ describe("Frontend test", () => {
     );
     expect(heading1).toBe("Add Post");
   });
+
+  test("Should take to My posts page", async () => {
+    await page.click("svg.MuiSvgIcon-root");
+    const [button] = await page.$x("//a[contains(., 'My Posts')]");
+    if (button) {
+      await button.click();
+    }
+    await page.waitForSelector("h2.MuiTypography-h2");
+    const heading1 = await page.$eval(
+      "h2.MuiTypography-h2",
+      (el) => el.textContent
+    );
+    expect(heading1).toBe("My Posts");
+  });
+
   test("Should logout", async () => {
     await page.click("#logoutButton");
     await page.waitForSelector("h1.MuiTypography-h5");

@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 import AddPost from "./AddPost";
+import MyPosts from "./MyPosts";
+import NeedToLogin from "./NeedToLogin";
 
 //* In out app we are using "material ui" for style, there for some of our defenition its part of "material ui".
 
@@ -14,7 +16,7 @@ import AddPost from "./AddPost";
 //* If the user need new access token, it handles it.
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
   async function (error) {
@@ -69,7 +71,10 @@ function App() {
             <SignUp />
           </Route>
           <Route exact path="/addPost">
-            <AddPost setUser={setUser} />
+            {user ? <AddPost setUser={setUser} /> : <NeedToLogin />}
+          </Route>
+          <Route exact path="/myPosts">
+            {user ? <MyPosts setUser={setUser} /> : <NeedToLogin />}
           </Route>
           <Route path="/">
             {user && <Welcome setUser={setUser} />}

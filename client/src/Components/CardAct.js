@@ -36,7 +36,7 @@ function CardAct({ post }) {
     getAVGRateData();
   }, []);
 
-  const setPostRate = async rate => {
+  const setPostRate = async (rate) => {
     const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
       postId: post._id,
       userName,
@@ -54,16 +54,20 @@ function CardAct({ post }) {
           <CheckCircleOutlineIcon color="primary" />
         ) : (
           <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">Rate this post!</Typography>
-            <Rating
-              onChange={(event, newValue) => {
-                setPostRate(newValue);
-              }}
-              name={post._id}
-              defaultValue={0}
-              precision={0.5}
-              emptyIcon={<StarBorderIcon fontSize="inherit" />}
-            />
+            {!post.private && (
+              <>
+                <Typography component="legend">Rate this post!</Typography>)(
+                <Rating
+                  onChange={(event, newValue) => {
+                    setPostRate(newValue);
+                  }}
+                  name={post._id}
+                  defaultValue={0}
+                  precision={0.5}
+                  emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                />
+              </>
+            )}
           </Box>
         )}
         <IconButton aria-label="add to favorites">
@@ -82,8 +86,17 @@ function CardAct({ post }) {
           borderColor="transparent"
           className={classes.AVGrate}
         >
-          <Typography component="legend">AVG Rate:</Typography>
-          <Rating name="read-only" value={rateValue} readOnly precision={0.5} />
+          {!post.private && (
+            <>
+              <Typography component="legend">AVG Rate:</Typography>
+              <Rating
+                name="read-only"
+                value={rateValue}
+                readOnly
+                precision={0.5}
+              />
+            </>
+          )}
         </Box>
       </CardActions>
     </div>
