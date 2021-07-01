@@ -10,36 +10,45 @@ function PostsDisplay() {
   const postsDiv = useRef();
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
-  const [viewPosts, setViewPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
   const [morePosts, setMorePosts] = useState(true);
   const [latestPostTime, setLatestPostTime] = useState(undefined);
+  const [searchFilter, setSearchfilter] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      const { data } = await axios.get(
-        `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}`
-      );
-      if (data === "No more posts") {
-        setLoading(false);
-        setMorePosts(false);
-        return;
-      }
-      setLatestPostTime(data[data.length - 1]);
-      data.splice(data.length - 1, 1);
-      if (pageNum === 1) {
-        setLoading(false);
-        setViewPosts(data);
-        return setPosts(data);
-      }
-      setViewPosts([...viewPosts, ...data]);
-      setPosts([...posts, ...data]);
-      setLoading(false);
-    };
-    getData();
+    getData(true);
   }, [pageNum]);
+
+  const serach = () => {
+    if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
+    setPageNum(1);
+    getData();
+  };
+
+  const getData = async scrolled => {
+    setLoading(true);
+    const { data } = await axios.get(
+      `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
+    );
+    if (data === "No more posts") {
+      if (searchText && !scrolled) {
+        setPosts([]);
+      }
+      setLoading(false);
+      setMorePosts(false);
+      return;
+    }
+    setLatestPostTime(data[data.length - 1]);
+    data.splice(data.length - 1, 1);
+    if (pageNum === 1) {
+      setLoading(false);
+      return setPosts(data);
+    }
+    setPosts([...posts, ...data]);
+    setLoading(false);
+  };
 
   //* Every time the user scrolled until the bottom of the div, it trigers this function and he ask for more posts.
 
@@ -50,15 +59,21 @@ function PostsDisplay() {
 
   return (
     <>
-      <Search posts={posts} setViewPosts={setViewPosts} />
+      <Search
+        setSearchfilter={setSearchfilter}
+        setSearchText={setSearchText}
+        searchFilter={searchFilter}
+        serach={serach}
+        searchText={searchText}
+      />
 
       <div className={classes.rootPostDisplay}>
         <Typography variant="h2" color="primary">
           Feed
         </Typography>
         <div className={classes.postsPostDisplay} ref={postsDiv}>
-          {viewPosts &&
-            viewPosts.map((post, i) => {
+          {posts &&
+            posts.map((post, i) => {
               return <PostCard post={post} key={i} />;
             })}
           {loading && (
