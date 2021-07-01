@@ -5,6 +5,7 @@ const Logout = require("../services/Logout");
 const createUser = require("../services/CreateUser");
 const login = require("../services/Login");
 const savePost = require("../services/SavePost");
+const { validateToken } = require("../Middlewares");
 
 user.post("/create", async (req, res) => {
   await createUser(req, res);
@@ -30,7 +31,7 @@ user.post("/logout", async (req, res) => {
   }
 });
 
-user.post("/save", async (req, res) => {
+user.post("/save", validateToken, async (req, res) => {
   try {
     await savePost(req, res);
   } catch (error) {
