@@ -9,10 +9,10 @@ import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
 import { FormControl, TextField } from "@material-ui/core";
 
-function Search({ posts, setViewPosts }) {
+function Search({ posts }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchFilter, setSearchfilter] = useState(null);
-  const [searchText, setSearchText] = useState(undefined);
+  const [searchText, setSearchText] = useState(null);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -22,17 +22,7 @@ function Search({ posts, setViewPosts }) {
     setAnchorEl(null);
   };
 
-  const filterPosts = () => {
-    if (!searchFilter) return;
-    const filterPostsList = posts.filter(post => {
-      return (
-        post[searchFilter] &&
-        post[searchFilter].toLowerCase().includes(searchText)
-      );
-    });
-    console.log(filterPostsList);
-    setViewPosts(filterPostsList);
-  };
+  const filterPosts = () => {};
   const setText = event => {
     setSearchText(event.target.value.toLowerCase());
     filterPosts();
