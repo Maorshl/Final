@@ -9,7 +9,6 @@ async function getPosts(pageNum, latestPost, searchFilter, searchText) {
   if (!searchFilter) {
     searchFilter = "title";
   }
-
   try {
     if (pageNum === "1") {
       posts = await Post.find({
@@ -21,8 +20,7 @@ async function getPosts(pageNum, latestPost, searchFilter, searchText) {
     } else {
       posts = await Post.find({
         createdAt: { $lt: new Date(latestPost) },
-        $and: [{ private: false }],
-        $and: [{ [searchFilter]: text }],
+        $and: [{ [searchFilter]: text }, { private: false }],
       })
         .sort({ createdAt: "desc" })
         .limit(5);
