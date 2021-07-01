@@ -3,7 +3,6 @@ const post = express.Router();
 const { validateToken } = require("../Middlewares");
 const createPost = require("../services/CreatePost");
 const getPrivatePosts = require("../services/getPrivatePosts");
-
 const getPosts = require("../services/GetPosts");
 
 post.post("/create", validateToken, (req, res) => {
@@ -23,10 +22,11 @@ post.get("/:user/private", validateToken, (req, res) => {
   }
 });
 
-post.get("/getPosts", validateToken, async (req, res) => {
+post.get("/getPosts", async (req, res) => {
   //* With the query the server will know which data send to each client
-  const { pageNum, latestPost } = req.query;
-  const data = await getPosts(pageNum, latestPost);
+  const { pageNum, latestPost, searchFilter, searchText } = req.query;
+  const data = await getPosts(pageNum, latestPost, searchFilter, searchText);
   res.send(data);
 });
+
 module.exports = post;

@@ -3,17 +3,26 @@ const Post = require("../models/Post");
 //* This function send to each client list of post, with the date of the last post,
 //* and every client send back the latest post time that he recived and now he can get older posts.
 
-async function getPosts(pageNum, latestPost) {
+async function getPosts(pageNum, latestPost, searchFilter, searchText) {
   let posts;
+  const text = new RegExp(searchText, "i");
+  if (!searchFilter) {
+    searchFilter = "title";
+  }
+
   try {
     if (pageNum === "1") {
-      posts = await Post.find({ private: false })
+      posts = await Post.find({
+        private: false,
+        $and: [{ [searchFilter]: text }],
+      })
         .sort({ createdAt: "desc" })
         .limit(5);
     } else {
       posts = await Post.find({
         createdAt: { $lt: new Date(latestPost) },
         $and: [{ private: false }],
+        $and: [{ [searchFilter]: text }],
       })
         .sort({ createdAt: "desc" })
         .limit(5);
