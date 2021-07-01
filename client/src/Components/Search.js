@@ -9,6 +9,7 @@ import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
 import { FormControl, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 function Search({
   setSearchfilter,
@@ -16,6 +17,8 @@ function Search({
   searchFilter,
   serach,
   searchText,
+  showRefresh,
+  setShowRefresh,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [buttonColor, setButtonColor] = useState("null");
@@ -29,9 +32,16 @@ function Search({
   };
 
   useEffect(() => {
+    //* If there is text and filter => normal search
     if (searchText && searchFilter) {
       setButtonColor("primary");
+      setShowRefresh(false);
+    } else if (!searchText && searchFilter) {
+      //* If only filter=> the user can refresh the feed
+      setShowRefresh(true);
+      setButtonColor("primary");
     } else {
+      //* Else- cant do anything
       setButtonColor("null");
     }
   }, [searchText, searchFilter]);
@@ -112,7 +122,7 @@ function Search({
           color={buttonColor}
           onClick={() => serach()}
         >
-          <SearchIcon />
+          {showRefresh ? <RefreshIcon /> : <SearchIcon />}
         </Button>
       </div>
     </div>
