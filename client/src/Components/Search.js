@@ -124,6 +124,7 @@ function Search({
           color={buttonColor}
           onClick={() => serach()}
         >
+          {/* Set icon by show refresh  */}
           {showRefresh ? <RefreshIcon /> : <SearchIcon />}
         </Button>
       </div>
