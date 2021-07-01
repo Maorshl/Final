@@ -1,11 +1,39 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import AppBar from "./AppBar";
+import PostCard from "./PostCard";
+import { Typography } from "@material-ui/core";
 
-function SavedPosts(props) {
+function MyPosts({ setUser }) {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    (async function () {
+      const privatePosts = await getPrivatePosts();
+      setPosts(privatePosts);
+    })();
+  }, []);
+
   return (
     <div>
-      <h1>hello world</h1>
+      <AppBar setUser={setUser} />
+      <Typography variant="h2" color="primary">
+        My Posts
+      </Typography>
+      {posts &&
+        posts.map((post) => {
+          return <PostCard post={post} />;
+        })}
     </div>
   );
 }
 
-export default SavedPosts;
+async function getPrivatePosts() {
+  const userName = Cookies.get("userName");
+  const { data } = await axios.post(`http://localhost:8080/post/savedposts`, {
+    userName,
+  });
+  return data;
+}
+export default MyPosts;
