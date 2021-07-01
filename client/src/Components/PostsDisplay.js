@@ -3,41 +3,64 @@ import PostCard from "./PostCard";
 import React, { useEffect, useState, useRef } from "react";
 import { Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Search from "./Search";
 import useStyles from "../Style/index";
 
 function PostsDisplay() {
   const postsDiv = useRef();
   const classes = useStyles();
-  // const [savedPosts, setSavedPosts] = useState([]);
-  // const [highRatedPosts, setHighRatedPosts] = useState([]);
-  // const [privatePosts, setPrivatePosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
   const [morePosts, setMorePosts] = useState(true);
   const [latestPostTime, setLatestPostTime] = useState(undefined);
+  const [searchFilter, setSearchfilter] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [showRefresh, setShowRefresh] = useState(false);
+
   useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      const { data } = await axios.get(
-        `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}`
-      );
-      if (data === "No more posts") {
-        setLoading(false);
-        setMorePosts(false);
-        return;
-      }
-      setLatestPostTime(data[data.length - 1]);
-      data.splice(data.length - 1, 1);
-      if (pageNum === 1) {
-        setLoading(false);
-        return setPosts(data);
-      }
-      setPosts([...posts, ...data]);
-      setLoading(false);
-    };
-    getData();
+    getData(true);
   }, [pageNum]);
+
+  const serach = () => {
+    //* If no data to search=> retrun
+    if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
+    if (!searchText && searchFilter) {
+      setSearchfilter("");
+      setShowRefresh(false);
+    }
+    //* Every time that clicked on search,
+    //* page num will reset to prevent from uncorrect post time to be part of a query.
+    setPageNum(1);
+    getData();
+  };
+
+  const getData = async scrolled => {
+    setLoading(true);
+    const { data } = await axios.get(
+      `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
+    );
+    if (data === "No more posts") {
+      //* Preventing from posts disapear when search and scrolling down.
+      if (searchText && !scrolled) {
+        setPosts([]);
+      }
+      setLoading(false);
+      setMorePosts(false);
+      return;
+    }
+    setLatestPostTime(data[data.length - 1]);
+    data.splice(data.length - 1, 1);
+    if (pageNum === 1) {
+      setLoading(false);
+      return setPosts(data);
+    }
+    setPosts([...posts, ...data]);
+    setLoading(false);
+  };
+
+  //* Every time the user scrolled until the bottom of the div
+  //* it trigers this function and he ask for more posts.
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
@@ -46,6 +69,16 @@ function PostsDisplay() {
 
   return (
     <>
+      <Search
+        setSearchfilter={setSearchfilter}
+        setSearchText={setSearchText}
+        searchFilter={searchFilter}
+        serach={serach}
+        searchText={searchText}
+        showRefresh={showRefresh}
+        setShowRefresh={setShowRefresh}
+      />
+
       <div className={classes.rootPostDisplay}>
         <Typography variant="h2" color="primary">
           Feed

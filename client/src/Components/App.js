@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import AddPost from "./AddPost";
 
-//* In out app we are using "material ui" as a bootstarp, there for some of our defenition its part of "material ui".
+//* In out app we are using "material ui" for style, there for some of our defenition its part of "material ui".
 
 //* The axios interceptors attach for each http request the access token.
 //* If the user need new access token, it handles it.
@@ -52,7 +52,6 @@ async function getNewToken(refToken) {
 
 function App() {
   const [user, setUser] = useState(null);
-  // todo spinner
 
   useEffect(() => {
     const token = Cookies.get("token");

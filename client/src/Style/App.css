@@ -45,3 +45,15 @@
 .App-link {
   color: #61dafb;
 }
+.search {
+  display: inline-flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.search-input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.serach-button {
+  height: 55px;
+}
