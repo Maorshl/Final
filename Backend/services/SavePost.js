@@ -1,11 +1,11 @@
-const User = require("../models/User");
+const Post = require("../models/Post");
 
 async function likePost(req, res) {
   const { userName, postId } = req.body;
   try {
-    await User.findOneAndUpdate(
-      { userName: userName },
-      { $push: { savedPosts: postId } }
+    await Post.findOneAndUpdate(
+      { _id: postId },
+      { $push: { likes: userName } }
     );
     res.send("updated successfully");
   } catch (error) {

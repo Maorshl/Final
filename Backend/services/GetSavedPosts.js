@@ -3,8 +3,7 @@ const User = require("../models/User");
 
 async function GetSavedPosts(req, res) {
   const { userName } = req.body;
-  const { savedPosts } = await User.findOne({ userName });
-  const usersSavedPosts = await Post.find({ _id: { $in: [...savedPosts] } });
+  const usersSavedPosts = await Post.find({ likes: { $in: [userName] } });
   res.send(usersSavedPosts);
 }
 
