@@ -16,13 +16,21 @@ function PostsDisplay() {
   const [latestPostTime, setLatestPostTime] = useState(undefined);
   const [searchFilter, setSearchfilter] = useState("");
   const [searchText, setSearchText] = useState("");
+  const [showRefresh, setShowRefresh] = useState(false);
 
   useEffect(() => {
     getData(true);
   }, [pageNum]);
 
   const serach = () => {
+    //* If no data to search=> retrun
     if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
+    if (!searchText && searchFilter) {
+      setSearchfilter("");
+      setShowRefresh(false);
+    }
+    //* Every time that clicked on search,
+    //* page num will reset to prevent from uncorrect post time to be part of a query.
     setPageNum(1);
     getData();
   };
@@ -65,6 +73,8 @@ function PostsDisplay() {
         searchFilter={searchFilter}
         serach={serach}
         searchText={searchText}
+        showRefresh={showRefresh}
+        setShowRefresh={setShowRefresh}
       />
 
       <div className={classes.rootPostDisplay}>
