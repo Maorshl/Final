@@ -22,12 +22,12 @@ post.get("/:user/private", validateToken, (req, res) => {
   }
 });
 
-post.get("/getPosts", async (req, res) => {
-  //* With the query the server will know which data send to each client
-  //* If the user search for somthing, it will add to the function
-  const { pageNum, latestPost, searchFilter, searchText } = req.query;
-  const data = await getPosts(pageNum, latestPost, searchFilter, searchText);
-  res.send(data);
+post.get("/getPosts", validateToken, (req, res) => {
+  try {
+    getPosts(req, res);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = post;

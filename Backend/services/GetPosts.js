@@ -3,9 +3,9 @@ const Post = require("../models/Post");
 //* This function send to each client list of post, with the date of the last post,
 //* and every client send back the latest post time that he recived and now he can get older posts.
 
-async function getPosts(pageNum, latestPost, searchFilter, searchText) {
+async function getPosts(req, res) {
+  let { pageNum, latestPost, searchFilter, searchText } = req.query;
   let posts;
-
   const text = new RegExp(searchText, "i");
 
   //* If search filter is undefined - set is default into title, only for mongoose that does the query.
@@ -28,14 +28,14 @@ async function getPosts(pageNum, latestPost, searchFilter, searchText) {
         .sort({ createdAt: "desc" })
         .limit(5);
     }
-    if (posts.length === 0) return "No more posts";
+    if (posts.length === 0) return res.send("No more posts");
     const lastPostTime = new Date(posts[posts.length - 1].createdAt);
     post = shuffleArray(posts);
     posts.push(lastPostTime);
-    return posts;
+    return res.json(posts);
   } catch (error) {
     console.log(error);
-    return "error";
+    return res.status(500).send("error");
   }
 }
 
