@@ -18,7 +18,6 @@ function CardAct({ post }) {
   const [isRated, setIsRated] = useState(false);
   const [rateValue, setRateValue] = useState(0);
   const [liked, setLiked] = useState(false);
-  console.log(post.likes);
 
   useEffect(() => {
     //* To know if user rated this post
