@@ -31,6 +31,8 @@ function Search({
     setAnchorEl(null);
   };
 
+  //* This use effect set the button icon and color, by the logic of the search.
+
   useEffect(() => {
     //* If there is text and filter => normal search
     if (searchText && searchFilter) {
@@ -41,7 +43,7 @@ function Search({
       setShowRefresh(true);
       setButtonColor("primary");
     } else {
-      //* Else- cant do anything
+      //* Else => cant do anything
       setButtonColor("null");
     }
   }, [searchText, searchFilter]);
