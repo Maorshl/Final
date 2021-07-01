@@ -12,7 +12,6 @@ function MyPosts({ setUser }) {
     (async function () {
       const privatePosts = await getPrivatePosts();
       setPosts(privatePosts);
-      console.log(privatePosts);
     })();
   }, []);
 
