@@ -16,7 +16,7 @@ import NeedToLogin from "./NeedToLogin";
 //* If the user need new access token, it handles it.
 
 axios.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
   async function (error) {
@@ -76,7 +76,7 @@ function App() {
           <Route exact path="/myPosts">
             {user ? <MyPosts setUser={setUser} /> : <NeedToLogin />}
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             {user && <Welcome setUser={setUser} />}
             {!user && <SignIn setUser={setUser} />}
           </Route>
