@@ -5,15 +5,26 @@ import AppBar from "./AppBar";
 import PostCard from "./PostCard";
 import { Typography } from "@material-ui/core";
 import Search from "./Search";
+import Pagination from "./Pagination";
 
 function MyPosts({ setUser }) {
   const [posts, setPosts] = useState([]);
   const [searchFilter, setSearchfilter] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showRefresh, setShowRefresh] = useState(false);
+  //* For paginate
+  const [currectPage, setCurrectPage] = useState(1);
+  const [postsPerPage] = useState(1);
+  const indexOfLastPost = currectPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const correctPost = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => {
+    setCurrectPage(pageNumber);
+  };
 
   const serach = () => {
-    //* If no data to search=> retrun
+    //* If no data to search => retrun
     if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
     if (!searchText && searchFilter) {
       setSearchfilter("");
@@ -24,7 +35,6 @@ function MyPosts({ setUser }) {
   async function getData() {
     const privatePosts = await getPrivatePosts(searchFilter, searchText);
     setPosts(privatePosts);
-    console.log(privatePosts);
   }
   useEffect(() => {
     getData();
@@ -45,10 +55,15 @@ function MyPosts({ setUser }) {
         showRefresh={showRefresh}
         setShowRefresh={setShowRefresh}
       />
-      {posts &&
-        posts.map(post => {
+      {correctPost &&
+        correctPost.map(post => {
           return <PostCard post={post} />;
         })}
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      />
     </div>
   );
 }
