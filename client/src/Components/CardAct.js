@@ -18,8 +18,13 @@ function CardAct({ post }) {
   const [isRated, setIsRated] = useState(false);
   const [rateValue, setRateValue] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [likesNumber, setLikesNumber] = useState(post.likes.length);
 
   useEffect(() => {
+    const currentUser = Cookies.get("userName");
+    if (post.likes.includes(currentUser)) {
+      setLiked(true);
+    }
     //* To know if user rated this post
     const getRaters = async () => {
       const { data } = await axios.get(
@@ -74,12 +79,13 @@ function CardAct({ post }) {
         )}
         {/* <div onClick={() => likeThePost(post._id)}> */}
         <IconButton aria-label="add to favorites">
-          {post.likes.includes(userName) ? (
-            <FavoriteIcon />
+          {liked ? (
+            <FavoriteIcon onClick={() => unlikeThePost(post._id)} />
           ) : (
             <FavoriteBorderIcon onClick={() => likeThePost(post._id)} />
           )}
         </IconButton>
+        <Typography>{likesNumber} Likes</Typography>
         {/* </div> */}
         {/*  Link button to each post URL */}
         {post.url && (
@@ -113,6 +119,15 @@ function CardAct({ post }) {
   async function likeThePost(postId) {
     await axios.post("http://localhost:8080/user/save", { userName, postId });
     setLiked(true);
+    setLikesNumber(likesNumber + 1);
+  }
+  async function unlikeThePost(postId) {
+    await axios.post("http://localhost:8080/user/removeFromSaved", {
+      userName,
+      postId,
+    });
+    setLiked(false);
+    setLikesNumber(likesNumber - 1);
   }
 }
 
