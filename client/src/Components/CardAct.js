@@ -10,14 +10,21 @@ import useStyles from "../Style";
 import { CardActions, IconButton } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LinkIcon from "@material-ui/icons/Link";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 const userName = Cookies.get("userName");
 
 function CardAct({ post }) {
   const classes = useStyles();
   const [isRated, setIsRated] = useState(false);
   const [rateValue, setRateValue] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [likesNumber, setLikesNumber] = useState(post.likes.length);
 
   useEffect(() => {
+    const currentUser = Cookies.get("userName");
+    if (post.likes.includes(currentUser)) {
+      setLiked(true);
+    }
     //* To know if user rated this post
     const getRaters = async () => {
       const { data } = await axios.get(
@@ -70,9 +77,16 @@ function CardAct({ post }) {
             )}
           </Box>
         )}
+        {/* <div onClick={() => likeThePost(post._id)}> */}
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          {liked ? (
+            <FavoriteIcon onClick={() => unlikeThePost(post._id)} />
+          ) : (
+            <FavoriteBorderIcon onClick={() => likeThePost(post._id)} />
+          )}
         </IconButton>
+        <Typography>{likesNumber} Likes</Typography>
+        {/* </div> */}
         {/*  Link button to each post URL */}
         {post.url && (
           <IconButton aria-label="share" href={`${post.url}`} target="_blank">
@@ -101,6 +115,20 @@ function CardAct({ post }) {
       </CardActions>
     </div>
   );
+
+  async function likeThePost(postId) {
+    await axios.post("http://localhost:8080/user/save", { userName, postId });
+    setLiked(true);
+    setLikesNumber(likesNumber + 1);
+  }
+  async function unlikeThePost(postId) {
+    await axios.post("http://localhost:8080/user/removeFromSaved", {
+      userName,
+      postId,
+    });
+    setLiked(false);
+    setLikesNumber(likesNumber - 1);
+  }
 }
 
 export default CardAct;

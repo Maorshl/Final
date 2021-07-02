@@ -31,9 +31,9 @@ function MyPosts({ setUser }) {
 
 async function getPrivatePosts() {
   const userName = Cookies.get("userName");
-  const { data } = await axios.get(
-    `http://localhost:8080/post/${userName}/private`
-  );
+  const { data } = await axios.post(`http://localhost:8080/post/savedposts`, {
+    userName,
+  });
   return data;
 }
 export default MyPosts;

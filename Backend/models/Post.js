@@ -11,6 +11,7 @@ const PostSchema = new Schema({
   createdAt: Date,
   author: String,
   tags: Array,
+  likes: Array,
   rating: Number,
   raters: Array,
   rateAVG: Number,
