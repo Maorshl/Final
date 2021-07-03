@@ -14,7 +14,7 @@ function MyPosts({ setUser }) {
   const [showRefresh, setShowRefresh] = useState(false);
   //* For paginate
   const [currectPage, setCurrectPage] = useState(1);
-  const [postsPerPage] = useState(1);
+  const postsPerPage = 10;
   const indexOfLastPost = currectPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPost = posts.slice(indexOfFirstPost, indexOfLastPost);
