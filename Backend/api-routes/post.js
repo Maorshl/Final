@@ -4,6 +4,7 @@ const { validateToken } = require("../Middlewares");
 const createPost = require("../services/CreatePost");
 const getPrivatePosts = require("../services/getPrivatePosts");
 const getPosts = require("../services/GetPosts");
+const getSavedPosts = require("../services/GetSavedPosts");
 
 post.post("/create", validateToken, (req, res) => {
   try {
@@ -30,4 +31,11 @@ post.get("/getPosts", validateToken, (req, res) => {
   }
 });
 
+post.post("/SavedPosts", validateToken, async (req, res) => {
+  try {
+    await getSavedPosts(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
 module.exports = post;

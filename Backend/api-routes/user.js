@@ -4,6 +4,9 @@ const getNewToken = require("../services/RefreshToken");
 const Logout = require("../services/Logout");
 const createUser = require("../services/CreateUser");
 const login = require("../services/Login");
+const savePost = require("../services/SavePost");
+const { validateToken } = require("../Middlewares");
+const removeFromSaved = require("../services/RemoveFromSaved");
 
 user.post("/create", async (req, res) => {
   await createUser(req, res);
@@ -29,4 +32,18 @@ user.post("/logout", async (req, res) => {
   }
 });
 
+user.post("/save", validateToken, async (req, res) => {
+  try {
+    await savePost(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+user.post("/removeFromSaved", validateToken, async (req, res) => {
+  try {
+    await removeFromSaved(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
 module.exports = user;

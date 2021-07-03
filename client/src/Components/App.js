@@ -9,6 +9,7 @@ import axios from "axios";
 import AddPost from "./AddPost";
 import MyPosts from "./MyPosts";
 import NeedToLogin from "./NeedToLogin";
+import SavedPosts from "./SavedPosts";
 
 //* In out app we are using "material ui" for style, there for some of our defenition its part of "material ui".
 
@@ -76,7 +77,11 @@ function App() {
           <Route exact path="/myPosts">
             {user ? <MyPosts setUser={setUser} /> : <NeedToLogin />}
           </Route>
-          <Route exact path="/">
+
+          <Route exact path="/savedPosts">
+            {user ? <SavedPosts setUser={setUser} /> : <NeedToLogin />}
+          </Route>
+          <Route path="/">
             {user && <Welcome setUser={setUser} />}
             {!user && <SignIn setUser={setUser} />}
           </Route>
