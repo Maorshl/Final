@@ -5,12 +5,24 @@ import AppBar from "./AppBar";
 import PostCard from "./PostCard";
 import { Typography } from "@material-ui/core";
 import Search from "./Search";
+import Pagination from "./Pagination";
 
 function MyPosts({ setUser }) {
   const [posts, setPosts] = useState([]);
   const [searchFilter, setSearchfilter] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showRefresh, setShowRefresh] = useState(false);
+  //* For paginate
+
+  const [currectPage, setCurrectPage] = useState(1);
+  const postsPerPage = 10;
+  const indexOfLastPost = currectPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => {
+    setCurrectPage(pageNumber);
+  };
 
   const serach = () => {
     //* If no data to search => retrun
@@ -46,10 +58,16 @@ function MyPosts({ setUser }) {
         showRefresh={showRefresh}
         setShowRefresh={setShowRefresh}
       />
-      {posts &&
-        posts.map(post => {
+      {correctPosts &&
+        correctPosts.map(post => {
           return <PostCard post={post} />;
         })}
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+        fromPage={"savedposts"}
+      />
     </div>
   );
 }
