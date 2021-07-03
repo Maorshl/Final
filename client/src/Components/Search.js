@@ -23,7 +23,7 @@ function Search({
   const [anchorEl, setAnchorEl] = useState(null);
   const [buttonColor, setButtonColor] = useState("null");
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -49,7 +49,7 @@ function Search({
   }, [searchText, searchFilter]);
 
   return (
-    <div className="search">
+    <div className="search-box">
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -111,13 +111,14 @@ function Search({
             multiline
             rows={1}
             variant="outlined"
-            onChange={event => {
+            color="primary"
+            onChange={(event) => {
               setSearchText(event.target.value);
             }}
           />
         </FormControl>
         <Button
-          className="serach-button"
+          className="search-button"
           aria-controls="customized-menu"
           aria-haspopup="true"
           variant="contained"
