@@ -17,7 +17,7 @@ import SavedPosts from "./SavedPosts";
 //* If the user need new access token, it handles it.
 
 axios.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
   async function (error) {
@@ -77,6 +77,7 @@ function App() {
           <Route exact path="/myPosts">
             {user ? <MyPosts setUser={setUser} /> : <NeedToLogin />}
           </Route>
+
           <Route exact path="/savedPosts">
             {user ? <SavedPosts setUser={setUser} /> : <NeedToLogin />}
           </Route>

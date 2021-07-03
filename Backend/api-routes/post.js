@@ -15,7 +15,7 @@ post.post("/create", validateToken, (req, res) => {
   }
 });
 
-post.get("/:user/private", validateToken, (req, res) => {
+post.get("/private", validateToken, (req, res) => {
   try {
     getPrivatePosts(req, res);
   } catch (error) {

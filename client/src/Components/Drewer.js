@@ -26,7 +26,7 @@ export default function TemporaryDrawer() {
     right: false,
   });
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = (anchor, open) => event => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -37,7 +37,7 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
+  const list = anchor => (
     <div
       className={clsx(classes.listDrewer, {
         [classes.fullListDrewer]: anchor === "top" || anchor === "bottom",
@@ -53,7 +53,7 @@ export default function TemporaryDrawer() {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component="a" href="/myposts">
+        <ListItem button component="a" href="/myPosts/#!">
           <ListItemIcon>
             <LockOpenIcon />
           </ListItemIcon>
@@ -80,7 +80,7 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      {["left"].map((anchor) => (
+      {["left"].map(anchor => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
             <IconButton

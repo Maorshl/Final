@@ -43,7 +43,7 @@ function CardAct({ post }) {
     getAVGRateData();
   }, []);
 
-  const setPostRate = async (rate) => {
+  const setPostRate = async rate => {
     const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
       postId: post._id,
       userName,
@@ -55,7 +55,7 @@ function CardAct({ post }) {
 
   return (
     <div>
-      {/*  If rated- marked as rated, if not, he can vote. */}
+      {/*  //*If rated- marked as rated, if not, he can vote. */}
       <CardActions disableSpacing className={classes.cardActions}>
         {isRated ? (
           <CheckCircleOutlineIcon color="primary" />
@@ -85,21 +85,26 @@ function CardAct({ post }) {
             <FavoriteBorderIcon onClick={() => likeThePost(post._id)} />
           )}
         </IconButton>
+
+        {/* //* Link button to each post URL */}
+
         <Typography>{likesNumber} Likes</Typography>
         {/* </div> */}
-        {/*  Link button to each post URL */}
+        
+
         {post.url && (
           <IconButton aria-label="share" href={`${post.url}`} target="_blank">
             <LinkIcon />
           </IconButton>
         )}
-        {/*  Each post AVG rate */}
+        {/* //* Each post AVG rate */}
         <Box
           component="fieldset"
           mb={3}
           borderColor="transparent"
           className={classes.AVGrate}
         >
+          {/* //*Only public posts can rated */}
           {!post.private && (
             <>
               <Typography component="legend">AVG Rate:</Typography>
