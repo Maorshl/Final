@@ -1,5 +1,4 @@
 const Post = require("../models/Post");
-const User = require("../models/User");
 
 async function GetSavedPosts(req, res) {
   let { userName, searchFilter, searchText } = req.query;
