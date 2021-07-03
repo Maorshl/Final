@@ -59,7 +59,7 @@ export default function TemporaryDrawer() {
           </ListItemIcon>
           <ListItemText primary="My Posts" />
         </ListItem>
-        <ListItem button component="a" href="/savedposts">
+        <ListItem button component="a" href="/savedposts/#!">
           <ListItemIcon>
             <FavoriteIcon />
           </ListItemIcon>
