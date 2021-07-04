@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -14,14 +14,16 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
+import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 
 export default function MenuAppBar({ setUser }) {
+  const userName = Cookies.get("userName");
   const classes = useStyles();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const logout = async (e) => {
+  const logout = async e => {
     await axios
       .post("http://localhost:8080/user/logout", {
         refreshToken: Cookies.get("refreshToken"),
@@ -35,13 +37,18 @@ export default function MenuAppBar({ setUser }) {
       });
   };
 
-  const handleMenu = (event) => {
+  const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+  // useEffect(() => {
+  //   axios.get(
+  //     `http://localhost:8080/user/getNotifications?userName=${userName}`
+  //   );
+  // }, []);
 
   return (
     <div className={classes.rootAppBar}>
@@ -51,6 +58,7 @@ export default function MenuAppBar({ setUser }) {
           <Typography variant="h6" className={classes.titleAppBar}>
             Smart library
           </Typography>
+          <NotificationsNoneIcon />
           {auth && (
             <div>
               <IconButton
