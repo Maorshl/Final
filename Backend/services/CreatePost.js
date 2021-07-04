@@ -7,7 +7,9 @@ async function createPost(post) {
     const newPost = new Post(post);
     newPost.head = await getTitle(newPost.url);
     newPost.save().then(result => {
-      postCreated(result);
+      if (!newPost.private) {
+        postCreated(result);
+      }
     });
     return "Post created successfully";
   } catch (error) {
