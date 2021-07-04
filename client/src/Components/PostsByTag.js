@@ -6,6 +6,7 @@ import PostCard from "./PostCard";
 import { Typography } from "@material-ui/core";
 import Search from "./Search";
 import Pagination from "./Pagination";
+import FollowTag from "./FollowTag";
 import { useParams } from "react-router-dom";
 
 function MyPosts({ setUser }) {
@@ -51,6 +52,7 @@ function MyPosts({ setUser }) {
       <Typography variant="h2" color="primary">
         "{tag}" Posts
       </Typography>
+      <FollowTag tag={tag} />
       <Search
         setSearchfilter={setSearchfilter}
         setSearchText={setSearchText}
