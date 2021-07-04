@@ -17,7 +17,7 @@ function MyPosts({ setUser }) {
   const postsPerPage = 10;
   const indexOfLastPost = currectPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const correctPost = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => {
     setCurrectPage(pageNumber);
@@ -55,14 +55,15 @@ function MyPosts({ setUser }) {
         showRefresh={showRefresh}
         setShowRefresh={setShowRefresh}
       />
-      {correctPost &&
-        correctPost.map(post => {
+      {correctPosts &&
+        correctPosts.map(post => {
           return <PostCard post={post} />;
         })}
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
         paginate={paginate}
+        fromPage={"myPosts"}
       />
     </div>
   );

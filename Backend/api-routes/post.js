@@ -31,7 +31,7 @@ post.get("/getPosts", validateToken, (req, res) => {
   }
 });
 
-post.post("/SavedPosts", validateToken, async (req, res) => {
+post.get("/SavedPosts", validateToken, async (req, res) => {
   try {
     await getSavedPosts(req, res);
   } catch (error) {
