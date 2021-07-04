@@ -28,7 +28,7 @@ async function getNewToken(req, res) {
       },
       ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "10m",
+        expiresIn: "15m",
       }
     );
     res.json({ accessToken });
