@@ -6,8 +6,8 @@ const User = require("../models/User");
 
 async function createTag(tags) {
   const tagsToSend = [];
-  const requests = tags.map(tag => {
-    return new Promise(async resolve => {
+  const requests = tags.map((tag) => {
+    return new Promise(async (resolve) => {
       const checkTag = await Tag.find({ name: tag });
       if (checkTag.length === 0) {
         const createNewTag = {
@@ -29,8 +29,8 @@ async function createTag(tags) {
 function getFollower(tagsToSend) {
   const allFollowers = [];
   //* Get all followers into list.
-  const requests = tagsToSend.map(tag => {
-    return new Promise(async resolve => {
+  const requests = tagsToSend.map((tag) => {
+    return new Promise(async (resolve) => {
       const eachTag = await Tag.find({ name: tag });
       allFollowers.push(...eachTag[0].followers);
       resolve(tag);
@@ -40,12 +40,12 @@ function getFollower(tagsToSend) {
   Promise.all(requests).then(() => {
     //* Make unique list, to prevent users get twice same notification on the same post.
     const uniqueFollowersList = [...new Set(allFollowers)];
-    sendNofitication(uniqueFollowersList);
+    sendNotification(uniqueFollowersList);
   });
 }
 
-function sendNofitication(followersList) {
-  followersList.forEach(follower => {
+function sendNotification(followersList) {
+  followersList.forEach((follower) => {
     User.findOneAndUpdate({ userName: follower });
   });
 }
