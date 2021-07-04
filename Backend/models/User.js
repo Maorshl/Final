@@ -8,7 +8,7 @@ const userSchema = new Schema({
   password: String,
   privatePosts: Array,
   savedPosts: Array,
-  timeUsing: Number,
+  notifications: Array,
 });
 
 module.exports = mongoose.model("User", userSchema);
