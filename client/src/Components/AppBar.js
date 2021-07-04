@@ -15,12 +15,20 @@ import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
+import Button from "@material-ui/core/Button";
+import StyledMenuItem from "../Style/StyledMenuItem";
+import StyledMenu from "../Style/StyledMenu";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 export default function MenuAppBar({ setUser }) {
   const userName = Cookies.get("userName");
   const classes = useStyles();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [notificationsEI, setNotofications] = useState(null);
+  const [notificationNum, setNotificationNum] = useState();
+  const [unReadPosts, setUnreadPosts] = useState([]);
   const open = Boolean(anchorEl);
 
   const logout = async e => {
@@ -44,11 +52,27 @@ export default function MenuAppBar({ setUser }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // useEffect(() => {
-  //   axios.get(
-  //     `http://localhost:8080/user/getNotifications?userName=${userName}`
-  //   );
-  // }, []);
+  const handleClickNotification = event => {
+    setNotofications(event.currentTarget);
+  };
+
+  const handleCloseNotification = () => {
+    setNotofications(null);
+  };
+
+  useEffect(() => {
+    const getNotifications = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8080/user/getNotifications?userName=${userName}`
+      );
+      setUnreadPosts(data);
+      const getUnRead = data.filter(post => {
+        return !post.read;
+      });
+      setNotificationNum(getUnRead.length);
+    };
+    getNotifications();
+  }, []);
 
   return (
     <div className={classes.rootAppBar}>
@@ -58,7 +82,25 @@ export default function MenuAppBar({ setUser }) {
           <Typography variant="h6" className={classes.titleAppBar}>
             Smart library
           </Typography>
-          <NotificationsNoneIcon />
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            variant="contained"
+            color="primary"
+            onClick={handleClickNotification}
+          >
+            <NotificationsNoneIcon />
+            {notificationNum}
+          </Button>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={notificationsEI}
+            keepMounted
+            open={Boolean(notificationsEI)}
+            onClose={handleCloseNotification}
+          >
+            <StyledMenuItem></StyledMenuItem>
+          </StyledMenu>
           {auth && (
             <div>
               <IconButton
