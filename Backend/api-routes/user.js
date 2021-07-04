@@ -7,6 +7,7 @@ const login = require("../services/Login");
 const savePost = require("../services/SavePost");
 const { validateToken } = require("../Middlewares");
 const removeFromSaved = require("../services/RemoveFromSaved");
+const getUserNotifications = require("../services/GetNotifications");
 
 user.post("/create", async (req, res) => {
   await createUser(req, res);
@@ -45,5 +46,8 @@ user.post("/removeFromSaved", validateToken, async (req, res) => {
   } catch (error) {
     res.send(error.message).status(500);
   }
+});
+user.get("/getNotifications", (req, res) => {
+  getUserNotifications(req, res);
 });
 module.exports = user;
