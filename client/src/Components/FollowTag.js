@@ -12,12 +12,12 @@ function FollowTag({ tag }) {
 
   const follow = async () => {
     const userName = Cookies.get("userName");
-    await axios.post("http://localhost:8080/follow", { userName, tag });
+    await axios.post("http://localhost:8080/post/follow", { userName, tag });
     setFollowed(true);
   };
   const unFollow = async () => {
     const userName = Cookies.get("userName");
-    await axios.post("http://localhost:8080/unFollow", { userName, tag });
+    await axios.post("http://localhost:8080/post/unFollow", { userName, tag });
     setFollowed(false);
   };
 
@@ -36,7 +36,7 @@ function FollowTag({ tag }) {
   );
 
   async function checkIfFollowed() {
-    const userName = axios.get("userName");
+    const userName = Cookies.get("userName");
     const { data } = await axios.get(
       `http://localhost:8080/post/followers/${tag}`
     );
