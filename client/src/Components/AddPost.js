@@ -31,25 +31,23 @@ function AddPost({ setUser }) {
   const [buttonColor, setButtonColor] = useState("null");
   const postAuthor = Cookies.get("userName");
 
-  const addPost = () => {
+  const addPost = async () => {
     if (!isValidUrl) return;
-    axios
-      .post("http://localhost:8080/post/create", {
-        title: postTitle,
-        url: postUrl,
-        description: postDescription,
-        private: postPrivate,
-        createdAt: new Date(),
-        author: postAuthor,
-        tags: postTags,
-        rating: 0,
-        rateAVG: 0,
-        raters: [],
-      })
-      .then(result => {
-        //* When the server done with the post request the client move back to the home page.
-        if (result.status === 200) window.location = "/";
-      });
+    const { data } = await axios.post("http://localhost:8080/post/create", {
+      title: postTitle,
+      url: postUrl,
+      description: postDescription,
+      private: postPrivate,
+      createdAt: new Date(),
+      author: postAuthor,
+      tags: postTags,
+      rating: 0,
+      rateAVG: 0,
+      raters: [],
+    });
+    console.log(data);
+    //* When the server done with the post request the client move back to the home page.
+    if (data === "post created successfully") window.location = "/";
   };
   const setPostUrl = event => {
     if (validator.isURL(event.target.value)) {
@@ -78,7 +76,7 @@ function AddPost({ setUser }) {
     setTag(capitalizeFirstLetter());
   };
   const setTags = () => {
-    //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates in post tags
+    //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates tags.
     if (tagInput.current.value === "") return;
     if (postTags.find(element => element === tagInput.current.value)) {
       tagInput.current.value = "";
