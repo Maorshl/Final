@@ -9,7 +9,9 @@ async function GetSavedPosts(req, res) {
   const usersSavedPosts = await Post.find({
     likes: { $in: [userName] },
     $and: [{ [searchFilter]: text }],
-  });
+  })
+    .sort({ createdAt: "desc" })
+    .limit(50);
   res.send(usersSavedPosts);
 }
 
