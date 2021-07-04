@@ -61,7 +61,7 @@ function sendNofitication(post, followersList) {
     User.findOneAndUpdate(
       { userName: follower },
       { $push: { notifications: newNotification } }
-    );
+    ).then(result => console.log(result));
   });
 }
 
