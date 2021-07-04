@@ -78,7 +78,7 @@ function AddPost({ setUser }) {
   const setTags = () => {
     //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates tags.
     if (tagInput.current.value === "") return;
-    if (postTags.find(element => element === tagInput.current.value)) {
+    if (postTags.find(element => element === tag)) {
       tagInput.current.value = "";
       tagInput.current.focus();
       return;
