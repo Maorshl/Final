@@ -23,7 +23,7 @@ function Search({
   const [anchorEl, setAnchorEl] = useState(null);
   const [buttonColor, setButtonColor] = useState("null");
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -111,7 +111,7 @@ function Search({
             multiline
             rows={1}
             variant="outlined"
-            onChange={event => {
+            onChange={(event) => {
               setSearchText(event.target.value);
             }}
           />
