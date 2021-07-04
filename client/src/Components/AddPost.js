@@ -69,7 +69,13 @@ function AddPost({ setUser }) {
   };
   const getTags = event => {
     //* This function get the value of the input, set it as varibale of tag with useState.
-    setTag(event.target.value);
+    //* Make each tag capital letter
+    function capitalizeFirstLetter() {
+      return (
+        event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
+      );
+    }
+    setTag(capitalizeFirstLetter());
   };
   const setTags = () => {
     //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates in post tags
