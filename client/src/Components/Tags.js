@@ -7,8 +7,8 @@ import useStyles from "../Style/index";
 function Tags({ tags, setPostTags }) {
   const classes = useStyles();
 
-  const handleDelete = tagToDelete => () => {
-    setPostTags(tags => tags.filter(tag => tag !== tagToDelete));
+  const handleDelete = (tagToDelete) => () => {
+    setPostTags((tags) => tags.filter((tag) => tag !== tagToDelete));
   };
   return (
     <Paper component="ul" className={classes.rootTags}>
