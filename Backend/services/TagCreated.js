@@ -22,17 +22,27 @@ async function createTag(tags) {
       }
     });
   });
-  Promise.all(requests).then(result => console.log(tagsToSend));
+  Promise.all(requests).then(() => getFollower(tagsToSend));
 }
 
-// function sendNofitication() {
-//   allFollowers = [];
-//   //* Get all followers into list.
-//   tagsToSend.forEach(async tag => {
-//     const eachTag = await Tag.find({ name: tag });
-//     allFollowers.push(...eachTag[0].followers);
-//   });
-//   console.log(allFollowers);
-// }
+function getFollower(tagsToSend) {
+  const allFollowers = [];
+  //* Get all followers into list.
+  const requests = tagsToSend.map(tag => {
+    return new Promise(async resolve => {
+      const eachTag = await Tag.find({ name: tag });
+      allFollowers.push(...eachTag[0].followers);
+      resolve(tag);
+    });
+  });
+
+  Promise.all(requests).then(() => {
+    //* Make unique list, to prevent users get twice same notification on the same post.
+    const uniqueFollowersList = [...new Set(allFollowers)];
+    sendNofitication(uniqueFollowersList);
+  });
+}
+
+function sendNofitication(followersList) {}
 
 module.exports = createTag;
