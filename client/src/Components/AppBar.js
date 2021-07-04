@@ -18,17 +18,17 @@ import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import Button from "@material-ui/core/Button";
 import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Notifications from "./Notifications";
 
 export default function MenuAppBar({ setUser }) {
   const userName = Cookies.get("userName");
   const classes = useStyles();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [notificationsEI, setNotofications] = useState(null);
-  const [notificationNum, setNotificationNum] = useState();
-  const [unReadPosts, setUnreadPosts] = useState([]);
+  const [notificationsEI, setNotoficationsEI] = useState(null);
+  const [notificationNum, setNotificationNum] = useState(0);
+  const [unReadNotification, setUnreadNotifications] = useState([]);
   const open = Boolean(anchorEl);
 
   const logout = async e => {
@@ -53,11 +53,11 @@ export default function MenuAppBar({ setUser }) {
     setAnchorEl(null);
   };
   const handleClickNotification = event => {
-    setNotofications(event.currentTarget);
+    setNotoficationsEI(event.currentTarget);
   };
 
   const handleCloseNotification = () => {
-    setNotofications(null);
+    setNotoficationsEI(null);
   };
 
   useEffect(() => {
@@ -65,11 +65,13 @@ export default function MenuAppBar({ setUser }) {
       const { data } = await axios.get(
         `http://localhost:8080/user/getNotifications?userName=${userName}`
       );
-      setUnreadPosts(data);
       const getUnRead = data.filter(post => {
         return !post.read;
       });
-      setNotificationNum(getUnRead.length);
+      console.log(getUnRead);
+      console.log(data);
+      setUnreadNotifications(getUnRead);
+      setNotificationNum(unReadNotification.length);
     };
     getNotifications();
   }, []);
@@ -99,7 +101,10 @@ export default function MenuAppBar({ setUser }) {
             open={Boolean(notificationsEI)}
             onClose={handleCloseNotification}
           >
-            <StyledMenuItem></StyledMenuItem>
+            {unReadNotification &&
+              unReadNotification.map(post => {
+                <Notifications post={post} />;
+              })}
           </StyledMenu>
           {auth && (
             <div>
