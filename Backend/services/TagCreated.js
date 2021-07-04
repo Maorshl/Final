@@ -1,4 +1,5 @@
 const Tag = require("../models/Tag");
+const User = require("../models/User");
 
 //* This function recive array of tags that just writed in a posts, and create tag if need.
 //* Else, add to array to send notifications, new tag dosent have followers..
@@ -43,6 +44,10 @@ function getFollower(tagsToSend) {
   });
 }
 
-function sendNofitication(followersList) {}
+function sendNofitication(followersList) {
+  followersList.forEach(follower => {
+    User.findOneAndUpdate({ userName: follower });
+  });
+}
 
 module.exports = createTag;
