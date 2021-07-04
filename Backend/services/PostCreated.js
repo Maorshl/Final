@@ -41,6 +41,11 @@ function getFollower(post, tagsToSend) {
   Promise.all(requests).then(() => {
     //* Make unique list, to prevent from users get twice notifications on the same post.
     const uniqueFollowersList = [...new Set(allFollowers)];
+    //* Check if author is in the list, and if he does exist, delete him.
+    const findIfAuthor = uniqueFollowersList.findIndex(post.author);
+    if (findIfAuthor !== -1) {
+      uniqueFollowersList.splice(findIfAuthor, 1);
+    }
     sendNofitication(post, uniqueFollowersList);
   });
 }
