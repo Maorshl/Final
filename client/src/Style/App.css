@@ -93,4 +93,9 @@ li a:hover {
 .notifications-div {
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  max-height: 20rem;
+}
+.notificationUnread {
+  background-color: #a6b3ff;
 }
