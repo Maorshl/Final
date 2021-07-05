@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
+import SubtitlesIcon from "@material-ui/icons/Subtitles";
 import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
 import { FormControl, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import DescriptionIcon from "@material-ui/icons/Description";
+import LabelIcon from "@material-ui/icons/Label";
 
 function Search({
   setSearchFilter,
@@ -23,7 +23,7 @@ function Search({
   const [anchorEl, setAnchorEl] = useState(null);
   const [buttonColor, setButtonColor] = useState("null");
 
-  const handleClick = (event) => {
+  const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -68,7 +68,7 @@ function Search({
       >
         <StyledMenuItem>
           <ListItemIcon>
-            <SendIcon fontSize="small" />
+            <SubtitlesIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText
             primary="Title"
@@ -80,7 +80,7 @@ function Search({
         </StyledMenuItem>
         <StyledMenuItem>
           <ListItemIcon>
-            <DraftsIcon fontSize="small" />
+            <DescriptionIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText
             primary="Description"
@@ -92,7 +92,7 @@ function Search({
         </StyledMenuItem>
         <StyledMenuItem>
           <ListItemIcon>
-            <InboxIcon fontSize="small" />
+            <LabelIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText
             primary="Tags"
@@ -112,7 +112,7 @@ function Search({
             rows={1}
             variant="outlined"
             color="primary"
-            onChange={(event) => {
+            onChange={event => {
               setSearchText(event.target.value);
             }}
           />
