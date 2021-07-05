@@ -49,7 +49,7 @@ function Search({
   }, [searchText, searchFilter]);
 
   return (
-    <div className="search">
+    <div className="search-box">
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -111,6 +111,7 @@ function Search({
             multiline
             rows={1}
             variant="outlined"
+            color="primary"
             onChange={(event) => {
               setSearchText(event.target.value);
             }}

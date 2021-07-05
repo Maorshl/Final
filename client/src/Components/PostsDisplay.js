@@ -35,7 +35,7 @@ function PostsDisplay() {
     getData();
   };
 
-  const getData = async scrolled => {
+  const getData = async (scrolled) => {
     setLoading(true);
     const { data } = await axios.get(
       `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
@@ -64,25 +64,25 @@ function PostsDisplay() {
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
-      setPageNum(prevPageNum => prevPageNum + 1);
+      setPageNum((prevPageNum) => prevPageNum + 1);
   };
 
   return (
     <>
-      <Search
-        setSearchFilter={setSearchFilter}
-        setSearchText={setSearchText}
-        searchFilter={searchFilter}
-        search={search}
-        searchText={searchText}
-        showRefresh={showRefresh}
-        setShowRefresh={setShowRefresh}
-      />
-
       <div className={classes.rootPostDisplay}>
         <Typography variant="h2" color="primary">
           Feed
         </Typography>
+        <Search
+          className="search"
+          setSearchfilter={setSearchfilter}
+          setSearchText={setSearchText}
+          searchFilter={searchFilter}
+          serach={serach}
+          searchText={searchText}
+          showRefresh={showRefresh}
+          setShowRefresh={setShowRefresh}
+        />
         <div className={classes.postsPostDisplay} ref={postsDiv}>
           {posts &&
             posts.map((post, i) => {
