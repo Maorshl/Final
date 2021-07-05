@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { REFRESH_TOKEN_SECRET, ACCESS_TOKEN_SECRET } = process.env;
 const refreshToken = require("../models/RefreshToken");
 
-//* This function checks the refresh token of the user and if he is vaild she return new access token.
+//* This function checks the refresh token of the user and if he is valid she return new access token.
 
 async function getNewToken(req, res) {
   const { refToken } = req.body;
