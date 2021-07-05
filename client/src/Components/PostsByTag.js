@@ -11,27 +11,27 @@ import { useParams } from "react-router-dom";
 
 function MyPosts({ setUser }) {
   const [posts, setPosts] = useState([]);
-  const [searchFilter, setSearchfilter] = useState("");
+  const [searchFilter, setSearchFilter] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showRefresh, setShowRefresh] = useState(false);
   let { tag } = useParams();
   //* For paginate
 
-  const [currectPage, setCurrectPage] = useState(1);
-  const postsPerPage = 10;
-  const indexOfLastPost = currectPage * postsPerPage;
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = -Infinity;
+  const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => {
-    setCurrectPage(pageNumber);
+    setCurrentPage(pageNumber);
   };
 
-  const serach = () => {
+  const search = () => {
     //* If no data to search => retrun
     if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
     if (!searchText && searchFilter) {
-      setSearchfilter("");
+      setSearchFilter("");
       setShowRefresh(false);
     }
     getData();
@@ -54,10 +54,10 @@ function MyPosts({ setUser }) {
       </Typography>
       <FollowTag tag={tag} />
       <Search
-        setSearchfilter={setSearchfilter}
+        setSearchFilter={setSearchFilter}
         setSearchText={setSearchText}
         searchFilter={searchFilter}
-        serach={serach}
+        search={search}
         searchText={searchText}
         showRefresh={showRefresh}
         setShowRefresh={setShowRefresh}
