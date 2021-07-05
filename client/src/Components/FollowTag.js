@@ -24,11 +24,11 @@ function FollowTag({ tag }) {
   return (
     <div>
       {followed ? (
-        <Button onClick={unFollow} variant="primary">
+        <Button onClick={unFollow} variant="contained" color="primary">
           Unfollow
         </Button>
       ) : (
-        <Button onClick={follow} variant="primary">
+        <Button onClick={follow} variant="contained" color="secondary">
           Follow
         </Button>
       )}
