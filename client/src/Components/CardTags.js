@@ -5,9 +5,9 @@ function CardTags({ tags }) {
   return (
     <div>
       {tags &&
-        tags.map((tag) => {
+        tags.map(tag => {
           return (
-            <Link href={`/${tag}`}>
+            <Link href={`/${tag}/#!`}>
               <Chip label={tag} />
             </Link>
           );
