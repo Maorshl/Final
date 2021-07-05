@@ -14,7 +14,7 @@ function PostsDisplay() {
   const [loading, setLoading] = useState(false);
   const [morePosts, setMorePosts] = useState(true);
   const [latestPostTime, setLatestPostTime] = useState(undefined);
-  const [searchFilter, setSearchfilter] = useState("");
+  const [searchFilter, setSearchFilter] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showRefresh, setShowRefresh] = useState(false);
 
@@ -22,11 +22,11 @@ function PostsDisplay() {
     getData(true);
   }, [pageNum]);
 
-  const serach = () => {
+  const search = () => {
     //* If no data to search=> retrun
     if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
     if (!searchText && searchFilter) {
-      setSearchfilter("");
+      setSearchFilter("");
       setShowRefresh(false);
     }
     //* Every time that clicked on search,
@@ -35,7 +35,7 @@ function PostsDisplay() {
     getData();
   };
 
-  const getData = async scrolled => {
+  const getData = async (scrolled) => {
     setLoading(true);
     const { data } = await axios.get(
       `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
@@ -64,16 +64,16 @@ function PostsDisplay() {
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
-      setPageNum(prevPageNum => prevPageNum + 1);
+      setPageNum((prevPageNum) => prevPageNum + 1);
   };
 
   return (
     <>
       <Search
-        setSearchfilter={setSearchfilter}
+        setSearchFilter={setSearchFilter}
         setSearchText={setSearchText}
         searchFilter={searchFilter}
-        serach={serach}
+        search={search}
         searchText={searchText}
         showRefresh={showRefresh}
         setShowRefresh={setShowRefresh}
