@@ -66,7 +66,7 @@ function AddPost({ setUser }) {
     setDescription(event.target.value);
   };
   const getTags = event => {
-    //* This function get the value of the input, set it as varibale of tag with useState.
+    //* This function get the value of the input, set it as variable of tag with useState.
     //* Make each tag capital letter
     function capitalizeFirstLetter() {
       return (
