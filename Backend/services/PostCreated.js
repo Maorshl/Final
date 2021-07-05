@@ -6,8 +6,8 @@ const User = require("../models/User");
 
 function postCreated(post) {
   const tagsToSend = [];
-  const requests = post.tags.map(tag => {
-    return new Promise(async resolve => {
+  const requests = post.tags.map((tag) => {
+    return new Promise(async (resolve) => {
       const checkTag = await Tag.find({ name: tag });
       if (checkTag.length === 0) {
         const createNewTag = {
@@ -30,8 +30,8 @@ function postCreated(post) {
 function getFollower(post, tagsToSend) {
   const allFollowers = [];
   //* Get all followers into list.
-  const requests = tagsToSend.map(tag => {
-    return new Promise(async resolve => {
+  const requests = tagsToSend.map((tag) => {
+    return new Promise(async (resolve) => {
       const eachTag = await Tag.find({ name: tag });
       allFollowers.push(...eachTag[0].followers);
       resolve(tag);
@@ -46,22 +46,22 @@ function getFollower(post, tagsToSend) {
     if (findIfAuthor !== -1) {
       uniqueFollowersList.splice(findIfAuthor, 1);
     }
-    sendNofitication(post, uniqueFollowersList);
+    sendNotification(post, uniqueFollowersList);
   });
 }
 
-function sendNofitication(post, followersList) {
+function sendNotification(post, followersList) {
   const newNotification = [
     {
       read: false,
-      postId: post._id,
+      post,
     },
   ];
-  followersList.forEach(follower => {
+  followersList.forEach((follower) => {
     User.findOneAndUpdate(
       { userName: follower },
       { $push: { notifications: newNotification } }
-    ).then(result => console.log(result));
+    ).then((result) => console.log(result));
   });
 }
 
