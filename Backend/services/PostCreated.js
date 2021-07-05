@@ -1,13 +1,13 @@
 const Tag = require("../models/Tag");
 const User = require("../models/User");
 
-//* This function recive array of tags that just writed in a posts, and create tag if need.
-//* Else, add to array to send notifications, new tag dosent have followers..
+//* This function receive array of tags that just written in a posts, and create tag if need.
+//* Else, add to array to send notifications, new tag doesn't have followers..
 
 function postCreated(post) {
   const tagsToSend = [];
-  const requests = post.tags.map((tag) => {
-    return new Promise(async (resolve) => {
+  const requests = post.tags.map(tag => {
+    return new Promise(async resolve => {
       const checkTag = await Tag.find({ name: tag });
       if (checkTag.length === 0) {
         const createNewTag = {
@@ -23,15 +23,15 @@ function postCreated(post) {
       }
     });
   });
-  //* Send the relevent tags
+  //* Send the relevant tags
   Promise.all(requests).then(() => getFollower(post, tagsToSend));
 }
 
 function getFollower(post, tagsToSend) {
   const allFollowers = [];
   //* Get all followers into list.
-  const requests = tagsToSend.map((tag) => {
-    return new Promise(async (resolve) => {
+  const requests = tagsToSend.map(tag => {
+    return new Promise(async resolve => {
       const eachTag = await Tag.find({ name: tag });
       allFollowers.push(...eachTag[0].followers);
       resolve(tag);
@@ -57,11 +57,11 @@ function sendNotification(post, followersList) {
       post,
     },
   ];
-  followersList.forEach((follower) => {
+  followersList.forEach(follower => {
     User.findOneAndUpdate(
       { userName: follower },
       { $push: { notifications: newNotification } }
-    ).then((result) => console.log(result));
+    ).then(result => console.log(result));
   });
 }
 
