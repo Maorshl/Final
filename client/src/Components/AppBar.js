@@ -51,6 +51,11 @@ export default function MenuAppBar({ setUser }) {
   };
   const handleClickNotification = event => {
     setNotificationsEI(event.currentTarget);
+    setTimeout(() => {
+      axios.patch(
+        `http://localhost:8080/user/updateNotification?userName=${userName}`
+      );
+    }, 3000);
   };
 
   const handleCloseNotification = () => {

@@ -56,7 +56,7 @@ user.get("/getNotifications", validateToken, (req, res) => {
   }
 });
 
-user.patch("/updateNotification", (req, res) => {
+user.patch("/updateNotification", validateToken, (req, res) => {
   try {
     updateNotifications(req, res);
   } catch (error) {
