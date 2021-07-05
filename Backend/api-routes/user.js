@@ -47,7 +47,7 @@ user.post("/removeFromSaved", validateToken, async (req, res) => {
     res.send(error.message).status(500);
   }
 });
-user.get("/getNotifications", (req, res) => {
+user.get("/getNotifications", validateToken, (req, res) => {
   getUserNotifications(req, res);
 });
 module.exports = user;
