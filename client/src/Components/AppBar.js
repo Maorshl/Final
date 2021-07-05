@@ -16,9 +16,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import Button from "@material-ui/core/Button";
-import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
-import ListItemText from "@material-ui/core/ListItemText";
 import Notifications from "./Notifications";
 
 export default function MenuAppBar({ setUser }) {
@@ -92,10 +90,9 @@ export default function MenuAppBar({ setUser }) {
             open={Boolean(notificationsEI)}
             onClose={handleCloseNotification}
           >
-            {unReadNotification &&
-              unReadNotification.map((post) => {
-                <Notifications post={post} />;
-              })}
+            {unReadNotification.map((notification) => {
+              return <Notifications notification={notification} />;
+            })}
           </StyledMenu>
           {auth && (
             <div>
