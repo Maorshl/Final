@@ -6,10 +6,9 @@ async function updateNotifications(req, res) {
   const { userName } = req.query;
   User.updateOne(
     { userName, "notifications.read": false },
-    { $set: { "notifications.$.read": true } }
+    { $set: { "notifications.$[].read": true } }
   ).then(result => {
-    res.status(204).send("Updated");
-    return;
+    return res.send("Updated");
   });
 }
 
