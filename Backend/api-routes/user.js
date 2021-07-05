@@ -8,6 +8,7 @@ const savePost = require("../services/SavePost");
 const { validateToken } = require("../Middlewares");
 const removeFromSaved = require("../services/RemoveFromSaved");
 const getUserNotifications = require("../services/GetNotifications");
+const updateNotifications = require("../services/UpdateNotifications");
 
 user.post("/create", async (req, res) => {
   await createUser(req, res);
@@ -48,9 +49,20 @@ user.patch("/removeFromSaved", validateToken, async (req, res) => {
   }
 });
 user.get("/getNotifications", validateToken, (req, res) => {
-  getUserNotifications(req, res);
+  try {
+    getUserNotifications(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
 });
 
-user.patch("/updateNotification", validateToken, (req, res) => {});
+user.patch("/updateNotification", (req, res) => {
+  try {
+    updateNotifications(req, res);
+  } catch (error) {
+    console.log(error);
+    res.send(error.message).status(500);
+  }
+});
 
 module.exports = user;
