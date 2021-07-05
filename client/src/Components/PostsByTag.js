@@ -18,7 +18,7 @@ function MyPosts({ setUser }) {
   //* For paginate
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = -Infinity;
+  const postsPerPage = 10;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -50,7 +50,7 @@ function MyPosts({ setUser }) {
     <div>
       <AppBar setUser={setUser} />
       <Typography variant="h2" color="primary">
-        "{tag}" Posts
+        {tag} Posts
       </Typography>
       <FollowTag tag={tag} />
       <Search
@@ -70,13 +70,13 @@ function MyPosts({ setUser }) {
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
         paginate={paginate}
-        fromPage={":tag"}
+        fromPage={`${tag}`}
       />
     </div>
   );
   async function getPostsByTag(searchFilter, searchText) {
     const { data } = await axios.get(
-      `http://localhost:8080/post/${tag}?searchFilter=${searchFilter}&searchText=${searchText}`
+      `http://localhost:8080/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     return data;
   }
