@@ -1,6 +1,6 @@
 const Post = require("../models/Post");
 
-//* This function recive post id and user name, and return true/false if the user rated the post.
+//* This function receive post id and user name, and return true/false if the user rated the post.
 
 async function getRaters(id, userName) {
   const post = await Post.findById(id);
