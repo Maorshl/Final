@@ -10,7 +10,7 @@ async function createUser(req, res) {
     await newUser.save();
     return res.status(201).send("User created successfully");
   } catch (error) {
-    return res.status(403).send("User name or email is alrady in use!");
+    return res.status(403).send("User name or email is already in use!");
   }
 }
 
