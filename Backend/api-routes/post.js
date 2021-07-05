@@ -65,7 +65,7 @@ post.post("/follow", async (req, res) => {
     res.send(error.message).status(500);
   }
 });
-post.post("/unFollow", async (req, res) => {
+post.patch("/unFollow", async (req, res) => {
   try {
     unFollowTag(req, res);
   } catch (error) {
