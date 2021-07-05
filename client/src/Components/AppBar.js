@@ -31,7 +31,7 @@ export default function MenuAppBar({ setUser }) {
   const [unReadNotification, setUnreadNotifications] = useState([]);
   const open = Boolean(anchorEl);
 
-  const logout = async e => {
+  const logout = async (e) => {
     await axios
       .post("http://localhost:8080/user/logout", {
         refreshToken: Cookies.get("refreshToken"),
@@ -45,14 +45,14 @@ export default function MenuAppBar({ setUser }) {
       });
   };
 
-  const handleMenu = event => {
+  const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleClickNotification = event => {
+  const handleClickNotification = (event) => {
     setNotoficationsEI(event.currentTarget);
   };
 
@@ -61,10 +61,9 @@ export default function MenuAppBar({ setUser }) {
   };
 
   useEffect(() => {
-    getNotifications().then(result => {
-      console.log(result);
+    getNotifications().then((result) => {
       setUnreadNotifications(result);
-      setNotificationNum(unReadNotification.length);
+      setNotificationNum(result.length);
     });
   }, []);
 
@@ -94,7 +93,7 @@ export default function MenuAppBar({ setUser }) {
             onClose={handleCloseNotification}
           >
             {unReadNotification &&
-              unReadNotification.map(post => {
+              unReadNotification.map((post) => {
                 <Notifications post={post} />;
               })}
           </StyledMenu>
