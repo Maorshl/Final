@@ -56,8 +56,8 @@ function MyPosts({ setUser }) {
         setShowRefresh={setShowRefresh}
       />
       {correctPosts &&
-        correctPosts.map(post => {
-          return <PostCard post={post} />;
+        correctPosts.map((post, i) => {
+          return <PostCard key={i} post={post} />;
         })}
       <Pagination
         postsPerPage={postsPerPage}
