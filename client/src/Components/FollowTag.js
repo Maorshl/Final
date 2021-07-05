@@ -17,7 +17,7 @@ function FollowTag({ tag }) {
   };
   const unFollow = async () => {
     const userName = Cookies.get("userName");
-    await axios.post("http://localhost:8080/post/unFollow", { userName, tag });
+    await axios.patch("http://localhost:8080/post/unFollow", { userName, tag });
     setFollowed(false);
   };
 
