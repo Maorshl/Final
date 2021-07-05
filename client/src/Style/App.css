@@ -90,3 +90,7 @@ li a {
 li a:hover {
   background-color: #757de8;
 }
+.notifications-div {
+  display: flex;
+  flex-direction: column;
+}
