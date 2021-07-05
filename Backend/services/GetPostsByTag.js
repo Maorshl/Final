@@ -1,8 +1,7 @@
 const Post = require("../models/Post");
 
 async function getPostsByTag(req, res) {
-  const { tag } = req.params;
-  let { searchFilter, searchText } = req.query;
+  let { tag, searchFilter, searchText } = req.query;
 
   const text = new RegExp(searchText, "i");
   searchFilter ? searchFilter : (searchFilter = "title");
