@@ -43,7 +43,7 @@ post.get("/SavedPosts", validateToken, async (req, res) => {
   }
 });
 
-post.get("/:tag", validateToken, async (req, res) => {
+post.get("/postByTag", validateToken, async (req, res) => {
   try {
     await getPostsByTag(req, res);
   } catch (error) {
