@@ -14,7 +14,7 @@ function PostsDisplay() {
   const [loading, setLoading] = useState(false);
   const [morePosts, setMorePosts] = useState(true);
   const [latestPostTime, setLatestPostTime] = useState(undefined);
-  const [searchFilter, setSearchfilter] = useState("");
+  const [searchFilter, setSearchFilter] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showRefresh, setShowRefresh] = useState(false);
 
@@ -22,15 +22,15 @@ function PostsDisplay() {
     getData(true);
   }, [pageNum]);
 
-  const serach = () => {
-    //* If no data to search=> retrun
+  const search = () => {
+    //* If no data to search=> return
     if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
     if (!searchText && searchFilter) {
-      setSearchfilter("");
+      setSearchFilter("");
       setShowRefresh(false);
     }
     //* Every time that clicked on search,
-    //* page num will reset to prevent from uncorrect post time to be part of a query.
+    //* page num will reset to prevent from incorrect post time to be part of a query.
     setPageNum(1);
     getData();
   };
@@ -41,7 +41,7 @@ function PostsDisplay() {
       `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     if (data === "No more posts") {
-      //* Preventing from posts disapear when search and scrolling down.
+      //* Preventing from posts disappear when search and scrolling down.
       if (searchText && !scrolled) {
         setPosts([]);
       }
@@ -60,7 +60,7 @@ function PostsDisplay() {
   };
 
   //* Every time the user scrolled until the bottom of the div
-  //* it trigers this function and he ask for more posts.
+  //* it triggers this function and he ask for more posts.
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)

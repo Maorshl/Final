@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -14,11 +14,19 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Drewer from "./Drewer";
 import Cookies from "js-cookie";
 import axios from "axios";
+import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
+import Button from "@material-ui/core/Button";
+import StyledMenu from "../Style/StyledMenu";
+import Notifications from "./Notifications";
 
 export default function MenuAppBar({ setUser }) {
+  const userName = Cookies.get("userName");
   const classes = useStyles();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [notificationsEI, setNotificationsEI] = useState(null);
+  const [notificationNum, setNotificationNum] = useState(0);
+  const [unReadNotification, setUnreadNotifications] = useState([]);
   const open = Boolean(anchorEl);
 
   const logout = async (e) => {
@@ -42,6 +50,20 @@ export default function MenuAppBar({ setUser }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleClickNotification = (event) => {
+    setNotificationsEI(event.currentTarget);
+  };
+
+  const handleCloseNotification = () => {
+    setNotificationsEI(null);
+  };
+
+  useEffect(() => {
+    getNotifications().then((result) => {
+      setUnreadNotifications(result);
+      setNotificationNum(result.length);
+    });
+  }, []);
 
   return (
     <div className={classes.rootAppBar}>
@@ -51,6 +73,27 @@ export default function MenuAppBar({ setUser }) {
           <Typography variant="h6" className={classes.titleAppBar}>
             Smart library
           </Typography>
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            variant="contained"
+            color="primary"
+            onClick={handleClickNotification}
+          >
+            <NotificationsNoneIcon />
+            {notificationNum}
+          </Button>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={notificationsEI}
+            keepMounted
+            open={Boolean(notificationsEI)}
+            onClose={handleCloseNotification}
+          >
+            {unReadNotification.map((notification) => {
+              return <Notifications notification={notification} />;
+            })}
+          </StyledMenu>
           {auth && (
             <div>
               <IconButton
@@ -96,4 +139,11 @@ export default function MenuAppBar({ setUser }) {
       </AppBar>
     </div>
   );
+
+  async function getNotifications() {
+    const { data } = await axios.get(
+      `http://localhost:8080/user/getNotifications?userName=${userName}`
+    );
+    return data;
+  }
 }

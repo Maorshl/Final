@@ -12,10 +12,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import RefreshIcon from "@material-ui/icons/Refresh";
 
 function Search({
-  setSearchfilter,
+  setSearchFilter,
   setSearchText,
   searchFilter,
-  serach,
+  search,
   searchText,
   showRefresh,
   setShowRefresh,
@@ -73,7 +73,7 @@ function Search({
           <ListItemText
             primary="Title"
             onClick={() => {
-              setSearchfilter("title");
+              setSearchFilter("title");
               handleClose();
             }}
           />
@@ -85,7 +85,7 @@ function Search({
           <ListItemText
             primary="Description"
             onClick={() => {
-              setSearchfilter("description");
+              setSearchFilter("description");
               handleClose();
             }}
           />
@@ -97,7 +97,7 @@ function Search({
           <ListItemText
             primary="Tags"
             onClick={() => {
-              setSearchfilter("tags");
+              setSearchFilter("tags");
               handleClose();
             }}
           />
@@ -123,7 +123,7 @@ function Search({
           aria-haspopup="true"
           variant="contained"
           color={buttonColor}
-          onClick={() => serach()}
+          onClick={() => search()}
         >
           {/* Set icon by show refresh  */}
           {showRefresh ? <RefreshIcon /> : <SearchIcon />}

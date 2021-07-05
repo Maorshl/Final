@@ -6,12 +6,15 @@ import PostCard from "./PostCard";
 import { Typography } from "@material-ui/core";
 import Search from "./Search";
 import Pagination from "./Pagination";
+import FollowTag from "./FollowTag";
+import { useParams } from "react-router-dom";
 
 function MyPosts({ setUser }) {
   const [posts, setPosts] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showRefresh, setShowRefresh] = useState(false);
+  let { tag } = useParams();
   //* For paginate
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +38,7 @@ function MyPosts({ setUser }) {
   };
 
   async function getData() {
-    const privatePosts = await getPrivatePosts(searchFilter, searchText);
+    const privatePosts = await getPostsByTag(searchFilter, searchText);
     setPosts(privatePosts);
   }
 
@@ -47,8 +50,9 @@ function MyPosts({ setUser }) {
     <div>
       <AppBar setUser={setUser} />
       <Typography variant="h2" color="primary">
-        Saved Posts
+        {tag} Posts
       </Typography>
+      <FollowTag tag={tag} />
       <Search
         setSearchFilter={setSearchFilter}
         setSearchText={setSearchText}
@@ -66,18 +70,16 @@ function MyPosts({ setUser }) {
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
         paginate={paginate}
-        fromPage={"savedposts"}
+        fromPage={`${tag}`}
       />
     </div>
   );
+  async function getPostsByTag(searchFilter, searchText) {
+    const { data } = await axios.get(
+      `http://localhost:8080/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
+    );
+    return data;
+  }
 }
 
-async function getPrivatePosts(searchFilter, searchText) {
-  const userName = Cookies.get("userName");
-  const { data } = await axios.get(
-    `http://localhost:8080/post/savedposts?userName=${userName}&searchFilter=${searchFilter}&searchText=${searchText}`,
-    {}
-  );
-  return data;
-}
 export default MyPosts;

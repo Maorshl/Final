@@ -10,14 +10,15 @@ import AddPost from "./AddPost";
 import MyPosts from "./MyPosts";
 import NeedToLogin from "./NeedToLogin";
 import SavedPosts from "./SavedPosts";
+import PostsByTag from "./PostsByTag";
 
-//* In out app we are using "material ui" for style, there for some of our defenition its part of "material ui".
+//* In out app we are using "material ui" for style, there for some of our definition its part of "material ui".
 
 //* The axios interceptors attach for each http request the access token.
 //* If the user need new access token, it handles it.
 
 axios.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
   async function (error) {
@@ -77,8 +78,12 @@ function App() {
           <Route exact path="/myPosts">
             {user ? <MyPosts setUser={setUser} /> : <NeedToLogin />}
           </Route>
+
           <Route exact path="/savedPosts">
             {user ? <SavedPosts setUser={setUser} /> : <NeedToLogin />}
+          </Route>
+          <Route exact path="/:tag">
+            {user ? <PostsByTag setUser={setUser} /> : <NeedToLogin />}
           </Route>
           <Route path="/">
             {user && <Welcome setUser={setUser} />}

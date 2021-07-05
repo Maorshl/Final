@@ -1,11 +1,16 @@
 const Post = require("../models/Post");
 const getTitle = require("./GetTitle");
+const postCreated = require("./PostCreated");
 
 async function createPost(post) {
   try {
     const newPost = new Post(post);
     newPost.head = await getTitle(newPost.url);
-    newPost.save();
+    newPost.save().then(result => {
+      if (!newPost.private) {
+        postCreated(result);
+      }
+    });
     return "Post created successfully";
   } catch (error) {
     return error;

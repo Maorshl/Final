@@ -1,7 +1,7 @@
 const Post = require("../models/Post");
 
 //* This function send to each client list of post, with the date of the last post,
-//* and every client send back the latest post time that he recived and now he can get older posts.
+//* and every client send back the latest post time that he received and now he can get older posts.
 
 async function getPosts(req, res) {
   let { pageNum, latestPost, searchFilter, searchText } = req.query;
