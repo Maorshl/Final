@@ -61,19 +61,11 @@ export default function MenuAppBar({ setUser }) {
   };
 
   useEffect(() => {
-    const getNotifications = async () => {
-      const { data } = await axios.get(
-        `http://localhost:8080/user/getNotifications?userName=${userName}`
-      );
-      const getUnRead = data.filter(post => {
-        return !post.read;
-      });
-      console.log(getUnRead);
-      console.log(data);
-      setUnreadNotifications(getUnRead);
+    getNotifications().then(result => {
+      console.log(result);
+      setUnreadNotifications(result);
       setNotificationNum(unReadNotification.length);
-    };
-    getNotifications();
+    });
   }, []);
 
   return (
@@ -151,4 +143,11 @@ export default function MenuAppBar({ setUser }) {
       </AppBar>
     </div>
   );
+
+  async function getNotifications() {
+    const { data } = await axios.get(
+      `http://localhost:8080/user/getNotifications?userName=${userName}`
+    );
+    return data;
+  }
 }
