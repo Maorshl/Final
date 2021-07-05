@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Toolbar,
@@ -29,7 +28,7 @@ export default function MenuAppBar({ setUser }) {
   const [unReadNotification, setUnreadNotifications] = useState([]);
   const open = Boolean(anchorEl);
 
-  const logout = async (e) => {
+  const logout = async e => {
     await axios
       .post("http://localhost:8080/user/logout", {
         refreshToken: Cookies.get("refreshToken"),
@@ -43,14 +42,14 @@ export default function MenuAppBar({ setUser }) {
       });
   };
 
-  const handleMenu = (event) => {
+  const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleClickNotification = (event) => {
+  const handleClickNotification = event => {
     setNotificationsEI(event.currentTarget);
   };
 
@@ -59,7 +58,7 @@ export default function MenuAppBar({ setUser }) {
   };
 
   useEffect(() => {
-    getNotifications().then((result) => {
+    getNotifications().then(result => {
       setUnreadNotifications(result);
       setNotificationNum(result.length);
     });
@@ -71,7 +70,7 @@ export default function MenuAppBar({ setUser }) {
         <Toolbar>
           <Drewer />
           <Typography variant="h6" className={classes.titleAppBar}>
-            Smart library
+            Smart library Hello {userName}! 🖐
           </Typography>
           <Button
             aria-controls="customized-menu"
@@ -84,15 +83,17 @@ export default function MenuAppBar({ setUser }) {
             {notificationNum}
           </Button>
           <StyledMenu
-            id="customized-menu"
+            id="simple-menu"
             anchorEl={notificationsEI}
             keepMounted
             open={Boolean(notificationsEI)}
             onClose={handleCloseNotification}
           >
-            {unReadNotification.map((notification) => {
-              return <Notifications notification={notification} />;
-            })}
+            <div className="notifications-div">
+              {unReadNotification.map(notification => {
+                return <Notifications notification={notification} />;
+              })}
+            </div>
           </StyledMenu>
           {auth && (
             <div>
