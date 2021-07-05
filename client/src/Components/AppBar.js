@@ -26,7 +26,7 @@ export default function MenuAppBar({ setUser }) {
   const classes = useStyles();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [notificationsEI, setNotoficationsEI] = useState(null);
+  const [notificationsEI, setNotificationsEI] = useState(null);
   const [notificationNum, setNotificationNum] = useState(0);
   const [unReadNotification, setUnreadNotifications] = useState([]);
   const open = Boolean(anchorEl);
@@ -53,11 +53,11 @@ export default function MenuAppBar({ setUser }) {
     setAnchorEl(null);
   };
   const handleClickNotification = (event) => {
-    setNotoficationsEI(event.currentTarget);
+    setNotificationsEI(event.currentTarget);
   };
 
   const handleCloseNotification = () => {
-    setNotoficationsEI(null);
+    setNotificationsEI(null);
   };
 
   useEffect(() => {
