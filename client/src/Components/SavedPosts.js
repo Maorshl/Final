@@ -9,26 +9,26 @@ import Pagination from "./Pagination";
 
 function MyPosts({ setUser }) {
   const [posts, setPosts] = useState([]);
-  const [searchFilter, setSearchfilter] = useState("");
+  const [searchFilter, setSearchFilter] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showRefresh, setShowRefresh] = useState(false);
   //* For paginate
 
-  const [currectPage, setCurrectPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
-  const indexOfLastPost = currectPage * postsPerPage;
+  const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => {
-    setCurrectPage(pageNumber);
+    setCurrentPage(pageNumber);
   };
 
-  const serach = () => {
-    //* If no data to search => retrun
+  const search = () => {
+    //* If no data to search => return
     if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
     if (!searchText && searchFilter) {
-      setSearchfilter("");
+      setSearchFilter("");
       setShowRefresh(false);
     }
     getData();
@@ -50,10 +50,10 @@ function MyPosts({ setUser }) {
         Saved Posts
       </Typography>
       <Search
-        setSearchfilter={setSearchfilter}
+        setSearchFilter={setSearchFilter}
         setSearchText={setSearchText}
         searchFilter={searchFilter}
-        serach={serach}
+        search={search}
         searchText={searchText}
         showRefresh={showRefresh}
         setShowRefresh={setShowRefresh}
