@@ -40,7 +40,7 @@ user.post("/save", validateToken, async (req, res) => {
     res.send(error.message).status(500);
   }
 });
-user.post("/removeFromSaved", validateToken, async (req, res) => {
+user.patch("/removeFromSaved", validateToken, async (req, res) => {
   try {
     await removeFromSaved(req, res);
   } catch (error) {
@@ -50,4 +50,7 @@ user.post("/removeFromSaved", validateToken, async (req, res) => {
 user.get("/getNotifications", validateToken, (req, res) => {
   getUserNotifications(req, res);
 });
+
+user.patch("/updateNotification", validateToken, (req, res) => {});
+
 module.exports = user;
