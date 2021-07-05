@@ -23,12 +23,12 @@ function MyPosts({ setUser }) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = (pageNumber) => {
+  const paginate = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
   const search = () => {
-    //* If no data to search => retrun
+    //* If no data to search => return
     if ((!searchFilter && !searchText) || (searchText && !searchFilter)) return;
     if (!searchText && searchFilter) {
       setSearchFilter("");
@@ -63,7 +63,7 @@ function MyPosts({ setUser }) {
         setShowRefresh={setShowRefresh}
       />
       {correctPosts &&
-        correctPosts.map((post) => {
+        correctPosts.map(post => {
           return <PostCard post={post} />;
         })}
       <Pagination
