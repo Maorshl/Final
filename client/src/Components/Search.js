@@ -23,7 +23,7 @@ function Search({
   const [anchorEl, setAnchorEl] = useState(null);
   const [buttonColor, setButtonColor] = useState("null");
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -66,41 +66,38 @@ function Search({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem
+          onClick={() => {
+            setSearchFilter("title");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <SubtitlesIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText
-            primary="Title"
-            onClick={() => {
-              setSearchFilter("title");
-              handleClose();
-            }}
-          />
+          <ListItemText primary="Title" />
         </StyledMenuItem>
-        <StyledMenuItem>
+        <StyledMenuItem
+          onClick={() => {
+            setSearchFilter("description");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <DescriptionIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText
-            primary="Description"
-            onClick={() => {
-              setSearchFilter("description");
-              handleClose();
-            }}
-          />
+          <ListItemText primary="Description" />
         </StyledMenuItem>
-        <StyledMenuItem>
+        <StyledMenuItem
+          onClick={() => {
+            setSearchFilter("tags");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <LabelIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText
-            primary="Tags"
-            onClick={() => {
-              setSearchFilter("tags");
-              handleClose();
-            }}
-          />
+          <ListItemText primary="Tags" />
         </StyledMenuItem>
       </StyledMenu>
       <div className="search-input">
@@ -112,7 +109,7 @@ function Search({
             rows={1}
             variant="outlined"
             color="primary"
-            onChange={event => {
+            onChange={(event) => {
               setSearchText(event.target.value);
             }}
           />
