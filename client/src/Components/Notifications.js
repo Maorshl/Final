@@ -13,7 +13,11 @@ function Notifications({ notification }) {
           New Post from: {notification.post.author}
         </Link>
         <ListItemText
-          primary={notification.post.title}
+          primary={
+            notification.post.title.length > 10
+              ? notification.post.title.slice(0, 10) + "..."
+              : notification.post.title
+          }
           secondary={
             <Link href={notification.post.url} target="_blank">
               <LinkIcon />
