@@ -7,12 +7,11 @@ import { useParams } from "react-router-dom";
 
 function MyPosts({ setUser }) {
   const { id } = useParams();
-  const [posts, setPosts] = useState(null);
+  const [post, setPost] = useState(null);
 
   async function getData() {
-    const privatePosts = await getPost();
-    setPosts(privatePosts);
-    console.log(privatePosts);
+    const onePost = await getPost();
+    setPost(onePost);
   }
 
   useEffect(() => {
@@ -22,12 +21,12 @@ function MyPosts({ setUser }) {
   return (
     <div>
       <AppBar setUser={setUser} />
-      {posts && (
+      {post && (
         <Typography variant="h2" color="primary">
-          Post by: {posts.author}
+          Post by: {post.author}
         </Typography>
       )}
-      {posts && <PostCard post={posts} />}
+      {post && <PostCard post={post} />}
     </div>
   );
 

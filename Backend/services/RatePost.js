@@ -1,6 +1,8 @@
 const Post = require("../models/Post");
 
-async function ratePost(postId, userName, rate) {
+async function ratePost(req, res) {
+  let { postId, userName, rate } = req.body;
+
   const post = await Post.findById(postId);
   rate = Number(rate);
   //* The list didn't updated yet with the current rate, so need to add one
@@ -18,7 +20,7 @@ async function ratePost(postId, userName, rate) {
   ).then(result => {
     console.log(result);
   });
-  return averageRate;
+  res.send({ averageRate });
 }
 
 module.exports = ratePost;

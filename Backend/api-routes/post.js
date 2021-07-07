@@ -10,13 +10,14 @@ const followTag = require("../services/FollowTag");
 const getTagFollowers = require("../services/GetTagFollowers");
 const unFollowTag = require("../services/UnfollowTag");
 const getOnePostById = require("../services/GetOnePostById");
+const editPost = require("../services/EditPost");
 
 post.post("/create", validateToken, (req, res) => {
   try {
     createPost(req.body);
     res.send("post created successfully");
   } catch (error) {
-    res.send(error.message);
+    res.send(error.message).status(500);
   }
 });
 
@@ -36,48 +37,57 @@ post.get("/getPosts", validateToken, (req, res) => {
   }
 });
 
-post.get("/SavedPosts", validateToken, async (req, res) => {
+post.get("/SavedPosts", validateToken, (req, res) => {
   try {
-    await getSavedPosts(req, res);
+    getSavedPosts(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
 
-post.get("/postByTag", validateToken, async (req, res) => {
+post.get("/postByTag", validateToken, (req, res) => {
   try {
-    await getPostsByTag(req, res);
+    getPostsByTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.get("/getOnePostById", async (req, res) => {
+post.get("/getOnePostById", validateToken, (req, res) => {
   try {
-    await getOnePostById(req, res);
+    getOnePostById(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.get("/followers/:tag", async (req, res) => {
+post.get("/followers/:tag", validateToken, (req, res) => {
   try {
-    await getTagFollowers(req, res);
+    getTagFollowers(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
 
-post.post("/follow", async (req, res) => {
+post.post("/follow", validateToken, (req, res) => {
   try {
     followTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.patch("/unFollow", async (req, res) => {
+post.patch("/unFollow", validateToken, (req, res) => {
   try {
     unFollowTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
+
+post.patch("/edit", (req, res) => {
+  try {
+    editPost(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+
 module.exports = post;
