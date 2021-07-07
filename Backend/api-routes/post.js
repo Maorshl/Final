@@ -16,7 +16,7 @@ post.post("/create", validateToken, (req, res) => {
     createPost(req.body);
     res.send("post created successfully");
   } catch (error) {
-    res.send(error.message);
+    res.send(error.message).status(500);
   }
 });
 
