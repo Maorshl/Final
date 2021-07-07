@@ -36,44 +36,44 @@ post.get("/getPosts", validateToken, (req, res) => {
   }
 });
 
-post.get("/SavedPosts", validateToken, async (req, res) => {
+post.get("/SavedPosts", validateToken, (req, res) => {
   try {
-    await getSavedPosts(req, res);
+    getSavedPosts(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
 
-post.get("/postByTag", validateToken, async (req, res) => {
+post.get("/postByTag", validateToken, (req, res) => {
   try {
-    await getPostsByTag(req, res);
+    getPostsByTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.get("/getOnePostById", async (req, res) => {
+post.get("/getOnePostById", (req, res) => {
   try {
-    await getOnePostById(req, res);
+    getOnePostById(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.get("/followers/:tag", async (req, res) => {
+post.get("/followers/:tag", (req, res) => {
   try {
-    await getTagFollowers(req, res);
+    getTagFollowers(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
 
-post.post("/follow", async (req, res) => {
+post.post("/follow", (req, res) => {
   try {
     followTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.patch("/unFollow", async (req, res) => {
+post.patch("/unFollow", (req, res) => {
   try {
     unFollowTag(req, res);
   } catch (error) {
