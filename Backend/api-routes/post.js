@@ -9,6 +9,7 @@ const getPostsByTag = require("../services/GetPostsByTag");
 const followTag = require("../services/FollowTag");
 const getTagFollowers = require("../services/GetTagFollowers");
 const unFollowTag = require("../services/unFollowTag");
+const getOnePostById = require("../services/GetOnePostById");
 
 post.post("/create", validateToken, (req, res) => {
   try {
@@ -46,6 +47,13 @@ post.get("/SavedPosts", validateToken, async (req, res) => {
 post.get("/postByTag", validateToken, async (req, res) => {
   try {
     await getPostsByTag(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+post.get("/getOnePostById", async (req, res) => {
+  try {
+    await getOnePostById(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
