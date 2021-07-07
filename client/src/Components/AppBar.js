@@ -96,9 +96,12 @@ export default function MenuAppBar({ setUser }) {
             onClose={handleCloseNotification}
           >
             <div className="notifications-div">
-              {unReadNotification.map((notification, i) => {
-                return <Notifications notification={notification} key={i} />;
-              })}
+              {unReadNotification
+                .slice(0)
+                .reverse()
+                .map((notification, i) => {
+                  return <Notifications notification={notification} key={i} />;
+                })}
             </div>
           </StyledMenu>
           {auth && (
