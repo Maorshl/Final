@@ -45,10 +45,11 @@ function AddPost({ setUser }) {
       rateAVG: 0,
       raters: [],
     });
-    console.log(data);
     //* When the server done with the post request the client move back to the home page.
     if (data === "post created successfully") window.location = "/";
   };
+
+  //* Only if the URL is valid, the user can submit the post.
   const setPostUrl = event => {
     if (validator.isURL(event.target.value)) {
       setButtonColor("primary");
@@ -87,6 +88,7 @@ function AddPost({ setUser }) {
     tagInput.current.value = "";
     tagInput.current.focus();
   };
+
   const changePostPrivate = () => {
     setPrivate(!postPrivate);
   };
