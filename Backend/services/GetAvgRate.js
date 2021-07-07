@@ -1,8 +1,10 @@
 const Post = require("../models/Post");
 
-async function getAvgRate(id) {
+async function getAvgRate(req, res) {
+  const { id } = req.query;
   const post = await Post.findById(id);
-  return post.rateAVG;
+  const AVG = post.rateAVG;
+  res.send({ AVG });
 }
 
 module.exports = getAvgRate;
