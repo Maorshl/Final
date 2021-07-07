@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
+import SubtitlesIcon from "@material-ui/icons/Subtitles";
 import StyledMenuItem from "../Style/StyledMenuItem";
 import StyledMenu from "../Style/StyledMenu";
 import { FormControl, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import DescriptionIcon from "@material-ui/icons/Description";
+import LabelIcon from "@material-ui/icons/Label";
 
 function Search({
-  setSearchfilter,
+  setSearchFilter,
   setSearchText,
   searchFilter,
-  serach,
+  search,
   searchText,
   showRefresh,
   setShowRefresh,
@@ -23,7 +23,7 @@ function Search({
   const [anchorEl, setAnchorEl] = useState(null);
   const [buttonColor, setButtonColor] = useState("null");
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -49,7 +49,7 @@ function Search({
   }, [searchText, searchFilter]);
 
   return (
-    <div className="search">
+    <div className="search-box">
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -66,41 +66,38 @@ function Search({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem
+          onClick={() => {
+            setSearchFilter("title");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
-            <SendIcon fontSize="small" />
+            <SubtitlesIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText
-            primary="Title"
-            onClick={() => {
-              setSearchfilter("title");
-              handleClose();
-            }}
-          />
+          <ListItemText primary="Title" />
         </StyledMenuItem>
-        <StyledMenuItem>
+        <StyledMenuItem
+          onClick={() => {
+            setSearchFilter("description");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
-            <DraftsIcon fontSize="small" />
+            <DescriptionIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText
-            primary="Description"
-            onClick={() => {
-              setSearchfilter("description");
-              handleClose();
-            }}
-          />
+          <ListItemText primary="Description" />
         </StyledMenuItem>
-        <StyledMenuItem>
+        <StyledMenuItem
+          onClick={() => {
+            setSearchFilter("tags");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
-            <InboxIcon fontSize="small" />
+            <LabelIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText
-            primary="Tags"
-            onClick={() => {
-              setSearchfilter("tags");
-              handleClose();
-            }}
-          />
+          <ListItemText primary="Tags" />
         </StyledMenuItem>
       </StyledMenu>
       <div className="search-input">
@@ -111,18 +108,19 @@ function Search({
             multiline
             rows={1}
             variant="outlined"
-            onChange={event => {
+            color="primary"
+            onChange={(event) => {
               setSearchText(event.target.value);
             }}
           />
         </FormControl>
         <Button
-          className="serach-button"
+          className="search-button"
           aria-controls="customized-menu"
           aria-haspopup="true"
           variant="contained"
           color={buttonColor}
-          onClick={() => serach()}
+          onClick={() => search()}
         >
           {/* Set icon by show refresh  */}
           {showRefresh ? <RefreshIcon /> : <SearchIcon />}

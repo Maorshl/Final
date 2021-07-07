@@ -43,7 +43,7 @@ function CardAct({ post }) {
     getAVGRateData();
   }, []);
 
-  const setPostRate = async rate => {
+  const setPostRate = async (rate) => {
     const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
       postId: post._id,
       userName,
@@ -77,7 +77,6 @@ function CardAct({ post }) {
             )}
           </Box>
         )}
-        {/* <div onClick={() => likeThePost(post._id)}> */}
         <IconButton aria-label="add to favorites">
           {liked ? (
             <FavoriteIcon onClick={() => unlikeThePost(post._id)} />
@@ -89,8 +88,6 @@ function CardAct({ post }) {
         {/* //* Link button to each post URL */}
 
         <Typography>{likesNumber} Likes</Typography>
-        {/* </div> */}
-        
 
         {post.url && (
           <IconButton aria-label="share" href={`${post.url}`} target="_blank">
@@ -127,7 +124,7 @@ function CardAct({ post }) {
     setLikesNumber(likesNumber + 1);
   }
   async function unlikeThePost(postId) {
-    await axios.post("http://localhost:8080/user/removeFromSaved", {
+    await axios.patch("http://localhost:8080/user/removeFromSaved", {
       userName,
       postId,
     });

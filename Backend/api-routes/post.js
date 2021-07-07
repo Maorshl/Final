@@ -5,6 +5,11 @@ const createPost = require("../services/CreatePost");
 const getPrivatePosts = require("../services/getPrivatePosts");
 const getPosts = require("../services/GetPosts");
 const getSavedPosts = require("../services/GetSavedPosts");
+const getPostsByTag = require("../services/GetPostsByTag");
+const followTag = require("../services/FollowTag");
+const getTagFollowers = require("../services/GetTagFollowers");
+const unFollowTag = require("../services/unFollowTag");
+const getOnePostById = require("../services/GetOnePostById");
 
 post.post("/create", validateToken, (req, res) => {
   try {
@@ -34,6 +39,43 @@ post.get("/getPosts", validateToken, (req, res) => {
 post.get("/SavedPosts", validateToken, async (req, res) => {
   try {
     await getSavedPosts(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+
+post.get("/postByTag", validateToken, async (req, res) => {
+  try {
+    await getPostsByTag(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+post.get("/getOnePostById", async (req, res) => {
+  try {
+    await getOnePostById(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+post.get("/followers/:tag", async (req, res) => {
+  try {
+    await getTagFollowers(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+
+post.post("/follow", async (req, res) => {
+  try {
+    followTag(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+post.patch("/unFollow", async (req, res) => {
+  try {
+    unFollowTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }

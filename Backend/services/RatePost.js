@@ -3,7 +3,7 @@ const Post = require("../models/Post");
 async function ratePost(postId, userName, rate) {
   const post = await Post.findById(postId);
   rate = Number(rate);
-  //* The list didnt updated yet with the current rate, so need to add one
+  //* The list didn't updated yet with the current rate, so need to add one
   const voted = post.raters.length + 1;
   const updateRating = post.rating + rate;
   const averageRate = updateRating / voted;

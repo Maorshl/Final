@@ -2,11 +2,10 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   rootPostDisplay: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#333",
     height: "100vh",
   },
   flex: {
@@ -20,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     justifyContent: "space-between",
     height: "fit-content",
-    backgroundColor: "#333",
   },
   spinnerPostDisplay: {
     display: "flex",
@@ -78,6 +76,9 @@ const useStyles = makeStyles(theme => ({
     width: "60%",
     margin: "auto",
     marginTop: "1rem",
+    background: "rgb(151,167,255)",
+    background:
+      "linear-gradient(225deg, rgba(151,167,255,1) 0%, rgba(238,238,238,1) 100%)",
   },
   avatarPostCard: {
     backgroundColor: red[500],
