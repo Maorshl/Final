@@ -28,7 +28,8 @@ export default function MenuAppBar({ setUser }) {
   const [unReadNotification, setUnreadNotifications] = useState([]);
   const open = Boolean(anchorEl);
 
-  const logout = async (e) => {
+  //* When user log out, delete all the Cookies and tokens at the DB
+  const logout = async e => {
     await axios
       .post("http://localhost:8080/user/logout", {
         refreshToken: Cookies.get("refreshToken"),
@@ -42,14 +43,16 @@ export default function MenuAppBar({ setUser }) {
       });
   };
 
-  const handleMenu = (event) => {
+  const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleClickNotification = (event) => {
+
+  //* When the use click at the notifications button, it is updated at the DB that all is read.
+  const handleClickNotification = event => {
     setNotificationsEI(event.currentTarget);
     axios
       .patch(
@@ -62,10 +65,12 @@ export default function MenuAppBar({ setUser }) {
     setNotificationsEI(null);
   };
 
+  //* When the page is up, it ask for all notification, and give the number of unread as the notifications number.
   useEffect(() => {
-    getNotifications().then((result) => {
+    getNotifications().then(result => {
       setUnreadNotifications(result);
-      const unRead = result.filter((notification) => !notification.read);
+
+      const unRead = result.filter(notification => !notification.read);
       setNotificationNum(unRead.length);
     });
   }, []);
