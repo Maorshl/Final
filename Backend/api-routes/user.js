@@ -10,40 +10,50 @@ const removeFromSaved = require("../services/RemoveFromSaved");
 const getUserNotifications = require("../services/GetNotifications");
 const updateNotifications = require("../services/UpdateNotifications");
 
-user.post("/create", async (req, res) => {
-  await createUser(req, res);
+user.post("/create", (req, res) => {
+  try {
+    createUser(req, res);
+  } catch (error) {
+    console.log(error);
+    res.send(error.message).status(500);
+  }
 });
 
-user.post("/login", async (req, res) => {
-  await login(req, res);
+user.post("/login", (req, res) => {
+  try {
+    login(req, res);
+  } catch (error) {
+    console.log(error);
+    res.send(error.message).status(500);
+  }
 });
 
 user.post("/refreshToken", (req, res) => {
   try {
     getNewToken(req, res);
   } catch (error) {
-    res.send(error.message);
+    res.send(error.message).status(500);
   }
 });
 
-user.post("/logout", async (req, res) => {
+user.post("/logout", (req, res) => {
   try {
-    await Logout(req, res);
+    Logout(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
 
-user.post("/save", validateToken, async (req, res) => {
+user.post("/save", validateToken, (req, res) => {
   try {
-    await savePost(req, res);
+    savePost(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-user.patch("/removeFromSaved", validateToken, async (req, res) => {
+user.patch("/removeFromSaved", validateToken, (req, res) => {
   try {
-    await removeFromSaved(req, res);
+    removeFromSaved(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
