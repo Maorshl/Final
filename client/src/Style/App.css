@@ -99,3 +99,6 @@ li a:hover {
 .notificationUnread {
   background-color: #a6b3ff;
 }
+#edit-button {
+  margin-top: 40%;
+}
