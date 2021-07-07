@@ -11,8 +11,10 @@ import { CardActions, IconButton } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LinkIcon from "@material-ui/icons/Link";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-const userName = Cookies.get("userName");
+import { Link, Button } from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
 
+const userName = Cookies.get("userName");
 function CardAct({ post }) {
   const classes = useStyles();
   const [isRated, setIsRated] = useState(false);
@@ -102,7 +104,8 @@ function CardAct({ post }) {
           className={classes.AVGrate}
         >
           {/* //*Only public posts can rated */}
-          {!post.private && (
+          {/* //*Only private posts can edited */}
+          {!post.private ? (
             <>
               <Typography component="legend">AVG Rate:</Typography>
               <Rating
@@ -112,6 +115,13 @@ function CardAct({ post }) {
                 precision={0.5}
               />
             </>
+          ) : (
+            <Button id="edit-button">
+              <Link href={`/editPost/${post._id}`}>
+                <EditIcon />
+                Edit
+              </Link>
+            </Button>
           )}
         </Box>
       </CardActions>
