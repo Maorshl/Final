@@ -9,7 +9,9 @@ function Notifications({ notification }) {
       className={notification.read ? "notificationRead" : "notificationUnread"}
     >
       <StyledMenuItem>
-        New Post from: {notification.post.author}
+        <Link href={`/post/${notification.post._id}`}>
+          New Post from: {notification.post.author}
+        </Link>
         <ListItemText
           primary={notification.post.title}
           secondary={
