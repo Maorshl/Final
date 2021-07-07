@@ -21,7 +21,7 @@ import Notifications from "./Notifications";
 export default function MenuAppBar({ setUser }) {
   const userName = Cookies.get("userName");
   const classes = useStyles();
-  const [auth, setAuth] = useState(true);
+  const auth = true;
   const [anchorEl, setAnchorEl] = useState(null);
   const [notificationsEI, setNotificationsEI] = useState(null);
   const [notificationNum, setNotificationNum] = useState(0);
