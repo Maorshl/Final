@@ -4,7 +4,6 @@ import { ListItemText, Link } from "@material-ui/core";
 import LinkIcon from "@material-ui/icons/Link";
 
 function Notifications({ notification }) {
-  console.log(notification);
   return (
     <div
       className={notification.read ? "notificationRead" : "notificationUnread"}
