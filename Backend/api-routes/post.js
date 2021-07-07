@@ -10,6 +10,7 @@ const followTag = require("../services/FollowTag");
 const getTagFollowers = require("../services/GetTagFollowers");
 const unFollowTag = require("../services/unFollowTag");
 const getOnePostById = require("../services/GetOnePostById");
+const editPost = require("../services/EditPost");
 
 post.post("/create", validateToken, (req, res) => {
   try {
@@ -51,14 +52,14 @@ post.get("/postByTag", validateToken, (req, res) => {
     res.send(error.message).status(500);
   }
 });
-post.get("/getOnePostById", (req, res) => {
+post.get("/getOnePostById", validateToken, (req, res) => {
   try {
     getOnePostById(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.get("/followers/:tag", (req, res) => {
+post.get("/followers/:tag", validateToken, (req, res) => {
   try {
     getTagFollowers(req, res);
   } catch (error) {
@@ -66,18 +67,27 @@ post.get("/followers/:tag", (req, res) => {
   }
 });
 
-post.post("/follow", (req, res) => {
+post.post("/follow", validateToken, (req, res) => {
   try {
     followTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
-post.patch("/unFollow", (req, res) => {
+post.patch("/unFollow", validateToken, (req, res) => {
   try {
     unFollowTag(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }
 });
+
+post.patch("/edit", (req, res) => {
+  try {
+    editPost(req, res);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+});
+
 module.exports = post;
