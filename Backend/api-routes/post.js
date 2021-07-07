@@ -8,7 +8,7 @@ const getSavedPosts = require("../services/GetSavedPosts");
 const getPostsByTag = require("../services/GetPostsByTag");
 const followTag = require("../services/FollowTag");
 const getTagFollowers = require("../services/GetTagFollowers");
-const unFollowTag = require("../services/unFollowTag");
+const unFollowTag = require("../services/UnfollowTag");
 const getOnePostById = require("../services/GetOnePostById");
 
 post.post("/create", validateToken, (req, res) => {
