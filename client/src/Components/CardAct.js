@@ -9,7 +9,6 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import useStyles from "../Style";
 import { CardActions, IconButton } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import LinkIcon from "@material-ui/icons/Link";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Link, Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -91,11 +90,6 @@ function CardAct({ post }) {
 
         <Typography>{likesNumber} Likes</Typography>
 
-        {post.url && (
-          <IconButton aria-label="share" href={`${post.url}`} target="_blank">
-            <LinkIcon />
-          </IconButton>
-        )}
         {/* //* Each post AVG rate */}
         <Box
           component="fieldset"
