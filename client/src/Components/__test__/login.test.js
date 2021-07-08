@@ -4,7 +4,7 @@ let browser;
 let page;
 describe("Frontend test", () => {
   test("Should login", async () => {
-    browser = await puppeteer.launch({ headless: false });
+    browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto("http://localhost:8080");
     await page.click("#username");
