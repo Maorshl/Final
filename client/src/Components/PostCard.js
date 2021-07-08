@@ -8,9 +8,9 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CardAct from "./CardAct";
 import useStyles from "../Style";
+import LinkIcon from "@material-ui/icons/Link";
 
 export default function PostCard({ post }) {
   const classes = useStyles();
@@ -18,14 +18,15 @@ export default function PostCard({ post }) {
   return (
     <Card className={classes.rootPostCard}>
       <CardHeader
+        className="card-header"
         avatar={
           <Avatar aria-label="recipe" className={classes.avatarPostCard}>
             {post.author}
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          <IconButton aria-label="share" href={`${post.url}`} target="_blank">
+            <LinkIcon />
           </IconButton>
         }
         title={post.title}
