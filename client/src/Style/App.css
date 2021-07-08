@@ -1,3 +1,27 @@
+html,
+body {
+  width: 100%;
+  height: fit-content;
+}
+
+body {
+  background: linear-gradient(-45deg, #a7ffeb, #a6b3ff, #80d8ff);
+  background-size: 100000000000% 10000000000%;
+  background-repeat: inherit;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .App {
   text-align: center;
 }
@@ -115,4 +139,8 @@ li a:hover {
 .AnyClassForTransition {
   top: 0;
   right: 50%;
+}
+.card-header {
+  display: flex;
+  flex-direction: row;
 }
