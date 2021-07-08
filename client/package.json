@@ -19,7 +19,8 @@
     "react-scripts": "4.0.3",
     "react-scroll-up-button": "^1.6.4",
     "validator": "^13.6.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "xss": "^1.0.9"
   },
   "scripts": {
     "server": "concurrently \"react-scripts start\" \"cd .. && cd Backend && node app.js\"",
