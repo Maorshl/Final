@@ -1,7 +1,8 @@
 const Tag = require("../models/Tag");
 const User = require("../models/User");
 
-//* This function receive array of tags that just written in a posts, and create tag if need.
+///* This function runs AFTER the post is created, and take care to send notifications
+//* This function receive post, and loop the array of tags that just written in a posts, and create tag if need.
 //* Else, add to array to send notifications, new tag doesn't have followers..
 
 function postCreated(post) {
