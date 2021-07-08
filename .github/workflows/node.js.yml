@@ -38,6 +38,8 @@ jobs:
         working-directory: ./client
       - name: Run build
         run: npm run build
+        env:
+          CI: false
         working-directory: ./client
       - name: Start server
         run: node app.js & npx wait-on http://localhost:8080
