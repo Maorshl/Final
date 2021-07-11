@@ -14,8 +14,7 @@ const editPost = require("../services/EditPost");
 
 post.post("/create", validateToken, (req, res) => {
   try {
-    createPost(req.body);
-    res.send("post created successfully");
+    createPost(req, res);
   } catch (error) {
     res.send(error.message).status(500);
   }

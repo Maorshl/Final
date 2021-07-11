@@ -1,5 +1,7 @@
 const Tag = require("../models/Tag");
 
+//* This function receive tag and return the list of tag followers
+
 async function getTagFollowers(req, res) {
   try {
     const { tag } = req.params;

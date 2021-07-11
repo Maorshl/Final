@@ -5,6 +5,8 @@ const { REFRESH_TOKEN_SECRET, ACCESS_TOKEN_SECRET } = process.env;
 const user = require("../models/User");
 const refreshToken = require("../models/RefreshToken");
 
+//* This function receive userName + password, and compare the password with bcrypt.
+
 async function login(req, res) {
   const { userName, password } = req.body;
   const loginUser = await user.findOne({ userName });

@@ -19,7 +19,7 @@ import EditPost from "./EditPost";
 //* If the user need new access token, it handles it.
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
   async function (error) {

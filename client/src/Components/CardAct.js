@@ -8,13 +8,14 @@ import Box from "@material-ui/core/Box";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import useStyles from "../Style";
 import { CardActions, IconButton } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LinkIcon from "@material-ui/icons/Link";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Link, Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-
+import BookmarkBorderOutlinedIcon from "@material-ui/icons/BookmarkBorderOutlined";
+import BookmarkOutlinedIcon from "@material-ui/icons/BookmarkOutlined";
 const userName = Cookies.get("userName");
+
+//* This component is used to handle all of postCard actions.
+
 function CardAct({ post }) {
   const classes = useStyles();
   const [isRated, setIsRated] = useState(false);
@@ -81,9 +82,9 @@ function CardAct({ post }) {
         )}
         <IconButton aria-label="add to favorites">
           {liked ? (
-            <FavoriteIcon onClick={() => unlikeThePost(post._id)} />
+            <BookmarkOutlinedIcon onClick={() => unlikeThePost(post._id)} />
           ) : (
-            <FavoriteBorderIcon onClick={() => likeThePost(post._id)} />
+            <BookmarkBorderOutlinedIcon onClick={() => likeThePost(post._id)} />
           )}
         </IconButton>
 
@@ -91,11 +92,6 @@ function CardAct({ post }) {
 
         <Typography>{likesNumber} Likes</Typography>
 
-        {post.url && (
-          <IconButton aria-label="share" href={`${post.url}`} target="_blank">
-            <LinkIcon />
-          </IconButton>
-        )}
         {/* //* Each post AVG rate */}
         <Box
           component="fieldset"
@@ -107,7 +103,9 @@ function CardAct({ post }) {
           {/* //*Only private posts can edited */}
           {!post.private ? (
             <>
+
               <Typography component="legend">Rating:</Typography>
+
               <Rating
                 name="read-only"
                 value={rateValue}

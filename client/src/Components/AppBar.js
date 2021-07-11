@@ -8,7 +8,6 @@ import {
   Menu,
 } from "@material-ui/core";
 import useStyles from "../Style";
-import { AccountCircle } from "@material-ui/icons";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Drewer from "./Drewer";
 import Cookies from "js-cookie";
@@ -111,15 +110,6 @@ export default function MenuAppBar({ setUser }) {
           </StyledMenu>
           {auth && (
             <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}

@@ -1,5 +1,7 @@
 const Post = require("../models/Post");
 
+//* This function receive postID, the userName who rated the post, and his rate, calcs the new AVG, update, and send back the new AVG
+
 async function ratePost(req, res) {
   let { postId, userName, rate } = req.body;
 
@@ -17,10 +19,9 @@ async function ratePost(req, res) {
       $push: { raters: userName },
       rateAVG: averageRate,
     }
-  ).then(result => {
-    console.log(result);
+  ).then(() => {
+    res.send({ averageRate });
   });
-  res.send({ averageRate });
 }
 
 module.exports = ratePost;

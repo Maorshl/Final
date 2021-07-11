@@ -47,7 +47,7 @@ function AddPost({ setUser }) {
       raters: [],
     });
     //* When the server done with the post request the client move back to the home page.
-    if (data === "post created successfully") window.location = "/";
+    if (data === "Post created successfully") window.location = "/";
   };
 
   //* Only if the URL is valid, the user can submit the post.
