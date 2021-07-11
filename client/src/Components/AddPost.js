@@ -16,6 +16,7 @@ import {
   Button,
   Typography,
   FormGroup,
+  Switch,
 } from "@material-ui/core";
 import xss from "xss";
 
@@ -34,7 +35,7 @@ function AddPost({ setUser }) {
 
   const addPost = async () => {
     if (!isValidUrl) return;
-    const { data } = await axios.post("http://localhost:8080/post/create", {
+    const response = await axios.post("http://localhost:8080/post/create", {
       title: postTitle,
       url: postUrl,
       description: postDescription,
@@ -46,8 +47,8 @@ function AddPost({ setUser }) {
       rateAVG: 0,
       raters: [],
     });
-    //* When the server done with the post request the client move back to the home page.
-    if (data === "Post created successfully") window.location = "/";
+    //* When the server is done with the post request the client move back to the home page.
+    if (response.status === 200) window.location = "/";
   };
 
   //* Only if the URL is valid, the user can submit the post.
@@ -171,7 +172,7 @@ function AddPost({ setUser }) {
           <Typography component="div">
             <Grid component="label" container alignItems="center" spacing={1}>
               <Grid item>
-                <AntSwitch
+                <Switch
                   checked={postPrivate}
                   onChange={changePostPrivate}
                   name="checkedC"

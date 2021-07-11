@@ -12,12 +12,12 @@ async function createPost(req, res) {
   } else {
     newPost.head = await getTitle(newPost.url);
   }
-  newPost.save().then(result => {
+  newPost.save().then((result) => {
     if (!newPost.private) {
       postCreated(result);
     }
   });
-  res.send("Post created successfully");
+  res.send("Post created successfully").status(200);
 }
 
 module.exports = createPost;
