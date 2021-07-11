@@ -102,33 +102,38 @@ function AddPost({ setUser }) {
         <Typography variant="h4" color="primary">
           Add Post
         </Typography>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl>
-            <InputLabel htmlFor="my-input">Post URL</InputLabel>
-            <Input
-              aria-describedby="my-helper-text"
-              onChange={setPostUrl}
-              className={classes.input}
-              type="url"
-              required="true"
-              name="url"
-            />
-            {!isValidUrl && (
-              <Typography variant="h6" color="primary">
-                Please enter valid URL
-              </Typography>
-            )}
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl>
-            <InputLabel htmlFor="my-input">Post Title</InputLabel>
-            <Input aria-describedby="my-helper-text" onChange={setPostTitle} />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormGroup>
-            <FormControl>
+        <Grid container spacing={3}>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl id="form-control">
+              <InputLabel htmlFor="my-input">Post URL</InputLabel>
+              <Input
+                id="add-post-input"
+                aria-describedby="my-helper-text"
+                onChange={setPostUrl}
+                className={classes.input}
+                type="url"
+                required="true"
+                name="url"
+              />
+              {!isValidUrl && (
+                <Typography variant="h6" color="primary">
+                  Please enter valid URL
+                </Typography>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl id="form-control">
+              <InputLabel htmlFor="my-input">Post Title</InputLabel>
+              <Input
+                aria-describedby="my-helper-text"
+                id="add-post-input"
+                onChange={setPostTitle}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl id="form-control">
               <TextField
                 id="outlined-multiline-static"
                 label="Post description"
@@ -138,26 +143,27 @@ function AddPost({ setUser }) {
                 onChange={setPostDescription}
               />
             </FormControl>
-          </FormGroup>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl style={{ width: "70%" }}>
-            <InputLabel htmlFor="my-input">Post Tags</InputLabel>
-            <Input
-              aria-describedby="my-helper-text"
-              onChange={getTags}
-              className={classes.input}
-              inputRef={tagInput}
-            />
-          </FormControl>
-          <Button
-            style={{ width: "30%", fontSize: "10px", marginLeft: 0 }}
-            onClick={setTags}
-            variant="contained"
-            color="primary"
-          >
-            Add Tag
-          </Button>
+          </Grid>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl style={{ width: "70%" }} id="form-control">
+              <InputLabel htmlFor="my-input">Post Tags</InputLabel>
+              <Input
+                id="add-post-input"
+                aria-describedby="my-helper-text"
+                onChange={getTags}
+                className={classes.input}
+                inputRef={tagInput}
+              />
+            </FormControl>
+            <Button
+              style={{ width: "30%", fontSize: "10px", marginLeft: 0 }}
+              onClick={setTags}
+              variant="contained"
+              color="primary"
+            >
+              Add Tag
+            </Button>
+          </Grid>
         </Grid>
         <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
 

@@ -1,7 +1,7 @@
 import { Switch } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
-const AntSwitch = withStyles(theme => ({
+const AntSwitch = withStyles((theme) => ({
   root: {
     width: 28,
     height: 16,

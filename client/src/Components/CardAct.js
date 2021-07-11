@@ -45,7 +45,7 @@ function CardAct({ post }) {
     getAVGRateData();
   }, []);
 
-  const setPostRate = async rate => {
+  const setPostRate = async (rate) => {
     const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
       postId: post._id,
       userName,
@@ -107,7 +107,7 @@ function CardAct({ post }) {
           {/* //*Only private posts can edited */}
           {!post.private ? (
             <>
-              <Typography component="legend">AVG Rate:</Typography>
+              <Typography component="legend">Rating:</Typography>
               <Rating
                 name="read-only"
                 value={rateValue}

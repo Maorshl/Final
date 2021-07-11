@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   container: {
-    width: "fit-content",
+    width: "50%",
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
   },
   inputContainer: {
+    width: "100%",
     padding: "1rem",
     display: "flex",
     flexDirection: "row",
