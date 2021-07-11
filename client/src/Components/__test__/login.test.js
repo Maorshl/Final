@@ -6,7 +6,7 @@ describe("Frontend test", () => {
   test("Should login", async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    await page.goto("http://localhost:8080");
+    await page.goto("http://localhost:3000");
     await page.click("#username");
     await page.type("#username", "GilMaor");
     await page.click("#password");
