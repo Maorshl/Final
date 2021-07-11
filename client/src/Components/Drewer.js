@@ -10,6 +10,7 @@ import {
   ListItemText,
   IconButton,
 } from "@material-ui/core";
+import BookmarkOutlinedIcon from "@material-ui/icons/BookmarkOutlined";
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import AddIcon from "@material-ui/icons/Add";
@@ -26,7 +27,7 @@ export default function TemporaryDrawer() {
     right: false,
   });
 
-  const toggleDrawer = (anchor, open) => event => {
+  const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -37,7 +38,7 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = anchor => (
+  const list = (anchor) => (
     <div
       className={clsx(classes.listDrewer, {
         [classes.fullListDrewer]: anchor === "top" || anchor === "bottom",
@@ -61,7 +62,7 @@ export default function TemporaryDrawer() {
         </ListItem>
         <ListItem button component="a" href="/savedposts/#!">
           <ListItemIcon>
-            <FavoriteIcon />
+            <BookmarkOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Saved Posts" />
         </ListItem>
@@ -80,7 +81,7 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      {["left"].map(anchor => (
+      {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
             <IconButton
