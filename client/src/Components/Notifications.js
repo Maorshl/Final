@@ -14,7 +14,7 @@ function Notifications({ notification }) {
         </Link>
         <ListItemText
           primary={
-            notification.post.title.length > 10
+            notification.post.title && notification.post.title.length > 10
               ? notification.post.title.slice(0, 10) + "..."
               : notification.post.title
           }
