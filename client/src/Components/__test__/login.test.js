@@ -6,7 +6,7 @@ describe("Frontend test", () => {
   test("Should login", async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    await page.goto("http://localhost:3000");
+    await page.goto("http://localhost:8080");
     await page.click("#username");
     await page.type("#username", "GilMaor");
     await page.click("#password");
@@ -21,7 +21,8 @@ describe("Frontend test", () => {
   });
 
   test("Should take to AddPost page", async () => {
-    await page.click(".makeStyles-rootFloating-14");
+    await page.waitForSelector("#add-button");
+    await page.click("#add-button");
     await page.waitForSelector("h4.MuiTypography-h4");
     const heading1 = await page.$eval(
       "h4.MuiTypography-h4",
@@ -31,6 +32,7 @@ describe("Frontend test", () => {
   });
 
   test("Should take to My posts page", async () => {
+    await page.waitForSelector("svg.MuiSvgIcon-root");
     await page.click("svg.MuiSvgIcon-root");
     const [button] = await page.$x("//a[contains(., 'My Posts')]");
     if (button) {
@@ -45,6 +47,7 @@ describe("Frontend test", () => {
   });
 
   test("Should logout", async () => {
+    await page.waitForSelector("#logoutButton");
     await page.click("#logoutButton");
     await page.waitForSelector("h1.MuiTypography-h5");
     const heading1 = await page.$eval(

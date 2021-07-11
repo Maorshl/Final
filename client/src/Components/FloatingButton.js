@@ -9,7 +9,7 @@ export default function FloatingActionButtons() {
   const classes = useStyles();
 
   return (
-    <Link href="/addPost">
+    <Link href="/addPost" id="add-button">
       <div className={classes.rootFloating}>
         <Fab color="primary" aria-label="add">
           <AddIcon />

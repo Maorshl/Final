@@ -17,6 +17,7 @@ import {
   Typography,
   FormGroup,
 } from "@material-ui/core";
+import xss from "xss";
 
 function AddPost({ setUser }) {
   const tagInput = useRef();
@@ -50,7 +51,7 @@ function AddPost({ setUser }) {
   };
 
   //* Only if the URL is valid, the user can submit the post.
-  const setPostUrl = event => {
+  const setPostUrl = (event) => {
     if (validator.isURL(event.target.value)) {
       setButtonColor("primary");
       setIsValidUrl(true);
@@ -60,26 +61,27 @@ function AddPost({ setUser }) {
       setIsValidUrl(false);
     }
   };
-  const setPostTitle = event => {
-    setTitle(event.target.value);
+  const setPostTitle = (event) => {
+    const safeInput = xss(event.target.value);
+    setTitle(safeInput);
   };
-  const setPostDescription = event => {
-    setDescription(event.target.value);
+  const setPostDescription = (event) => {
+    const safeInput = xss(event.target.value);
+    setDescription(safeInput);
   };
-  const getTags = event => {
+  const getTags = (event) => {
     //* This function get the value of the input, set it as variable of tag with useState.
     //* Make each tag capital letter
     function capitalizeFirstLetter() {
-      return (
-        event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
-      );
+      const safeInput = xss(event.target.value);
+      return safeInput.charAt(0).toUpperCase() + safeInput.slice(1);
     }
     setTag(capitalizeFirstLetter());
   };
   const setTags = () => {
     //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates tags.
     if (tagInput.current.value === "") return;
-    if (postTags.find(element => element === tag)) {
+    if (postTags.find((element) => element === tag)) {
       tagInput.current.value = "";
       tagInput.current.focus();
       return;
@@ -100,33 +102,38 @@ function AddPost({ setUser }) {
         <Typography variant="h4" color="primary">
           Add Post
         </Typography>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl>
-            <InputLabel htmlFor="my-input">Post URL</InputLabel>
-            <Input
-              aria-describedby="my-helper-text"
-              onChange={setPostUrl}
-              className={classes.input}
-              type="url"
-              required="true"
-              name="url"
-            />
-            {!isValidUrl && (
-              <Typography variant="h6" color="primary">
-                Please enter valid URL
-              </Typography>
-            )}
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl>
-            <InputLabel htmlFor="my-input">Post Title</InputLabel>
-            <Input aria-describedby="my-helper-text" onChange={setPostTitle} />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormGroup>
-            <FormControl>
+        <Grid container spacing={3}>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl id="form-control">
+              <InputLabel htmlFor="my-input">Post URL</InputLabel>
+              <Input
+                id="add-post-input"
+                aria-describedby="my-helper-text"
+                onChange={setPostUrl}
+                className={classes.input}
+                type="url"
+                required="true"
+                name="url"
+              />
+              {!isValidUrl && (
+                <Typography variant="h6" color="primary">
+                  Please enter valid URL
+                </Typography>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl id="form-control">
+              <InputLabel htmlFor="my-input">Post Title</InputLabel>
+              <Input
+                aria-describedby="my-helper-text"
+                id="add-post-input"
+                onChange={setPostTitle}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl id="form-control">
               <TextField
                 id="outlined-multiline-static"
                 label="Post description"
@@ -136,26 +143,27 @@ function AddPost({ setUser }) {
                 onChange={setPostDescription}
               />
             </FormControl>
-          </FormGroup>
-        </Grid>
-        <Grid item xs={12} className={classes.inputContainer}>
-          <FormControl style={{ width: "70%" }}>
-            <InputLabel htmlFor="my-input">Post Tags</InputLabel>
-            <Input
-              aria-describedby="my-helper-text"
-              onChange={getTags}
-              className={classes.input}
-              inputRef={tagInput}
-            />
-          </FormControl>
-          <Button
-            style={{ width: "30%", fontSize: "10px", marginLeft: 0 }}
-            onClick={setTags}
-            variant="contained"
-            color="primary"
-          >
-            Add Tag
-          </Button>
+          </Grid>
+          <Grid item xs={12} className={classes.inputContainer}>
+            <FormControl style={{ width: "70%" }} id="form-control">
+              <InputLabel htmlFor="my-input">Post Tags</InputLabel>
+              <Input
+                id="add-post-input"
+                aria-describedby="my-helper-text"
+                onChange={getTags}
+                className={classes.input}
+                inputRef={tagInput}
+              />
+            </FormControl>
+            <Button
+              style={{ width: "30%", fontSize: "10px", marginLeft: 0 }}
+              onClick={setTags}
+              variant="contained"
+              color="primary"
+            >
+              Add Tag
+            </Button>
+          </Grid>
         </Grid>
         <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
 

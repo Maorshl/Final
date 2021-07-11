@@ -68,6 +68,12 @@ body {
 .App-link {
   color: #61dafb;
 }
+#add-post-input {
+  width: 100%;
+}
+#form-control {
+  width: 100%;
+}
 .search {
   display: inline-flex;
   margin-top: 10px;

@@ -36,9 +36,14 @@ jobs:
       - name: Install Client dependencies
         run: npm i
         working-directory: ./client
-      - name: Run Client
-        run: npm run server & npx wait-on http://localhost:3000
+      - name: Run build
+        run: npm run build
+        env:
+          CI: false
         working-directory: ./client
+      - name: Start server
+        run: node app.js & npx wait-on http://localhost:8080
+        working-directory: ./Backend
       - name: Running tests
         run: npm run test
         working-directory: ./client
