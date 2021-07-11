@@ -8,12 +8,14 @@ import Box from "@material-ui/core/Box";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import useStyles from "../Style";
 import { CardActions, IconButton } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Link, Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-
+import BookmarkBorderOutlinedIcon from "@material-ui/icons/BookmarkBorderOutlined";
+import BookmarkOutlinedIcon from "@material-ui/icons/BookmarkOutlined";
 const userName = Cookies.get("userName");
+
+//* This component is used to handle all of postCard actions.
+
 function CardAct({ post }) {
   const classes = useStyles();
   const [isRated, setIsRated] = useState(false);
@@ -80,9 +82,9 @@ function CardAct({ post }) {
         )}
         <IconButton aria-label="add to favorites">
           {liked ? (
-            <FavoriteIcon onClick={() => unlikeThePost(post._id)} />
+            <BookmarkOutlinedIcon onClick={() => unlikeThePost(post._id)} />
           ) : (
-            <FavoriteBorderIcon onClick={() => likeThePost(post._id)} />
+            <BookmarkBorderOutlinedIcon onClick={() => likeThePost(post._id)} />
           )}
         </IconButton>
 
@@ -101,7 +103,7 @@ function CardAct({ post }) {
           {/* //*Only private posts can edited */}
           {!post.private ? (
             <>
-              <Typography component="legend">AVG Rate:</Typography>
+              <Typography component="legend">Average Rate:</Typography>
               <Rating
                 name="read-only"
                 value={rateValue}
