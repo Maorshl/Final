@@ -33,11 +33,13 @@ function PostsDisplay() {
     }
     //* Every time that clicked on search,
     //* page num will reset to prevent from incorrect post time to be part of a query.
+    //* After search the => reset the posts array.
+    setPosts([]);
     setPageNum(1);
     getData();
   };
 
-  const getData = async (scrolled) => {
+  const getData = async scrolled => {
     setLoading(true);
     const { data } = await axios.get(
       `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
@@ -51,6 +53,7 @@ function PostsDisplay() {
       setMorePosts(false);
       return;
     }
+    //* The time is the last object in the array, after i received him i delete it.
     setLatestPostTime(data[data.length - 1]);
     data.splice(data.length - 1, 1);
     if (pageNum === 1) {
@@ -66,7 +69,7 @@ function PostsDisplay() {
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
-      setPageNum((prevPageNum) => prevPageNum + 1);
+      setPageNum(prevPageNum => prevPageNum + 1);
   };
 
   return (
@@ -92,10 +95,9 @@ function PostsDisplay() {
           setShowRefresh={setShowRefresh}
         />
         <div className={classes.postsPostDisplay} ref={postsDiv}>
-          {posts &&
-            posts.map((post, i) => {
-              return <PostCard post={post} key={i} />;
-            })}
+          {posts.map((post, i) => {
+            return <PostCard post={post} key={i} />;
+          })}
           {loading && (
             <div className={classes.spinnerPostDisplay}>
               <CircularProgress color="secondary" />
