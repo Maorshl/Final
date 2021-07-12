@@ -100,7 +100,7 @@ function AddPost({ setUser }) {
     <>
       <AppBar setUser={setUser} />
       <div className={classes.container}>
-        <Typography variant="h4" color="primary">
+        <Typography variant="h4" color="primary" data-testId="AddPost">
           Add Post
         </Typography>
         <Grid container spacing={3}>
