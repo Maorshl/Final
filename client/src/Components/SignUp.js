@@ -54,12 +54,9 @@ export default function SignUp() {
   const createUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/create",
-        {
-          user: { userName, password, email },
-        }
-      );
+      const response = await axios.post("http://localhost:8080/user/create", {
+        user: { userName, password, email },
+      });
       if (response.status === 201) {
         setRedirect(true);
       } else {
