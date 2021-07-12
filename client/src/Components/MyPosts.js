@@ -19,7 +19,7 @@ function MyPosts({ setUser }) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = (pageNumber) => {
+  const paginate = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
@@ -30,6 +30,8 @@ function MyPosts({ setUser }) {
       setSearchFilter("");
       setShowRefresh(false);
     }
+    //* After search the => reset the posts array.
+    setPosts([]);
     getData();
   };
   async function getData() {
