@@ -8,7 +8,7 @@ function CardTags({ tags }) {
         tags.map((tag, i) => {
           return (
             <Link href={`/${tag}/#!`} key={i}>
-              <Chip label={tag} />
+              <Chip label={tag} data-testId={`postTag${i}`} />
             </Link>
           );
         })}
