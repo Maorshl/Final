@@ -30,7 +30,11 @@ async function getPosts(req, res) {
     }
     if (posts.length === 0) return res.send("No more posts");
     const lastPostTime = new Date(posts[posts.length - 1].createdAt);
-    post = shuffleArray(posts);
+    console.log("before", posts);
+    posts = posts.sort((a, b) => {
+      return b.rateAVG - a.rateAVG;
+    });
+    console.log("after", posts);
     posts.push(lastPostTime);
     return res.json(posts);
   } catch (error) {
@@ -38,14 +42,5 @@ async function getPosts(req, res) {
     return res.status(500).send("error");
   }
 }
-
-const shuffleArray = array => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-};
 
 module.exports = getPosts;
