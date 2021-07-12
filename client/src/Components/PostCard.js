@@ -33,10 +33,15 @@ export default function PostCard({ post }) {
         subheader={new Date(post.createdAt).toLocaleDateString()}
       />
       <CardContent>
-        <Typography variant="body2" component="p">
+        <Typography variant="body2" component="p" data-testId="postHead">
           {post.head && post.head}
         </Typography>
-        <Typography variant="body3" color="textSecondary" component="p">
+        <Typography
+          variant="body3"
+          color="textSecondary"
+          component="p"
+          data-testId="postDescription"
+        >
           {post.description}
         </Typography>
       </CardContent>
