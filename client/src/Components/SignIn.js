@@ -51,13 +51,10 @@ export default function SignInSide({ setUser }) {
 
   const login = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/login",
-      {
-        userName,
-        password,
-      }
-    );
+    const response = await axios.post("http://localhost:8080/user/login", {
+      userName,
+      password,
+    });
     if (response.status === 200) {
       let expires = null;
       if (rememberMe) {
