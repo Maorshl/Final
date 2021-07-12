@@ -40,7 +40,7 @@ function PostsDisplay() {
   const getData = async (scrolled) => {
     setLoading(true);
     const { data } = await axios.get(
-      `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
+      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     if (data === "No more posts") {
       //* Preventing from posts disappear when search and scrolling down.

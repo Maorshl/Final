@@ -31,14 +31,14 @@ function CardAct({ post }) {
     //* To know if user rated this post
     const getRaters = async () => {
       const { data } = await axios.get(
-        `http://localhost:8080/rating/isRated?id=${post._id}&userName=${userName}`
+        `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/rating/isRated?id=${post._id}&userName=${userName}`
       );
       setIsRated(data);
     };
     //* Set each post his AVG rate
     const getAVGRateData = async () => {
       const { data } = await axios.get(
-        `http://localhost:8080/rating/getRate?id=${post._id}`
+        `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/rating/getRate?id=${post._id}`
       );
       setRateValue(data.AVG);
     };
@@ -47,11 +47,14 @@ function CardAct({ post }) {
   }, []);
 
   const setPostRate = async (rate) => {
-    const { data } = await axios.post("http://localhost:8080/rating/ratePost", {
-      postId: post._id,
-      userName,
-      rate,
-    });
+    const { data } = await axios.post(
+      "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/rating/ratePost",
+      {
+        postId: post._id,
+        userName,
+        rate,
+      }
+    );
     setIsRated(true);
     setRateValue(data.averageRate);
   };
@@ -103,7 +106,6 @@ function CardAct({ post }) {
           {/* //*Only private posts can edited */}
           {!post.private ? (
             <>
-
               <Typography component="legend">Rating:</Typography>
 
               <Rating
@@ -127,15 +129,21 @@ function CardAct({ post }) {
   );
 
   async function likeThePost(postId) {
-    await axios.post("http://localhost:8080/user/save", { userName, postId });
+    await axios.post(
+      "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/save",
+      { userName, postId }
+    );
     setLiked(true);
     setLikesNumber(likesNumber + 1);
   }
   async function unlikeThePost(postId) {
-    await axios.patch("http://localhost:8080/user/removeFromSaved", {
-      userName,
-      postId,
-    });
+    await axios.patch(
+      "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/removeFromSaved",
+      {
+        userName,
+        postId,
+      }
+    );
     setLiked(false);
     setLikesNumber(likesNumber - 1);
   }

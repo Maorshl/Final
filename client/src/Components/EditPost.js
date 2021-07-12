@@ -25,7 +25,7 @@ function EditPost({ setUser }) {
   const [postTags, setPostTags] = useState([]);
   const [tag, setTag] = useState("");
 
-  const getTags = event => {
+  const getTags = (event) => {
     //* This function get the value of the input, set it as variable of tag with useState.
     //* Make each tag capital letter
     function capitalizeFirstLetter() {
@@ -38,7 +38,7 @@ function EditPost({ setUser }) {
   const setTags = () => {
     //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates tags.
     if (tagInput.current.value === "") return;
-    if (postTags.find(element => element === tag)) {
+    if (postTags.find((element) => element === tag)) {
       tagInput.current.value = "";
       tagInput.current.focus();
       return;
@@ -48,10 +48,10 @@ function EditPost({ setUser }) {
     tagInput.current.focus();
   };
 
-  const setPostTitle = event => {
+  const setPostTitle = (event) => {
     setTitle(event.target.value);
   };
-  const setPostDescription = event => {
+  const setPostDescription = (event) => {
     setDescription(event.target.value);
   };
   async function getData() {
@@ -62,12 +62,15 @@ function EditPost({ setUser }) {
   }
 
   const savePost = async () => {
-    const { data } = await axios.patch("http://localhost:8080/post/edit", {
-      id,
-      title: postTitle,
-      description: postDescription,
-      tags: postTags,
-    });
+    const { data } = await axios.patch(
+      "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/edit",
+      {
+        id,
+        title: postTitle,
+        description: postDescription,
+        tags: postTags,
+      }
+    );
     if (data === "Updated") return (window.location = "/myPosts/#!");
   };
 
@@ -146,7 +149,7 @@ function EditPost({ setUser }) {
   );
   async function getPost() {
     const { data } = await axios.get(
-      `http://localhost:8080/post/getonepostbyid?id=${id}`
+      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/getonepostbyid?id=${id}`
     );
     return data;
   }

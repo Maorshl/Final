@@ -22,7 +22,7 @@ function MyPosts({ setUser }) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = pageNumber => {
+  const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
@@ -62,7 +62,7 @@ function MyPosts({ setUser }) {
         setShowRefresh={setShowRefresh}
       />
       {correctPosts &&
-        correctPosts.map(post => {
+        correctPosts.map((post) => {
           return <PostCard post={post} />;
         })}
       <Pagination
@@ -75,7 +75,7 @@ function MyPosts({ setUser }) {
   );
   async function getPostsByTag(searchFilter, searchText) {
     const { data } = await axios.get(
-      `http://localhost:8080/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
+      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     return data;
   }

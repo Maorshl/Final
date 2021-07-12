@@ -46,9 +46,12 @@ axios.interceptors.request.use(async function (config) {
 });
 async function getNewToken(refToken) {
   try {
-    const token = await axios.post("http://localhost:8080/user/refreshToken", {
-      refToken: refToken,
-    });
+    const token = await axios.post(
+      "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/refreshToken",
+      {
+        refToken: refToken,
+      }
+    );
     return token.data;
   } catch (error) {
     console.log(error);

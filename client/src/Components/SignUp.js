@@ -51,12 +51,15 @@ export default function SignUp() {
   const [redirect, setRedirect] = useState(false);
   const [tryAgain, setTryAgain] = useState(false);
 
-  const createUser = async e => {
+  const createUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/user/create", {
-        user: { userName, password, email },
-      });
+      const response = await axios.post(
+        "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/create",
+        {
+          user: { userName, password, email },
+        }
+      );
       if (response.status === 201) {
         setRedirect(true);
       } else {
@@ -83,7 +86,7 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                onChange={e => {
+                onChange={(e) => {
                   setUsername(e.target.value);
                 }}
                 autoComplete="Uname"
@@ -98,7 +101,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={e => {
+                onChange={(e) => {
                   setEmail(e.target.value);
                 }}
                 variant="outlined"
@@ -112,7 +115,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={e => {
+                onChange={(e) => {
                   setPassword(e.target.value);
                 }}
                 variant="outlined"

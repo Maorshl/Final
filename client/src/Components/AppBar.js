@@ -28,11 +28,14 @@ export default function MenuAppBar({ setUser }) {
   const open = Boolean(anchorEl);
 
   //* When user log out, delete all the Cookies and tokens at the DB
-  const logout = async e => {
+  const logout = async (e) => {
     await axios
-      .post("http://localhost:8080/user/logout", {
-        refreshToken: Cookies.get("refreshToken"),
-      })
+      .post(
+        "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/logout",
+        {
+          refreshToken: Cookies.get("refreshToken"),
+        }
+      )
       .then(() => {
         Cookies.remove("token");
         Cookies.remove("refreshToken");
@@ -42,7 +45,7 @@ export default function MenuAppBar({ setUser }) {
       });
   };
 
-  const handleMenu = event => {
+  const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -51,11 +54,11 @@ export default function MenuAppBar({ setUser }) {
   };
 
   //* When the use click at the notifications button, it is updated at the DB that all is read.
-  const handleClickNotification = event => {
+  const handleClickNotification = (event) => {
     setNotificationsEI(event.currentTarget);
     axios
       .patch(
-        `http://localhost:8080/user/updateNotification?userName=${userName}`
+        `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/updateNotification?userName=${userName}`
       )
       .then(() => setNotificationNum(0));
   };
@@ -66,10 +69,10 @@ export default function MenuAppBar({ setUser }) {
 
   //* When the page is up, it ask for all notification, and give the number of unread as the notifications number.
   useEffect(() => {
-    getNotifications().then(result => {
+    getNotifications().then((result) => {
       setUnreadNotifications(result);
 
-      const unRead = result.filter(notification => !notification.read);
+      const unRead = result.filter((notification) => !notification.read);
       setNotificationNum(unRead.length);
     });
   }, []);
@@ -147,7 +150,7 @@ export default function MenuAppBar({ setUser }) {
 
   async function getNotifications() {
     const { data } = await axios.get(
-      `http://localhost:8080/user/getNotifications?userName=${userName}`
+      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/getNotifications?userName=${userName}`
     );
     return data;
   }

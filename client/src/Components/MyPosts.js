@@ -19,7 +19,7 @@ function MyPosts({ setUser }) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = pageNumber => {
+  const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
@@ -72,7 +72,7 @@ function MyPosts({ setUser }) {
 async function getPrivatePosts(searchFilter, searchText) {
   const userName = Cookies.get("userName");
   const { data } = await axios.get(
-    `http://localhost:8080/post/private?userName=${userName}&searchFilter=${searchFilter}&searchText=${searchText}`
+    `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/private?userName=${userName}&searchFilter=${searchFilter}&searchText=${searchText}`
   );
   return data;
 }
