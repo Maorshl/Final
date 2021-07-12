@@ -32,7 +32,7 @@ function MyPosts({ setUser }) {
 
   async function getPost() {
     const { data } = await axios.get(
-      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/getonepostbyid?id=${id}`
+      `http://localhost:8080/post/getonepostbyid?id=${id}`
     );
     return data;
   }
