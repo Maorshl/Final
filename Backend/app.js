@@ -11,13 +11,13 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "./build")));
 
 app.use("/user", user);
 app.use("/post", post);
 app.use("/rating", rating);
 app.get("*", (req, res) => {
-  return res.sendFile(path.join(__dirname + "/../client/build/index.html"));
+  return res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 app.listen(PORT, () => {
