@@ -62,15 +62,12 @@ function EditPost({ setUser }) {
   }
 
   const savePost = async () => {
-    const { data } = await axios.patch(
-      "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/edit",
-      {
-        id,
-        title: postTitle,
-        description: postDescription,
-        tags: postTags,
-      }
-    );
+    const { data } = await axios.patch("http://localhost:8080/post/edit", {
+      id,
+      title: postTitle,
+      description: postDescription,
+      tags: postTags,
+    });
     if (data === "Updated") return (window.location = "/myPosts/#!");
   };
 
@@ -149,7 +146,7 @@ function EditPost({ setUser }) {
   );
   async function getPost() {
     const { data } = await axios.get(
-      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/getonepostbyid?id=${id}`
+      `http://localhost:8080/post/getonepostbyid?id=${id}`
     );
     return data;
   }
