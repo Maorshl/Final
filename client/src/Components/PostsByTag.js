@@ -75,7 +75,7 @@ function MyPosts({ setUser }) {
   );
   async function getPostsByTag(searchFilter, searchText) {
     const { data } = await axios.get(
-      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
+      `http://localhost:8080/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     return data;
   }
