@@ -20,7 +20,7 @@ function MyPosts({ setUser }) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = (pageNumber) => {
+  const paginate = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
@@ -31,6 +31,8 @@ function MyPosts({ setUser }) {
       setSearchFilter("");
       setShowRefresh(false);
     }
+    //* After search the => reset the posts array.
+    setPosts([]);
     getData();
   };
 
@@ -59,7 +61,7 @@ function MyPosts({ setUser }) {
         setShowRefresh={setShowRefresh}
       />
       {correctPosts &&
-        correctPosts.map((post) => {
+        correctPosts.map(post => {
           return <PostCard post={post} />;
         })}
       <Pagination
