@@ -30,12 +30,9 @@ export default function MenuAppBar({ setUser }) {
   //* When user log out, delete all the Cookies and tokens at the DB
   const logout = async (e) => {
     await axios
-      .post(
-        "http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/logout",
-        {
-          refreshToken: Cookies.get("refreshToken"),
-        }
-      )
+      .post("http://localhost:8080/user/logout", {
+        refreshToken: Cookies.get("refreshToken"),
+      })
       .then(() => {
         Cookies.remove("token");
         Cookies.remove("refreshToken");
@@ -58,7 +55,7 @@ export default function MenuAppBar({ setUser }) {
     setNotificationsEI(event.currentTarget);
     axios
       .patch(
-        `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/updateNotification?userName=${userName}`
+        `http://localhost:8080/user/updateNotification?userName=${userName}`
       )
       .then(() => setNotificationNum(0));
   };
@@ -150,7 +147,7 @@ export default function MenuAppBar({ setUser }) {
 
   async function getNotifications() {
     const { data } = await axios.get(
-      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/user/getNotifications?userName=${userName}`
+      `http://localhost:8080/user/getNotifications?userName=${userName}`
     );
     return data;
   }
