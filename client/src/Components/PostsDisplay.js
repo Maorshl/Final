@@ -39,10 +39,10 @@ function PostsDisplay() {
     getData();
   };
 
-  const getData = async scrolled => {
+  const getData = async (scrolled) => {
     setLoading(true);
     const { data } = await axios.get(
-      `http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
+      `http://localhost:8080/post/getPosts?pageNum=${pageNum}&latestPost=${latestPostTime}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     if (data === "No more posts") {
       //* Preventing from posts disappear when search and scrolling down.
@@ -69,7 +69,7 @@ function PostsDisplay() {
 
   window.onscroll = () => {
     if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
-      setPageNum(prevPageNum => prevPageNum + 1);
+      setPageNum((prevPageNum) => prevPageNum + 1);
   };
 
   return (
