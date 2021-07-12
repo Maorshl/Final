@@ -27,3 +27,6 @@ In addition you can follow tag, and receive notifications when someone else publ
 ## Credits
 
 ## Usage
+## Take a look! 
+The app is hosted at AWS at the add:
+http://ec2-3-80-252-156.compute-1.amazonaws.com:8080/
