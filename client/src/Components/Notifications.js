@@ -6,6 +6,7 @@ import LinkIcon from "@material-ui/icons/Link";
 function Notifications({ notification }) {
   return (
     <div
+      data-testId="mainNotificationDiv"
       className={notification.read ? "notificationRead" : "notificationUnread"}
     >
       <StyledMenuItem>

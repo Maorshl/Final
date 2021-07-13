@@ -76,7 +76,7 @@ export default function SignUp() {
         <Avatar className={classes.avatarSignUp}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" data-testId="SignUpHeader">
           Sign up
         </Typography>
         <form className={classes.formSignUp} noValidate>
