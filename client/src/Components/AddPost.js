@@ -5,7 +5,6 @@ import validator from "validator";
 import Tags from "./Tags";
 import AppBar from "./AppBar";
 import useStyles from "../Style";
-import AntSwitch from "../Style/AntSwitch";
 import {
   Grid,
   Input,
