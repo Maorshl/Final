@@ -49,6 +49,6 @@ In addition you can follow tag, and receive notifications when someone else publ
 
 ### The app is hosted on AWS try it out:
 
-## [Smart-Library](http://app.smartlibrary.link:8080)
+## [Smart-Library](http://app.smartlibrary.link)
 
 <img src="./client/public/ReadMeFiles/ThankYou.gif" alt="drawing" width="200" height="200"/>
