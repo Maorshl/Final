@@ -51,7 +51,7 @@ export default function SignInSide({ setUser }) {
 
   const login = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost:8080/user/login", {
+    const response = await axios.post("http://localhost/user/login", {
       userName,
       password,
     });

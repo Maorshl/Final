@@ -34,7 +34,7 @@ function AddPost({ setUser }) {
 
   const addPost = async () => {
     if (!isValidUrl) return;
-    const response = await axios.post("http://localhost:8080/post/create", {
+    const response = await axios.post("http://localhost/post/create", {
       title: postTitle,
       url: postUrl,
       description: postDescription,

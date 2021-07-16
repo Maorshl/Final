@@ -77,7 +77,7 @@ function MyPosts({ setUser }) {
 async function getPrivatePosts(searchFilter, searchText) {
   const userName = Cookies.get("userName");
   const { data } = await axios.get(
-    `http://localhost:8080/post/savedposts?userName=${userName}&searchFilter=${searchFilter}&searchText=${searchText}`,
+    `http://localhost/post/savedposts?userName=${userName}&searchFilter=${searchFilter}&searchText=${searchText}`,
     {}
   );
   return data;

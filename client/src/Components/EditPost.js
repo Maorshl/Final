@@ -62,7 +62,7 @@ function EditPost({ setUser }) {
   }
 
   const savePost = async () => {
-    const { data } = await axios.patch("http://localhost:8080/post/edit", {
+    const { data } = await axios.patch("http://localhost/post/edit", {
       id,
       title: postTitle,
       description: postDescription,
@@ -146,7 +146,7 @@ function EditPost({ setUser }) {
   );
   async function getPost() {
     const { data } = await axios.get(
-      `http://localhost:8080/post/getonepostbyid?id=${id}`
+      `http://localhost/post/getonepostbyid?id=${id}`
     );
     return data;
   }

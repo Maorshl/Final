@@ -46,7 +46,7 @@ axios.interceptors.request.use(async function (config) {
 });
 async function getNewToken(refToken) {
   try {
-    const token = await axios.post("http://localhost:8080/user/refreshToken", {
+    const token = await axios.post("http://localhost/user/refreshToken", {
       refToken: refToken,
     });
     return token.data;

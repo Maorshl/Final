@@ -54,7 +54,7 @@ export default function SignUp() {
   const createUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/user/create", {
+      const response = await axios.post("http://localhost/user/create", {
         user: { userName, password, email },
       });
       if (response.status === 201) {
