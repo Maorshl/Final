@@ -59,8 +59,8 @@ In addition you can follow a tag, and receive notifications when someone else pu
 
 ## Take a look!
 
-### The app is hosted on AWS try it out:
+### The app is hosted try it out:
 
-## [Smart-Library](http://app.smartlibrary.link)
+## [Smart-Library](https://smart-library-maor-gil.herokuapp.com/)
 
 <img src="./client/public/ReadMeFiles/ThankYou.gif" alt="drawing" width="200" height="200"/>
