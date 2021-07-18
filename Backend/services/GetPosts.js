@@ -30,7 +30,6 @@ async function getPosts(req, res) {
     }
     if (posts.length === 0) return res.send("No more posts");
     const lastPostTime = new Date(posts[posts.length - 1].createdAt);
-    console.log("before", posts);
     posts = posts.sort((a, b) => {
       return b.rateAVG - a.rateAVG;
     });
