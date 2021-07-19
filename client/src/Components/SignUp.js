@@ -54,9 +54,12 @@ export default function SignUp() {
   const createUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost/user/create", {
-        user: { userName, password, email },
-      });
+      const response = await axios.post(
+        "http://app.smartlibrary.link:8080/user/create",
+        {
+          user: { userName, password, email },
+        }
+      );
       if (response.status === 201) {
         setRedirect(true);
       } else {
