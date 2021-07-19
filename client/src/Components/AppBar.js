@@ -30,7 +30,7 @@ export default function MenuAppBar({ setUser }) {
   //* When user log out, delete all the Cookies and tokens at the DB
   const logout = async (e) => {
     await axios
-      .post("http://localhost/user/logout", {
+      .post("http://app.smartlibrary.link:8080/user/logout", {
         refreshToken: Cookies.get("refreshToken"),
       })
       .then(() => {
@@ -54,7 +54,9 @@ export default function MenuAppBar({ setUser }) {
   const handleClickNotification = (event) => {
     setNotificationsEI(event.currentTarget);
     axios
-      .patch(`http://localhost/user/updateNotification?userName=${userName}`)
+      .patch(
+        `http://app.smartlibrary.link:8080/user/updateNotification?userName=${userName}`
+      )
       .then(() => setNotificationNum(0));
   };
 
@@ -145,7 +147,7 @@ export default function MenuAppBar({ setUser }) {
 
   async function getNotifications() {
     const { data } = await axios.get(
-      `http://localhost/user/getNotifications?userName=${userName}`
+      `http://app.smartlibrary.link:8080/user/getNotifications?userName=${userName}`
     );
     return data;
   }

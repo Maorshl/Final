@@ -62,12 +62,15 @@ function EditPost({ setUser }) {
   }
 
   const savePost = async () => {
-    const { data } = await axios.patch("http://localhost/post/edit", {
-      id,
-      title: postTitle,
-      description: postDescription,
-      tags: postTags,
-    });
+    const { data } = await axios.patch(
+      "http://app.smartlibrary.link:8080/post/edit",
+      {
+        id,
+        title: postTitle,
+        description: postDescription,
+        tags: postTags,
+      }
+    );
     if (data === "Updated") return (window.location = "/myPosts/#!");
   };
 
@@ -146,7 +149,7 @@ function EditPost({ setUser }) {
   );
   async function getPost() {
     const { data } = await axios.get(
-      `http://localhost/post/getonepostbyid?id=${id}`
+      `http://app.smartlibrary.link:8080/post/getonepostbyid?id=${id}`
     );
     return data;
   }
