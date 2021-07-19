@@ -34,18 +34,21 @@ function AddPost({ setUser }) {
 
   const addPost = async () => {
     if (!isValidUrl) return;
-    const response = await axios.post("http://localhost/post/create", {
-      title: postTitle,
-      url: postUrl,
-      description: postDescription,
-      private: postPrivate,
-      createdAt: new Date(),
-      author: postAuthor,
-      tags: postTags,
-      rating: 0,
-      rateAVG: 0,
-      raters: [],
-    });
+    const response = await axios.post(
+      "http://app.smartlibrary.link:8080/post/create",
+      {
+        title: postTitle,
+        url: postUrl,
+        description: postDescription,
+        private: postPrivate,
+        createdAt: new Date(),
+        author: postAuthor,
+        tags: postTags,
+        rating: 0,
+        rateAVG: 0,
+        raters: [],
+      }
+    );
     //* When the server is done with the post request the client move back to the home page.
     if (response.status === 200) window.location = "/";
   };
