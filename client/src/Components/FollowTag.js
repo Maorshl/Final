@@ -12,12 +12,18 @@ function FollowTag({ tag }) {
 
   const follow = async () => {
     const userName = Cookies.get("userName");
-    await axios.post("http://localhost/post/follow", { userName, tag });
+    await axios.post("http://app.smartlibrary.link:8080/post/follow", {
+      userName,
+      tag,
+    });
     setFollowed(true);
   };
   const unFollow = async () => {
     const userName = Cookies.get("userName");
-    await axios.patch("http://localhost/post/unFollow", { userName, tag });
+    await axios.patch("http://app.smartlibrary.link:8080/post/unFollow", {
+      userName,
+      tag,
+    });
     setFollowed(false);
   };
 
@@ -37,7 +43,9 @@ function FollowTag({ tag }) {
 
   async function checkIfFollowed() {
     const userName = Cookies.get("userName");
-    const { data } = await axios.get(`http://localhost/post/followers/${tag}`);
+    const { data } = await axios.get(
+      `http://app.smartlibrary.link:8080/post/followers/${tag}`
+    );
     if (data.includes(userName)) {
       setFollowed(true);
     }

@@ -74,7 +74,7 @@ function MyPosts({ setUser }) {
 async function getPrivatePosts(searchFilter, searchText) {
   const userName = Cookies.get("userName");
   const { data } = await axios.get(
-    `http://localhost/post/private?userName=${userName}&searchFilter=${searchFilter}&searchText=${searchText}`
+    `http://app.smartlibrary.link:8080/post/private?userName=${userName}&searchFilter=${searchFilter}&searchText=${searchText}`
   );
   return data;
 }
