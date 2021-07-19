@@ -32,7 +32,7 @@ function MyPosts({ setUser }) {
 
   async function getPost() {
     const { data } = await axios.get(
-      `http://localhost/post/getonepostbyid?id=${id}`
+      `http://app.smartlibrary.link:8080/post/getonepostbyid?id=${id}`
     );
     return data;
   }

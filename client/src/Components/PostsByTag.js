@@ -75,7 +75,7 @@ function MyPosts({ setUser }) {
   );
   async function getPostsByTag(searchFilter, searchText) {
     const { data } = await axios.get(
-      `http://localhost/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
+      `http://app.smartlibrary.link:8080/post/postByTag?tag=${tag}&searchFilter=${searchFilter}&searchText=${searchText}`
     );
     return data;
   }
