@@ -46,9 +46,12 @@ axios.interceptors.request.use(async function (config) {
 });
 async function getNewToken(refToken) {
   try {
-    const token = await axios.post("http://localhost/user/refreshToken", {
-      refToken: refToken,
-    });
+    const token = await axios.post(
+      "http://app.smartlibrary.link:8080/user/refreshToken",
+      {
+        refToken: refToken,
+      }
+    );
     return token.data;
   } catch (error) {
     console.log(error);
