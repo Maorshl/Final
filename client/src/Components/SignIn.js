@@ -51,10 +51,13 @@ export default function SignInSide({ setUser }) {
 
   const login = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost/user/login", {
-      userName,
-      password,
-    });
+    const response = await axios.post(
+      "http://app.smartlibrary.link:8080/user/login",
+      {
+        userName,
+        password,
+      }
+    );
     if (response.status === 200) {
       let expires = null;
       if (rememberMe) {
