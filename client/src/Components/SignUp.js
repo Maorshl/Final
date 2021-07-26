@@ -73,7 +73,7 @@ export default function SignUp() {
     return <Redirect to="/" />;
   }
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className="sign-up-page">
       <CssBaseline />
       <div className={classes.paperSignUp}>
         <Avatar className={classes.avatarSignUp}>
