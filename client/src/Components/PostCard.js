@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardTags from "./CardTags";
 import {
   Card,
@@ -11,12 +11,18 @@ import {
 import CardAct from "./CardAct";
 import useStyles from "../Style";
 import LinkIcon from "@material-ui/icons/Link";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function PostCard({ post }) {
+  useEffect(() => {
+    AOS.init({ duration: 2000 });
+  }, []);
+
   const classes = useStyles();
 
   return (
-    <Card className={classes.rootPostCard}>
+    <Card className={classes.rootPostCard} data-aos="fade-left">
       <CardHeader
         className="card-header"
         avatar={
