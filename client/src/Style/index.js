@@ -74,12 +74,14 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   rootPostCard: {
-    width: "60%",
+    width: "50%",
     margin: "auto",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.35)",
     marginTop: "1rem",
-    background: "rgb(151,167,255)",
+    background: "rgb(159,168,218)",
     background:
-      "linear-gradient(225deg, rgba(151,167,255,1) 0%, rgba(238,238,238,1) 100%)",
+      "linear-gradient(45deg, rgba(159,168,218,1) 0%, rgba(111,125,200,1) 100%)",
   },
   avatarPostCard: {
     backgroundColor: red[500],
@@ -120,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   paperSignUp: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(0),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
