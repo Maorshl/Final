@@ -68,8 +68,9 @@ function PostsDisplay() {
   //* it triggers this function and he ask for more posts.
 
   window.onscroll = () => {
-    if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight)
+    if (postsDiv.current.getBoundingClientRect().bottom <= window.innerHeight) {
       setPageNum((prevPageNum) => prevPageNum + 1);
+    }
   };
 
   return (
@@ -96,7 +97,11 @@ function PostsDisplay() {
         />
         <div className={classes.postsPostDisplay} ref={postsDiv}>
           {posts.map((post, i) => {
-            return <PostCard post={post} key={i} />;
+            return (
+              <div>
+                <PostCard post={post} key={i} />
+              </div>
+            );
           })}
           {loading && (
             <div className={classes.spinnerPostDisplay}>
@@ -109,6 +114,7 @@ function PostsDisplay() {
             </Typography>
           )}
         </div>
+        <br />
       </div>
     </>
   );
