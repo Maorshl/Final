@@ -107,7 +107,7 @@ function Search({
             label="Search post"
             multiline
             rows={1}
-            variant="outlined"
+            variant="filled"
             color="primary"
             onChange={(event) => {
               setSearchText(event.target.value);
