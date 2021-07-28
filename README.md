@@ -47,15 +47,15 @@ In addition you can follow a tag, and receive notifications when someone else pu
 
 ### After you sign in you can view other user's posts or maybe add your own
 
-![Main Page](./client/public/ReadMeFiles/Animation1.gif)
+![Main Page](./client/public/ReadMeFiles/AnimationNew1.gif)
 
 ### If you follow a tag you will get notification whenever other user post a link with that tag
 
-![Getting Notification](./client/public/ReadMeFiles/Animation2.gif)
+![Getting Notification](./client/public/ReadMeFiles/AnimationNew2.gif)
 
 ### You can save and rate other user's posts
 
-![Getting Notification](./client/public/ReadMeFiles/Animation3.gif)
+![Getting Notification](./client/public/ReadMeFiles/AnimationNew3.gif)
 
 ## Take a look!
 
