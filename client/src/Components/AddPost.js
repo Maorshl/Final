@@ -101,19 +101,19 @@ function AddPost({ setUser }) {
   return (
     <>
       <AppBar setUser={setUser} />
+      <div className={classes.headers}>
+        <Typography variant="h4" color="primary" data-testId="AddPost">
+          Add Post
+        </Typography>
+      </div>
       <div className={classes.addPost}>
         <div className={classes.container}>
-          <div className={classes.addPostHeader}>
-            <Typography variant="h4" color="primary" data-testId="AddPost">
-              Add Post
-            </Typography>
-          </div>
-          <Grid container spacing={3}>
+          <Grid container spacing={4}>
             <Grid item xs={12} className={classes.inputContainer}>
               <FormControl id="form-control">
                 <InputLabel htmlFor="my-input">Post URL</InputLabel>
                 <Input
-                  id="add-post-input"
+                  id="add-post-input-url"
                   aria-describedby="my-helper-text"
                   onChange={setPostUrl}
                   className={classes.input}
@@ -133,7 +133,7 @@ function AddPost({ setUser }) {
                 <InputLabel htmlFor="my-input">Post Title</InputLabel>
                 <Input
                   aria-describedby="my-helper-text"
-                  id="add-post-input"
+                  id="add-post-input-title"
                   onChange={setPostTitle}
                 />
               </FormControl>
@@ -154,7 +154,7 @@ function AddPost({ setUser }) {
               <FormControl style={{ width: "70%" }} id="form-control">
                 <InputLabel htmlFor="my-input">Post Tags</InputLabel>
                 <Input
-                  id="add-post-input"
+                  id="add-post-input-tags"
                   aria-describedby="my-helper-text"
                   onChange={getTags}
                   className={classes.input}

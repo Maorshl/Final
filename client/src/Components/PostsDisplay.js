@@ -112,7 +112,7 @@ function PostsDisplay() {
             <Typography
               variant="h6"
               color="primary"
-              className={classes.headers}
+              className={classes.noMorePosts}
             >
               No more posts to show! come back later :)
             </Typography>
