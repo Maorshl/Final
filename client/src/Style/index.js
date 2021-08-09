@@ -165,7 +165,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: "1rem",
     textAlign: "center",
   },
-  noMorePosts: {
+  headers: {
     width: "30rem",
     margin: "auto",
     boxShadow:

@@ -82,7 +82,7 @@ function PostsDisplay() {
         >
           <NavigationIcon />
         </ScrollUpButton>
-        <Typography variant="h2" color="primary">
+        <Typography variant="h2" color="primary" className={classes.headers}>
           Feed
         </Typography>
         <Search
@@ -112,7 +112,7 @@ function PostsDisplay() {
             <Typography
               variant="h6"
               color="primary"
-              className={classes.noMorePosts}
+              className={classes.headers}
             >
               No more posts to show! come back later :)
             </Typography>

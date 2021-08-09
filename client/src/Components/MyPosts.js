@@ -6,8 +6,11 @@ import PostCard from "./PostCard";
 import { Typography } from "@material-ui/core";
 import Search from "./Search";
 import Pagination from "./Pagination";
+import useStyles from "../Style/index";
 
 function MyPosts({ setUser }) {
+  const classes = useStyles();
+
   const [posts, setPosts] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -19,7 +22,7 @@ function MyPosts({ setUser }) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const correctPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = (pageNumber) => {
+  const paginate = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
@@ -45,7 +48,7 @@ function MyPosts({ setUser }) {
   return (
     <div>
       <AppBar setUser={setUser} />
-      <Typography variant="h2" color="primary">
+      <Typography variant="h2" color="primary" className={classes.headers}>
         My Posts
       </Typography>
       <Search
