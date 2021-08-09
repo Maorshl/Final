@@ -109,7 +109,11 @@ function PostsDisplay() {
             </div>
           )}
           {!morePosts && (
-            <Typography variant="h6" color="primary">
+            <Typography
+              variant="h6"
+              color="primary"
+              className={classes.noMorePosts}
+            >
               No more posts to show! come back later :)
             </Typography>
           )}
