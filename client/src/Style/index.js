@@ -2,7 +2,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   rootPostDisplay: {
     display: "flex",
     flexDirection: "column",
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    marginTop: "2rem",
+    marginTop: "3rem",
     margin: "auto",
   },
   inputContainer: {
@@ -149,6 +149,21 @@ const useStyles = makeStyles((theme) => ({
   },
   cardActions: {
     justifyContent: "space-around",
+  },
+  addPost: {
+    width: "90rem",
+    height: "47rem",
+    margin: "auto",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.35)",
+    marginTop: "1rem",
+    background: "rgb(159,168,218)",
+    background:
+      "linear-gradient(45deg, rgba(159,168,218,1) 0%, rgba(111,125,200,1) 100%)",
+  },
+  addPostHeader: {
+    marginTop: "1rem",
+    textAlign: "center",
   },
 }));
 

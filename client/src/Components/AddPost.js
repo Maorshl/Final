@@ -54,7 +54,7 @@ function AddPost({ setUser }) {
   };
 
   //* Only if the URL is valid, the user can submit the post.
-  const setPostUrl = (event) => {
+  const setPostUrl = event => {
     if (validator.isURL(event.target.value)) {
       setButtonColor("primary");
       setIsValidUrl(true);
@@ -64,15 +64,15 @@ function AddPost({ setUser }) {
       setIsValidUrl(false);
     }
   };
-  const setPostTitle = (event) => {
+  const setPostTitle = event => {
     const safeInput = xss(event.target.value);
     setTitle(safeInput);
   };
-  const setPostDescription = (event) => {
+  const setPostDescription = event => {
     const safeInput = xss(event.target.value);
     setDescription(safeInput);
   };
-  const getTags = (event) => {
+  const getTags = event => {
     //* This function get the value of the input, set it as variable of tag with useState.
     //* Make each tag capital letter
     function capitalizeFirstLetter() {
@@ -84,7 +84,7 @@ function AddPost({ setUser }) {
   const setTags = () => {
     //* This function takes each last tag of the input and add it to the tags array, and make sure that there is no duplicates tags.
     if (tagInput.current.value === "") return;
-    if (postTags.find((element) => element === tag)) {
+    if (postTags.find(element => element === tag)) {
       tagInput.current.value = "";
       tagInput.current.focus();
       return;
@@ -101,105 +101,109 @@ function AddPost({ setUser }) {
   return (
     <>
       <AppBar setUser={setUser} />
-      <div className={classes.container}>
-        <Typography variant="h4" color="primary" data-testId="AddPost">
-          Add Post
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} className={classes.inputContainer}>
-            <FormControl id="form-control">
-              <InputLabel htmlFor="my-input">Post URL</InputLabel>
-              <Input
-                id="add-post-input"
-                aria-describedby="my-helper-text"
-                onChange={setPostUrl}
-                className={classes.input}
-                type="url"
-                required="true"
-                name="url"
-              />
-              {!isValidUrl && (
-                <Typography variant="h6" color="primary">
-                  Please enter valid URL
-                </Typography>
-              )}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} className={classes.inputContainer}>
-            <FormControl id="form-control">
-              <InputLabel htmlFor="my-input">Post Title</InputLabel>
-              <Input
-                aria-describedby="my-helper-text"
-                id="add-post-input"
-                onChange={setPostTitle}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} className={classes.inputContainer}>
-            <FormControl id="form-control">
-              <TextField
-                id="outlined-multiline-static"
-                label="Post description"
-                multiline
-                rows={4}
-                variant="outlined"
-                onChange={setPostDescription}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} className={classes.inputContainer}>
-            <FormControl style={{ width: "70%" }} id="form-control">
-              <InputLabel htmlFor="my-input">Post Tags</InputLabel>
-              <Input
-                id="add-post-input"
-                aria-describedby="my-helper-text"
-                onChange={getTags}
-                className={classes.input}
-                inputRef={tagInput}
-              />
-            </FormControl>
-            <Button
-              style={{ width: "30%", fontSize: "10px", marginLeft: 0 }}
-              onClick={setTags}
-              variant="contained"
-              color="primary"
-            >
-              Add Tag
-            </Button>
-          </Grid>
-        </Grid>
-        <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
-
-        <FormGroup style={{ marginBottom: "1rem", marginLeft: "1rem" }}>
-          <Typography component="div">
-            <Grid component="label" container alignItems="center" spacing={1}>
-              <Grid item>
-                <Switch
-                  checked={postPrivate}
-                  onChange={changePostPrivate}
-                  name="checkedC"
+      <div className={classes.addPost}>
+        <div className={classes.container}>
+          <div className={classes.addPostHeader}>
+            <Typography variant="h4" color="primary" data-testId="AddPost">
+              Add Post
+            </Typography>
+          </div>
+          <Grid container spacing={3}>
+            <Grid item xs={12} className={classes.inputContainer}>
+              <FormControl id="form-control">
+                <InputLabel htmlFor="my-input">Post URL</InputLabel>
+                <Input
+                  id="add-post-input"
+                  aria-describedby="my-helper-text"
+                  onChange={setPostUrl}
+                  className={classes.input}
+                  type="url"
+                  required="true"
+                  name="url"
                 />
-              </Grid>
-              <Grid item>Private</Grid>
+                {!isValidUrl && (
+                  <Typography variant="h6" color="primary">
+                    Please enter valid URL
+                  </Typography>
+                )}
+              </FormControl>
             </Grid>
-          </Typography>
-        </FormGroup>
+            <Grid item xs={12} className={classes.inputContainer}>
+              <FormControl id="form-control">
+                <InputLabel htmlFor="my-input">Post Title</InputLabel>
+                <Input
+                  aria-describedby="my-helper-text"
+                  id="add-post-input"
+                  onChange={setPostTitle}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} className={classes.inputContainer}>
+              <FormControl id="form-control">
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Post description"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                  onChange={setPostDescription}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} className={classes.inputContainer}>
+              <FormControl style={{ width: "70%" }} id="form-control">
+                <InputLabel htmlFor="my-input">Post Tags</InputLabel>
+                <Input
+                  id="add-post-input"
+                  aria-describedby="my-helper-text"
+                  onChange={getTags}
+                  className={classes.input}
+                  inputRef={tagInput}
+                />
+              </FormControl>
+              <Button
+                style={{ width: "30%", fontSize: "10px", marginLeft: 0 }}
+                onClick={setTags}
+                variant="contained"
+                color="primary"
+              >
+                Add Tag
+              </Button>
+            </Grid>
+          </Grid>
+          <Tags tags={postTags} setPostTags={setPostTags} tagInput={tagInput} />
 
-        <Button
-          style={{
-            marginRight: "1rem",
-            fontSize: "20px",
-            marginLeft: "1rem",
-            marginBottom: "1rem",
-          }}
-          onClick={addPost}
-          variant="contained"
-          color={buttonColor}
-        >
-          Add Post
-        </Button>
+          <FormGroup style={{ marginBottom: "1rem", marginLeft: "1rem" }}>
+            <Typography component="div">
+              <Grid component="label" container alignItems="center" spacing={1}>
+                <Grid item>
+                  <Switch
+                    checked={postPrivate}
+                    onChange={changePostPrivate}
+                    name="checkedC"
+                  />
+                </Grid>
+                <Grid item>Private</Grid>
+              </Grid>
+            </Typography>
+          </FormGroup>
+
+          <Button
+            style={{
+              marginRight: "1rem",
+              fontSize: "20px",
+              marginLeft: "1rem",
+              marginBottom: "1rem",
+            }}
+            onClick={addPost}
+            variant="contained"
+            color={buttonColor}
+          >
+            Add Post
+          </Button>
+        </div>
+        <Copyright />
       </div>
-      <Copyright />
     </>
   );
 }
